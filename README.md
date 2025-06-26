@@ -48,6 +48,20 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
 
 ---
 
+## 👑 Royalty
+
+> “Legacy is the only true victory.”
+
+| Category              | Detail                                                                 |
+|-----------------------|------------------------------------------------------------------------|
+| **Style**             | Greedy / Prestige                                                      |
+| **Mechanics**         | - Influence buildings count as bonus<br>- Monuments with objective based scoring<br>- Wins by own rules |
+| **Playstyle**         | Builds slow but powerful engines, wins via alt win cons rather than solely tile count |
+| **Signature Mechanic**| **Crown Influence** – Gain bonus points through buildings              |
+| **Weakness**          | Jack of all trades that requires help from other types to achieve goals |
+| **Visual Theme**      | Regal halls, marble plazas, glowing crowns                             |
+| **Example Cards**     | Monument of Might, Royal Decree, Throne of Gold                        |
+
 ## ✨ Magical
 
 > “A plan today is victory tomorrow.”
@@ -80,24 +94,6 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
 
 ---
 
-## 👑 Royalty
-
-> “Legacy is the only true victory.”
-
-| Category              | Detail                                                                 |
-|-----------------------|------------------------------------------------------------------------|
-| **Style**             | Greedy / Prestige                                                      |
-| **Mechanics**         | - Influence buildings count as bonus<br>- Monuments with objective based scoring<br>- Wins by own rules |
-| **Playstyle**         | Builds slow but powerful engines, wins via alt win cons rather than solely tile count |
-| **Signature Mechanic**| **Crown Influence** – Gain bonus points through buildings              |
-| **Weakness**          | Jack of all trades that requires help from other types to achieve goals |
-| **Visual Theme**      | Regal halls, marble plazas, glowing crowns                             |
-| **Example Cards**     | Monument of Might, Royal Decree, Throne of Gold                        |
-
-
-
----
-
 ## Game Loop & Progression
 
 ### Player Setup
@@ -120,9 +116,8 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
   - Real-time 4-player FFA match.
 
 - **Evening – Reward Phase:**  
-  - Gain one free card.
-  - Remove cards from deck
-  - Upgrade exisiting cards in the deck
+  - Gain exp for battle
+  - Level up
 
 ---
 
@@ -130,11 +125,12 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
 
 - **Start:**
   - Map spawns with player HQs and 4 starting Plebs with a limit of 10.  
-  - Player hand is drawn; Players may place buildings before the round timer begins during the pre-battle phase.
+  - Player draws 5 cards; Players may place buildings before the round timer begins during the pre-battle phase.
 
 - **Gameplay:**
   - 4-player FFA (1v1v1v1).
   - Rounds start at **2 minutes**, increasing by 30s per round (capped at **6 minutes**).
+  - Cards played are discarded to the graveyard. If there are cards in the deck always draw to hand size (5).
   - **Real-time** play with time control:
     - `Space` – Pause  
     - `1–4` – Speed tiers (4 = unlimited)
@@ -149,7 +145,9 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
 
 ### Plebs
 
-- Plebs can die. They will be spawned by a buildings that spawn them. Players will have a max capacity
+- Plebs can die.
+- Plebs are spawned by buildings including the HQ. These buildings effects are to spawn plebs.
+- Each colour in battle will have a max limit to plebs that can be increased by buildings
 - Move in straight lines until:
   - Hitting a building or another faction's Pleb = bounce.
 - **Bounce Behavior:**
@@ -179,6 +177,7 @@ Buildings come in Common, Rare, and Legendary tiers, affecting cost and power.
 
 - Only on owned tiles.
 - Cost **Ducats**, and possibly **Wood** or **Stone**.
+- Drag and drop to place cards
 
 ### Health
 
@@ -227,25 +226,79 @@ Buildings come in Common, Rare, and Legendary tiers, affecting cost and power.
 
 ## Deck & Store
 
+### Card Packs
+
+- A set of pairs of cards and quantities (e.g. 3xRoyal Decree, 1xThrone of Gold).
+- **Total**:
+    - 6 Urban - larger size (5)
+    - 6 Nature - smaller size (3)
+    - 6 Royal - average size (4)
+    - 6 Default - varity size (3-5)
+- Card packs can gain enhancements (Add Random Card, Clone a card, and Remove a card)  
+**When Upgraded** the card pack may recent different effects
+- Adding new cards
+- Removing old cards
+- Upgrading cards
+- Changing cost of cards
+
 ### Deck
 
-- Represents player’s building options during battles.
-- Each card = one building.
-- Starts with a base number of cards (TBD).
+- A group of up to five card packs
+- Each card = one building or effect.
+- Each card in your deck is shuffled and drawn into your hand during the Battle Phase.
+- Starts with a basic package (generic utility buildings) and a faction package (based on chosen archetype)
 
 ### Store (Dawn Phase)
 
-- **Buy Cards**: Spend Bucks to add to deck.
-- **Reroll**: Refresh store offers for Y Bucks.
+- Gain 10 coins each day, it doesn't roll over.
+- **Buy Charms**: Spend bucks to buy enhancements for the card packs
+- **Buy Cards**: Spend bucks to buy packs. Display up to 5 card packs. Buying up to three of the same pack will upgrade the pack. Max pack level is three.
+- **Buy Reroll**: Buy rerolls to use either in battle, store, or level-up
 
-### Passive Income Scaling
+---
 
-- Base: +5 Bucks per day  
-- For every 5 unspent Bucks (up to 25), gain +1 income
+### Card Packs
+
+## Cards:
+| Name      | Cost | Effect                                                  |
+|-----------|------|---------------------------------------------------------|
+| Toll road | 200d | On activate: gain 5 coins                               |
+| House     | 200d | Increase pleb capacity by 3. Spawn a pleb, repeat every 30 seconds  |
+
+## Urban:
+
+1. Industrial Block - Generate and harvest stone
+2. Factory - Generate income based on activation
+3. Urban sprawl - Connect previously placed buildings, better housing, improves on activation
+4. City watch - Attack buildings, pleb limit increase
+5. Trading - Passive income
+6. Skyscraper - Stone collection, mega structure
+
+## Nature:
+
+1. Greentide - Buildings that increase pleb limit and spawn plebs quickly
+2. Ferality - Aggressive units and buildings
+3. Canopy Surge - Increase speed of plebs
+4. 
+---
+
+## Map Generation
+
+## Size
+
+Maps will be 15x15 or 225 tiles total
+
+## Terrain
+
+- Water, gaps, cliffs
+- Trees and stones
+- 
 
 ---
 
 ## Asynchronous
 
 - Players will play against other players decks handled by ai.
-- 
+- Players will submit decks after each round
+- The game servers will send three other decks submitted previously by players at current day
+- If no decks could be found then generate new decks from scratch
