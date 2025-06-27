@@ -132,8 +132,8 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
   - Rounds start at **2 minutes**, increasing by 30s per round (capped at **6 minutes**).
   - Cards played are discarded to the graveyard. If there are cards in the deck always draw to hand size (5).
   - **Real-time** play with time control:
-    - `Space` – Pause  
-    - `1–4` – Speed tiers (4 = unlimited)
+	- `Space` – Pause  
+	- `1–4` – Speed tiers (4 = unlimited)
 
 - **Victory:**
   - Ranked by **tile count** at round end.
@@ -230,10 +230,10 @@ Buildings come in Common, Rare, and Legendary tiers, affecting cost and power.
 
 - A set of pairs of cards and quantities (e.g. 3xRoyal Decree, 1xThrone of Gold).
 - **Total**:
-    - 6 Urban - larger size (5)
-    - 6 Nature - smaller size (3)
-    - 6 Royal - average size (4)
-    - 6 Default - varity size (3-5)
+	- 6 Urban - larger size (5)
+	- 6 Nature - smaller size (3)
+	- 6 Royal - average size (4)
+	- 6 Default - varity size (3-5)
 - Card packs can gain enhancements (Add Random Card, Clone a card, and Remove a card)  
 **When Upgraded** the card pack may recent different effects
 - Adding new cards

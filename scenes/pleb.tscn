@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdpvvcevociux"]
+
+[ext_resource type="Script" uid="uid://dy7ak73k5hbfd" path="res://pleb.gd" id="1_d22m4"]
+[ext_resource type="Texture2D" uid="uid://curxwlduegtya" path="res://assets/sprites/sheets/Units.png" id="2_tp18g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d22m4"]
+size = Vector2(14, 22)
+
+[node name="Pleb" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_d22m4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_d22m4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_tp18g")
+hframes = 6
+vframes = 4
