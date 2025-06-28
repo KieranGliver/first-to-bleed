@@ -1,0 +1,138 @@
+[gd_scene load_steps=17 format=3 uid="uid://crpk50yl4r2ja"]
+
+[ext_resource type="Texture2D" uid="uid://dt6hox27kgbeg" path="res://Sprites/Sheets/FloorTiles.png" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://dxxftcmn0kmk2" path="res://scripts/main.gd" id="1_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://bt1j84rs03yle" path="res://Sprites/Sheets/ClaimedTiles.png" id="2_jyhfs"]
+[ext_resource type="Script" uid="uid://b4xgekfiw3stj" path="res://scripts/timer.gd" id="2_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://crxco5hnhy74x" path="res://Sprites/coin.png" id="3_85g3d"]
+[ext_resource type="Script" uid="uid://cd0rexmnrj2m" path="res://scripts/ducat_ui.gd" id="3_choun"]
+[ext_resource type="Script" uid="uid://dqhrlqem88w8c" path="res://scripts/camera.gd" id="3_jyhfs"]
+[ext_resource type="Script" uid="uid://cb100xtt2jy3l" path="res://scripts/game_manager.gd" id="3_tipki"]
+[ext_resource type="Script" uid="uid://mant6s3os11m" path="res://scripts/tile_ui.gd" id="5_ynf5e"]
+[ext_resource type="Script" uid="uid://cwk8kx5hv4e7g" path="res://scripts/map_manager.gd" id="7_hptm8"]
+[ext_resource type="Script" uid="uid://c705jx5n2t0ye" path="res://scripts/building_layer.gd" id="10_d1ilt"]
+[ext_resource type="Script" uid="uid://cur355hgohous" path="res://scripts/pleb_layer.gd" id="11_6iyac"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o5qli"]
+texture = ExtResource("1_o5qli")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, -32, 32, 32, 32, 32, -32)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, -32, 32, 32, 32, 32, -32)
+2:2/0 = 0
+3:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_0wfyh"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
+sources/0 = SubResource("TileSetAtlasSource_o5qli")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_choun"]
+texture = ExtResource("2_jyhfs")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_tefeu"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_choun")
+
+[node name="Main" type="Node"]
+script = ExtResource("1_tbgi4")
+
+[node name="GM" type="Node2D" parent="."]
+script = ExtResource("3_tipki")
+
+[node name="MapManager" type="Node2D" parent="GM"]
+script = ExtResource("7_hptm8")
+
+[node name="FloorLayer" type="TileMapLayer" parent="GM/MapManager"]
+tile_set = SubResource("TileSet_0wfyh")
+
+[node name="ClaimLayer" type="TileMapLayer" parent="GM/MapManager"]
+tile_set = SubResource("TileSet_tefeu")
+
+[node name="BuildingLayer" type="Node2D" parent="GM/MapManager"]
+position = Vector2(32, 32)
+script = ExtResource("10_d1ilt")
+
+[node name="PlebLayer" type="Node2D" parent="GM/MapManager"]
+script = ExtResource("11_6iyac")
+
+[node name="Camera2D" type="Camera2D" parent="GM"]
+script = ExtResource("3_jyhfs")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="GM"]
+
+[node name="UI" type="Control" parent="GM/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Timer" type="Label" parent="GM/CanvasLayer/UI"]
+layout_mode = 1
+offset_right = 82.0
+offset_bottom = 45.0
+theme_override_font_sizes/font_size = 32
+text = "00:00"
+script = ExtResource("2_o6xl0")
+
+[node name="Ducat" type="HBoxContainer" parent="GM/CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -104.0
+offset_bottom = 45.0
+grow_horizontal = 0
+script = ExtResource("3_choun")
+
+[node name="TextureRect" type="TextureRect" parent="GM/CanvasLayer/UI/Ducat"]
+layout_mode = 2
+texture = ExtResource("3_85g3d")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="GM/CanvasLayer/UI/Ducat"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "200"
+
+[node name="Tile" type="HBoxContainer" parent="GM/CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+script = ExtResource("5_ynf5e")
+
+[node name="team_1" type="Label" parent="GM/CanvasLayer/UI/Tile"]
+layout_mode = 2
+
+[node name="team_2" type="Label" parent="GM/CanvasLayer/UI/Tile"]
+layout_mode = 2
+
+[node name="team_3" type="Label" parent="GM/CanvasLayer/UI/Tile"]
+layout_mode = 2
+
+[node name="team_4" type="Label" parent="GM/CanvasLayer/UI/Tile"]
+layout_mode = 2
+
+[node name="Sounds" type="Node" parent="."]

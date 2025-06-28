@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://06y1v73hl42e"]
+
+[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/buildings/building.tscn" id="1_tajum"]
+[ext_resource type="Script" uid="uid://c07c1ppbmi0wf" path="res://scripts/hq.gd" id="2_t2i80"]
+
+[node name="HQ" instance=ExtResource("1_tajum")]
+script = ExtResource("2_t2i80")

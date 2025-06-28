@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdpvvcevociux"]
+
+[ext_resource type="Texture2D" uid="uid://curxwlduegtya" path="res://Sprites/Sheets/Units.png" id="1_06ium"]
+[ext_resource type="Script" uid="uid://dy7ak73k5hbfd" path="res://scripts/pleb.gd" id="2_03ljr"]
+
+[node name="Sprite2D" type="Sprite2D"]
+texture = ExtResource("1_06ium")
+hframes = 6
+vframes = 4
+script = ExtResource("2_03ljr")
