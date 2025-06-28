@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://ck754yhnd0rgy"]
+
+[ext_resource type="Script" uid="uid://cy0pssy0lw0bn" path="res://scripts/resource/card_data.gd" id="1_aroxr"]
+
+[resource]
+script = ExtResource("1_aroxr")
+building_name = 2
+cost = 200
+rarity = 0
+description = "On Touch: Gain 5 ducats"
+metadata/_custom_type_script = "uid://cy0pssy0lw0bn"

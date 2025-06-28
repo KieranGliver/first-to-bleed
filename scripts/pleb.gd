@@ -28,42 +28,44 @@ func _physics_process(delta: float) -> void:
 	var cur_tile := map_manager.local_to_map(map_manager.to_local(global_position))
 	var next_tile := map_manager.local_to_map(map_manager.to_local(target_position))
 	
-	var in_bounds := (
-		next_tile.x >= 0 and next_tile.x < map_manager.map_size.x and
-		next_tile.y >= 0 and next_tile.y < map_manager.map_size.y
-	)
-	
-	# Bounce off the edge or invalid floor
-	if not in_bounds or not map_manager.floor_map[next_tile.y][next_tile.x]:
-		bounce_from_tile(next_tile, cur_tile, velocity)
-		return
-	
-	var building_on_tile = map_manager.building_map.has(next_tile)
-	
-	# Bounce off building
-	if building_on_tile:
-		bounce_from_tile(next_tile, cur_tile, velocity)
-		var building = map_manager.building_map[next_tile]
-		if building.team == team:
-			building._on_touch(self)
-		else:
-			building._on_attack(self)
-	
-	var tile_owner = map_manager.claim_map[next_tile.x][next_tile.y]
-	
-	# Bounce off neutral and opponent tiles
-	if tile_owner != team:
-		bounce_from_tile(next_tile, cur_tile, velocity)
+	if cur_tile != next_tile:
 		
-		if tile_owner == -1:
-			map_manager.claim(next_tile, team)
-			gm.add_ducats(5, team)
-			gm.add_tiles(1, team)
-		else:
-			map_manager.claim(next_tile, -1)
-			gm.add_tiles(-1, tile_owner)
+		var in_bounds := (
+			next_tile.x >= 0 and next_tile.x < map_manager.map_size.x and
+			next_tile.y >= 0 and next_tile.y < map_manager.map_size.y
+		)
 		
-		return
+		# Bounce off the edge or invalid floor
+		if not in_bounds or not map_manager.floor_map[next_tile.y][next_tile.x]:
+			bounce_from_tile(next_tile, cur_tile, velocity)
+			return
+		
+		var building_on_tile = map_manager.building_map.has(next_tile)
+		
+		# Bounce off building
+		if building_on_tile:
+			bounce_from_tile(next_tile, cur_tile, velocity)
+			var building = map_manager.building_map[next_tile]
+			if building.team == team:
+				building._on_touch(self)
+			else:
+				building._on_attack(self)
+		
+		var tile_owner = map_manager.claim_map[next_tile.x][next_tile.y]
+		
+		# Bounce off neutral and opponent tiles
+		if tile_owner != team:
+			bounce_from_tile(next_tile, cur_tile, velocity)
+			
+			if tile_owner == -1:
+				map_manager.claim(next_tile, team)
+				gm.add_ducats(5, team)
+				gm.add_tiles(1, team)
+			else:
+				map_manager.claim(next_tile, -1)
+				gm.add_tiles(-1, tile_owner)
+			
+			return
 	
 	# normal movement
 	global_position = target_position

@@ -33,7 +33,7 @@ func spawn(map_manager: MapManager, local_pos: Vector2, scene_name: String, team
 		add_child(instance)
 		return instance
 	else:
-		push_warning("Building scene not found: " + scene_name)
+		push_warning("Scene not found: " + scene_name)
 		return null
 
 func clear():

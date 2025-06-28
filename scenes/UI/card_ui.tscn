@@ -1,0 +1,72 @@
+[gd_scene load_steps=13 format=3 uid="uid://dpeclu1mk0hx7"]
+
+[ext_resource type="Script" uid="uid://b7rj1meldq0d" path="res://scripts/ui/card_ui.gd" id="1_jxgmb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jxgmb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x05kw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ekcna"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vu8sv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a6rhs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eib7d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t0h6h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_afi7b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wqr8b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rjcnw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_umxem"]
+
+[node name="CardUI" type="PanelContainer"]
+custom_minimum_size = Vector2(200, 0)
+offset_right = 86.0
+offset_bottom = 91.0
+script = ExtResource("1_jxgmb")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="cost" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "100"
+
+[node name="name" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Name"
+
+[node name="description" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "etc, etc, etc"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jxgmb")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_x05kw")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ekcna")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_vu8sv")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_a6rhs")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_eib7d")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_t0h6h")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_afi7b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_wqr8b")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_rjcnw")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_umxem")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

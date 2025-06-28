@@ -7,6 +7,6 @@
 script = ExtResource("1_ilf1y")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-1, -28)
+position = Vector2(0, -41)
 texture = ExtResource("2_gp7k3")
 hframes = 9

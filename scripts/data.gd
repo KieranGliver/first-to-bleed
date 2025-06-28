@@ -11,6 +11,7 @@ enum BuildingName {
 	HQ,
 	HOUSE,
 	STALL,
+	
 }
 
 enum Speed {
