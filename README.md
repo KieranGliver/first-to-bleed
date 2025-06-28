@@ -26,9 +26,10 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
 | **Mechanics**         | - Buffs for clustered buildings<br>- High stone, low wood use<br>- Strong passive income |
 | **Playstyle**         | Turtle up, optimize layout, outscale late-game                         |
 | **Signature Mechanic**| **Zoning Bonus** – adjacency buffs based on building layout            |
-| **Weakness**          | Vulnerable early game; struggles vs. rush                         |
+| **Weakness**          | Vulnerable early game; struggles vs. rush                              |
 | **Visual Theme**      | Dense cityscapes, paved tiles, urban decor                             |
 | **Example Cards**     | Stone Bank, Merchant Quarter, Trade Guild                              |
+| **Keywords**          | Concrete, Industrial, Zoned, and Ghost                                 |
 
 ---
 
@@ -45,6 +46,7 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
 | **Weakness**          | Weak in tight maps; falls off if denied space                          |
 | **Visual Theme**      | Overgrown fields, vines, cracked earth                                 |
 | **Example Cards**     | Vine Burst, Root Hive, Rampant Grove                                   |
+| **Keywords**          | Rush, Overgrowth, and Populate                                         |
 
 ---
 
@@ -60,7 +62,7 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
 | **Signature Mechanic**| **Crown Influence** – Gain bonus points through buildings              |
 | **Weakness**          | Jack of all trades that requires help from other types to achieve goals |
 | **Visual Theme**      | Regal halls, marble plazas, glowing crowns                             |
-| **Example Cards**     | Monument of Might, Royal Decree, Throne of Gold                        |
+| **Example Cards**     | Large, Exploit, and Esteem                                             |
 
 ## ✨ Magical
 
@@ -94,6 +96,60 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
 
 ---
 
+## Keywords
+
+### Directional
+
+Building can be rotated
+
+### Launch x
+
+Launch plebs x tiles in the direction the building is facing
+
+### Bewitched
+
+Plebs moved randomly for 5 seconds
+
+### Rush
+
+Plebs gain a movement speed buff for three seconds up to three stacks. (125%, 150%, 200%)
+
+### Industrial
+
+Plebs will trigger on touch effects twice for five seconds
+
+### Exploit
+
+Plebs will deal double damage for five seconds
+
+### Concrete
+
+Buildingss gain 5 health
+
+### Large
+
+Buildings size is 2x2
+
+### Populate
+
+Gain one pleb
+
+### Zoned
+
+Building can be placed next to another building
+
+### Ghost
+
+Plebs can go through this building
+
+### Overgrowth
+
+Building gains a growth stack lasting 1 seconds. If the buidling already contains a growth stack a vine appears nearby and clears the growth stack. Vines are resources with two health that are owned by a the building owner. Vines can be traversed by the owner.
+
+### Esteem
+
+At the end of the match gain victory points based on the number of buildings owned
+
 ## Game Loop & Progression
 
 ### Player Setup
@@ -116,15 +172,14 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
   - Real-time 4-player FFA match.
 
 - **Evening – Reward Phase:**  
-  - Gain exp for battle
-  - Level up
+  - 
 
 ---
 
 ## Battle Rules
 
 - **Start:**
-  - Map spawns with player HQs and 4 starting Plebs with a limit of 10.  
+  - Map spawns with player HQs and 4 starting Plebs.  
   - Player draws 5 cards; Players may place buildings before the round timer begins during the pre-battle phase.
 
 - **Gameplay:**
@@ -135,9 +190,10 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
 	- `Space` – Pause  
 	- `1–4` – Speed tiers (4 = unlimited)
 
-- **Victory:**
+- **Battle-Results:**
   - Ranked by **tile count** at round end.
-  - Some buildings may influence tile count at the end
+  - Some buildings may influence tile count at the end.
+  - Chart showing match (tiles claimed, total bounces, total gold, cards placed)
 
 ---
 
@@ -145,25 +201,18 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
 
 ### Plebs
 
-- Plebs can die.
-- Plebs are spawned by buildings including the HQ. These buildings effects are to spawn plebs.
+- Plebs can't die. When a pleb is on a square that is being switched they fly back to their hq
+- Pleb count can be increased by buildings that will instantly spawn plebs. If destroied they 
 - Each colour in battle will have a max limit to plebs that can be increased by buildings
 - Move in straight lines until:
-  - Hitting a building or another faction's Pleb = bounce.
+  - Hitting a building = bounce and attack.
+  - Hitting unclaimed area = bounce, gain ducats and claim.
+  - Hitting a claimed territory = bouce and declaim.
+  - Hitting a terrain = bounce.
 - **Bounce Behavior:**
   - Redirects Pleb in a non-blocked direction.
-  - Some Plebs have bounce direction preferences.
-
-### Tiles
-
-- **Neutral tile hit:**
-  - Becomes claimed by Pleb’s faction.
-  - Grants **Ducats**.
-  - Pleb bounces.
-
-- **Claimed tile hit:**
-  - Becomes neutral.
-  - Pleb bounces.
+  - Slight randomness to increase excitement
+  - Some Plebs have bounce direction preferences?
 
 ---
 
@@ -183,7 +232,7 @@ Buildings come in Common, Rare, and Legendary tiers, affecting cost and power.
 
 - All buildings have base HP.
 - When a pleb hits the building it will take one damage.
-- Destroyed buildings leave behind Ruins tiles, which some archetypes (e.g. Scrap) can exploit.
+- Destroyed buildings leave behind Ruins tiles, which some archetypes (e.g. Scrap) can exploit?
 
 ### Activation Types
 
@@ -263,7 +312,7 @@ Buildings come in Common, Rare, and Legendary tiers, affecting cost and power.
 | Name      | Cost | Effect                                                  |
 |-----------|------|---------------------------------------------------------|
 | Toll road | 200d | On activate: gain 5 coins                               |
-| House     | 200d | Increase pleb capacity by 3. Spawn a pleb, repeat every 30 seconds  |
+| House     | 200d | Gain two plebs                                          |
 
 ## Urban:
 
