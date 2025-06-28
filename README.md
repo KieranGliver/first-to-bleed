@@ -28,7 +28,6 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
 | **Signature Mechanic**| **Zoning Bonus** – adjacency buffs based on building layout            |
 | **Weakness**          | Vulnerable early game; struggles vs. rush                              |
 | **Visual Theme**      | Dense cityscapes, paved tiles, urban decor                             |
-| **Example Cards**     | Stone Bank, Merchant Quarter, Trade Guild                              |
 | **Keywords**          | Concrete, Industrial, Zoned, and Ghost                                 |
 
 ---
@@ -45,7 +44,6 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
 | **Signature Mechanic**| **Wild Growth** – Fast spawning plebs                                  |
 | **Weakness**          | Weak in tight maps; falls off if denied space                          |
 | **Visual Theme**      | Overgrown fields, vines, cracked earth                                 |
-| **Example Cards**     | Vine Burst, Root Hive, Rampant Grove                                   |
 | **Keywords**          | Rush, Overgrowth, and Populate                                         |
 
 ---
@@ -62,7 +60,6 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
 | **Signature Mechanic**| **Crown Influence** – Gain bonus points through buildings              |
 | **Weakness**          | Jack of all trades that requires help from other types to achieve goals |
 | **Visual Theme**      | Regal halls, marble plazas, glowing crowns                             |
-| **Example Cards**     | Large, Exploit, and Esteem                                             |
 
 ## ✨ Magical
 
@@ -76,7 +73,6 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
 | **Signature Mechanic**| **Magic Circle** – powerful effects from building layout               |
 | **Weakness**          | Relies on setup; vulnerable to disruption                              |
 | **Visual Theme**      | Arcane sigils, glowing runes, purple stone                             |
-| **Example Cards**     | Chrono Pillar, Leyline Knot, Hex Spire                                 |
 
 ---
 
@@ -92,63 +88,8 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
 | **Signature Mechanic**| **Junk Harvest** – gains bonuses destroyed buildings                   |
 | **Weakness**          | Requires burns bright early and can run out of fuel fast               |
 | **Visual Theme**      | Rusted machinery, broken tiles, scavenged signage                      |
-| **Example Cards**     | Salvage Core, Patch Hub, Gear Totem                                    |
 
 ---
-
-## Keywords
-
-### Directional
-
-Building can be rotated
-
-### Launch x
-
-Launch plebs x tiles in the direction the building is facing
-
-### Bewitched
-
-Plebs moved randomly for 5 seconds
-
-### Rush
-
-Plebs gain a movement speed buff for three seconds up to three stacks. (125%, 150%, 200%)
-
-### Industrial
-
-Plebs will trigger on touch effects twice for five seconds
-
-### Exploit
-
-Plebs will deal double damage for five seconds
-
-### Concrete
-
-Buildingss gain 5 health
-
-### Large
-
-Buildings size is 2x2
-
-### Populate
-
-Gain one pleb
-
-### Zoned
-
-Building can be placed next to another building
-
-### Ghost
-
-Plebs can go through this building
-
-### Overgrowth
-
-Building gains a growth stack lasting 1 seconds. If the buidling already contains a growth stack a vine appears nearby and clears the growth stack. Vines are resources with two health that are owned by a the building owner. Vines can be traversed by the owner.
-
-### Esteem
-
-At the end of the match gain victory points based on the number of buildings owned
 
 ## Game Loop & Progression
 
@@ -238,7 +179,7 @@ Buildings come in Common, Rare, and Legendary tiers, affecting cost and power.
 
 - **On Touch** – When a Pleb bounces on it.
 - **On Placement** – Triggers on deployment.
-- **Passive** – Periodic effect over time.
+- **Countdown** – Periodic effect over time.
 - **On Attack** – When hit by an enemy Pleb.
 
 ### Effect Examples
@@ -251,6 +192,60 @@ Buildings come in Common, Rare, and Legendary tiers, affecting cost and power.
 - Target enemy Plebs  
 - Influence any game mechanic
 
+### Keywords
+
+#### Directional
+
+Building can be rotated
+
+#### Launch x
+
+Launch plebs x tiles in the direction the building is facing
+
+#### Bewitched
+
+Plebs moved randomly for 5 seconds
+
+#### Rush
+
+Plebs gain a movement speed buff for three seconds up to three stacks. (125%, 150%, 200%)
+
+#### Industrial
+
+Plebs will trigger on touch effects twice for five seconds
+
+#### Exploit
+
+Plebs will deal double damage for five seconds
+
+#### Concrete
+
+Buildingss gain 5 health
+
+#### Large
+
+Buildings size is 2x2
+
+#### Populate
+
+Gain one pleb
+
+#### Zoned
+
+Building can be placed next to another building
+
+#### Ghost
+
+Plebs can go through this building
+
+#### Connection
+
+The number of buildings that either are connected to this building or connected to a building that is connected to this
+
+#### Overgrowth
+
+Building gains a growth stack lasting 1 seconds. If the buidling already contains a growth stack a vine appears nearby and clears the growth stack. Vines are resources with two health that are owned by a the building owner. Vines can be traversed by the owner.
+
 ### Building Types
 
 - **Income** – Boosts resource generation  
@@ -260,16 +255,59 @@ Buildings come in Common, Rare, and Legendary tiers, affecting cost and power.
 - **Resource** – Spawns gatherable resources  
 - **Directional** – Alters Pleb pathing
 
+
+### Buildings:
+
+### Buildings
+
+| Name              | Faction   | Cost      | Description                                                                |
+|-------------------|-----------|-----------|----------------------------------------------------------------------------|
+| Walls             | Default   | 100d      | **Concrete**                                                               |
+| Stall             | Default   | 200d      | On Touch: Gain 5 Ducats                                                    |
+| House             | Default   | 200d      | **Populate** 2                                                             |
+| Launch            | Default   | 200d      | **Ghost**, On Touch: **Launch** 5                                          |
+| Tower             | Default   | 200d      | On Touch: Fire projectile within 3 tiles                                   |
+| One Way           | Urban     | 200d      | **Directional**, **Ghost**, On Touch: **Launch** 1                         |
+| Tube              | Urban     | 100d      | **Zoned**                                                                  |
+| Café              | Urban     | 400d      | Countdown (5s): Nearest 2 plebs gain **Industrial**                        |
+| Rangefinder       | Urban     | 300d      | **Zoned**. Buildings within the connection gian +2 range                   |
+| Gate              | Urban     | 200d      | **Ghosted**, **Zoned**                                                     |
+| Gatling Gun       | Urban     | 300d      | +1 projectile per **connection** ; Countdown (15s): Fire within 3 tiles    |
+| IRS               | Urban     | 500d      | On any building placed: Gain 50 Ducats                                     |
+| Grocery           | Urban     | 200d      | Countdown (15s): Gain 5 Ducats per **connection**                          |
+| Reinforced Wall   | Urban     | 200d      | **Zoned**. Connected buildings gain **Concrete**                           |
+| Mall              | Urban     | 300d      | **Zoned**. +1 VP per Mall connected at End of Game                         |
+| Stone Quarry      | Urban     | 200d      | On Touch: Gain 1 Stone                                                     |
+| Canopy            | Nature    | 200d      | On Touch: Plebs gain **Rush**                                              |
+| Pea Shooter       | Nature    | 500d      | **Overgrowth**, Countdown (7s): Fire 3 projectiles within 1 tile, +1 range per Vines within 1 tile |
+| Lumberyard        | Nature    | 200d      | On Pleb attack on forest: Gain 10 ducats                                   |
+| Dam               | Nature    | 400d      | On tree destruction: Plebs gain **Rush**                                   |
+| Bomb              | Nature    | 200d      | Countdown (10s): Self-destruct; Remove terrain in 2-tile radius            |
+| Windmill          | Nature    | 100d      | Countdown (10s): Gain 1 Ducat per Pleb                                     |
+| Mine              | Nature    | 200d      | On Attack: Self-destruct, claim all tiles within 2 tile                    |
+| Outpost           | Nature    | 100d      | **Populate** 1                                                             |
+| Forest            | Nature    | 200d      | Countdown (10s): Spawn tree within 1 tile                                  |
+| Swamp             | Nature    | 180d      | **Overgrowth**. Countdown (5s): Turn vine into tree resource               |
+| Statue            | Royalty   | 300d      | Nearby plebs gain **Exploit**                                              |
+| Library           | Royalty   | 500d      | Worth 10 VP at the end of the game                                         |
+| Farm              | Royalty   | 400d      | On Touch: Gain 15 Gold                                                     |
+| Bazaar            | Royalty   | 200d      | On Touch: Gain 1 random resource                                           |
+| Mint              | Royalty   | 300d      | Countdown (15s): Convert 5 stone to 50 Ducats                              |
+| Throne            | Royalty   | 300d      | **Large**. End of Game: +1 VP per building                                 |
+| Palace Gate       | Royalty   | 500d      | **Large**, **Ghost**. Plebs gain **Rush** + **Exploit** passing through    |
+| Census Office     | Royalty   | 250d      | On Placement: +1 VP per 3 plebs                                            |
+
+
 ---
 
 ## Resources
 
-| Type     | Use                              | Gained From                              |
-|----------|-----------------------------------|-------------------------------------------|
-| **Bucks**  | Shop purchases                     | Start of each round, based on income      |
+| Type       | Use                               | Gained From                               |
+|------------|-----------------------------------|-------------------------------------------|
+| **Bucks**  | Shop purchases                    | Start of each round, based on income      |
 | **Ducats** | Placing cards (buildings)         | - Buildings<br>- Plebs hitting gold or neutral tiles |
-| **Wood**   | Placing specific building cards   | Plebs hitting **trees**                  |
-| **Stone**  | Placing specific building cards   | Plebs hitting **rocks/stones**           |
+| **Wood**   | Placing specific building cards   | Plebs hitting **trees**                   |
+| **Stone**  | Placing specific building cards   | Plebs hitting **rocks/stones**            |
 
 ---
 
