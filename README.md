@@ -28,7 +28,8 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
 | **Signature Mechanic**| **Zoning Bonus** – adjacency buffs based on building layout            |
 | **Weakness**          | Vulnerable early game; struggles vs. rush                              |
 | **Visual Theme**      | Dense cityscapes, paved tiles, urban decor                             |
-| **Keywords**          | Concrete, Industrial, Zoned, and Ghost                                 |
+| **Keywords**          | Concrete, Industrial, Zoned                                            |
+| **Passive**           | Gain 1 stone per (5s)                                                  |
 
 ---
 
@@ -45,6 +46,7 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
 | **Weakness**          | Weak in tight maps; falls off if denied space                          |
 | **Visual Theme**      | Overgrown fields, vines, cracked earth                                 |
 | **Keywords**          | Rush, Overgrowth, and Populate                                         |
+| **Passive**           | Every building spawns a population                                     |
 
 ---
 
@@ -58,8 +60,9 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
 | **Mechanics**         | - Influence buildings count as bonus<br>- Monuments with objective based scoring<br>- Wins by own rules |
 | **Playstyle**         | Builds slow but powerful engines, wins via alt win cons rather than solely tile count |
 | **Signature Mechanic**| **Crown Influence** – Gain bonus points through buildings              |
-| **Weakness**          | Jack of all trades that requires help from other types to achieve goals |
+| **Weakness**          | Jack of all trades that requires help from other types to achieve goals|
 | **Visual Theme**      | Regal halls, marble plazas, glowing crowns                             |
+| **Passive**           | Large buildings count as double vp at the end of the game              |
 
 ## ✨ Magical
 
@@ -143,16 +146,17 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
 ### Plebs
 
 - Plebs can't die. When a pleb is on a square that is being switched they fly back to their hq
-- Pleb count can be increased by buildings that will instantly spawn plebs. If destroied they 
-- Each colour in battle will have a max limit to plebs that can be increased by buildings
+- Pleb count can be increased by buildings that will instantly spawn plebs. When building is destroyed plebs will be removed.
+- A Force can be applied to the plebs that will launch them in a direction
 - Move in straight lines until:
-  - Hitting a building = bounce and attack.
+  - Hitting a building = bounce and (attack or touch).
   - Hitting unclaimed area = bounce, gain ducats and claim.
   - Hitting a claimed territory = bouce and declaim.
   - Hitting a terrain = bounce.
 - **Bounce Behavior:**
   - Redirects Pleb in a non-blocked direction.
   - Slight randomness to increase excitement
+  - Force is reflected on bounce lossing magnitude
   - Some Plebs have bounce direction preferences?
 
 ---
@@ -168,11 +172,12 @@ Buildings come in Common, Rare, and Legendary tiers, affecting cost and power.
 - Only on owned tiles.
 - Cost **Ducats**, and possibly **Wood** or **Stone**.
 - Drag and drop to place cards
+- Buildings can't be placed next to one another.
 
 ### Health
 
-- All buildings have base HP.
-- When a pleb hits the building it will take one damage.
+- All buildings have base HP (Default: 10).
+- When an enemy pleb hits the building it will take one damage.
 - Destroyed buildings leave behind Ruins tiles, which some archetypes (e.g. Scrap) can exploit?
 
 ### Activation Types
@@ -189,7 +194,6 @@ Buildings come in Common, Rare, and Legendary tiers, affecting cost and power.
 - Upgrade nearby structures  
 - Fire projectiles  
 - Redirect or move Plebs  
-- Target enemy Plebs  
 - Influence any game mechanic
 
 ### Keywords
@@ -197,10 +201,6 @@ Buildings come in Common, Rare, and Legendary tiers, affecting cost and power.
 #### Directional
 
 Building can be rotated
-
-#### Launch x
-
-Launch plebs x tiles in the direction the building is facing
 
 #### Bewitched
 
@@ -258,8 +258,6 @@ Building gains a growth stack lasting 1 seconds. If the buidling already contain
 
 ### Buildings:
 
-### Buildings
-
 | Name              | Faction   | Cost      | Description                                                                |
 |-------------------|-----------|-----------|----------------------------------------------------------------------------|
 | Walls             | Default   | 100d      | **Concrete**                                                               |
@@ -307,6 +305,8 @@ Building gains a growth stack lasting 1 seconds. If the buidling already contain
 
 ## Resources
 
+### User resources
+
 | Type       | Use                               | Gained From                               |
 |------------|-----------------------------------|-------------------------------------------|
 | **Bucks**  | Shop purchases                    | Start of each round, based on income      |
@@ -314,6 +314,13 @@ Building gains a growth stack lasting 1 seconds. If the buidling already contain
 | **Wood**   | Placing specific building cards   | Plebs hitting **trees**                   |
 | **Stone**  | Placing specific building cards   | Plebs hitting **rocks/stones**            |
 
+### Map resources
+
+- Trees: Gain 1 wood on touch takes 2 hits
+- Stone: Gain 1 stone on touch takes 5 hits
+- Vines: takes 1 hit
+- Ruins: Takes 3 hits
+  
 ---
 
 ## Deck & Store
@@ -370,15 +377,40 @@ Building gains a growth stack lasting 1 seconds. If the buidling already contain
 
 ## Map Generation
 
-## Size
+**Goals**:
+- Tactical: Multiple viable paths and choke points.
+- Replayable: Never feel same-y.
+- Thematic: Feel distinct per faction or map theme.
+- Fair: Each player should have roughly equal opportunity.
 
-Maps will be 15x15 or 225 tiles total
+### Setup
 
-## Terrain
+- An appropriate spot is picked for each team start.
+- A HQ is placed in the center of a 4x4 claimed area.
+- All tiles in the area are removed of all terrain and made floors.
 
-- Water, gaps, cliffs
-- Trees and stones
-- 
+### Size
+
+Map will start at the base size 15x15 or 255 tiles. Size will increase by 2 each round
+
+### Terrain
+
+- Water
+- Cliffs
+- Resources - Tree, stones, vines, and ruins
+- Buildings
+
+### Patterns
+
+- **Field**: Wide open terrain, not many obsticles
+- **Maze**: Water creates narrow lines in interesting pattern for plebs to follow. No cliffs
+- **Lake**: Large water feature in the center
+- **Highlands**: High cliff density
+- **Swamp**: Lots of small water groups and vines present. Low cliff, high tree
+- **Wasteland**: minimal resources, ruins everywhere
+- **Fortress**: Starts are surrounded by symetrical resources and terrain
+- **DeathMatch**: Teams are locked into two different 1v1 battles with equal tiles
+- **Hill**: Stones and trees concentrated in the center
 
 ---
 
