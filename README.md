@@ -264,9 +264,12 @@ Building gains a growth stack lasting 1 seconds. If the buidling already contain
 |-------------------|-----------|-----------|----------------------------------------------------------------------------|
 | Walls             | Default   | 100d      | **Concrete**                                                               |
 | Stall             | Default   | 200d      | On Touch: Gain 5 Ducats                                                    |
+| Campfire          | Default   | 200d      | Countdown (10s): Gain 20 gold                                              |
 | House             | Default   | 200d      | **Populate** 2                                                             |
 | Launch            | Default   | 200d      | **Ghost**, On Touch: **Launch** 5                                          |
 | Tower             | Default   | 200d      | On Touch: Fire projectile within 3 tiles                                   |
+| Bridge            | Default   | 100d      | Can be placed outside of territory. Can be placed on water                 |
+| Crate             | Default   | 100d      | **Dense**, on placement: Gain 50 ducats                                    |
 | One Way           | Urban     | 200d      | **Directional**, **Ghost**, On Touch: **Launch** 1                         |
 | Tube              | Urban     | 100d      | **Zoned**                                                                  |
 | Café              | Urban     | 400d      | Countdown (5s): Nearest 2 plebs gain **Industrial**                        |
@@ -279,7 +282,7 @@ Building gains a growth stack lasting 1 seconds. If the buidling already contain
 | Mall              | Urban     | 300d      | **Zoned**. +1 VP per Mall connected at End of Game                         |
 | Stone Quarry      | Urban     | 200d      | On Touch: Gain 1 Stone                                                     |
 | Canopy            | Nature    | 200d      | On Touch: Plebs gain **Rush**                                              |
-| Pea Shooter       | Nature    | 500d      | **Overgrowth**, Countdown (7s): Fire 3 projectiles within 1 tile, +1 range per Vines within 1 tile |
+| Pea Shooter       | Nature    | 500d      | On touch: **Overgrowth**, Countdown (7s): Fire 3 projectiles within 1 tile, +1 range per Vines within 1 tile |
 | Lumberyard        | Nature    | 200d      | On Pleb attack on forest: Gain 10 ducats                                   |
 | Dam               | Nature    | 400d      | On tree destruction: Plebs gain **Rush**                                   |
 | Bomb              | Nature    | 200d      | Countdown (10s): Self-destruct; Remove terrain in 2-tile radius            |
@@ -287,7 +290,9 @@ Building gains a growth stack lasting 1 seconds. If the buidling already contain
 | Mine              | Nature    | 200d      | On Attack: Self-destruct, claim all tiles within 2 tile                    |
 | Outpost           | Nature    | 100d      | **Populate** 1                                                             |
 | Forest            | Nature    | 200d      | Countdown (10s): Spawn tree within 1 tile                                  |
-| Swamp             | Nature    | 180d      | **Overgrowth**. Countdown (5s): Turn vine into tree resource               |
+| Swamp             | Nature    | 300d      | On touch: **Overgrowth**. Countdown (5s): Turn vine into tree resource     |
+| Alarm Tower       | Nature    | 300d      | On Attack: All nearby Plebs gain Rush                                      |
+| Vine Pit          | Nature    | 200d      | On attack: Gain **Overgrowth**                                             |
 | Statue            | Royalty   | 300d      | Nearby plebs gain **Exploit**                                              |
 | Library           | Royalty   | 500d      | Worth 10 VP at the end of the game                                         |
 | Farm              | Royalty   | 400d      | On Touch: Gain 15 Gold                                                     |
@@ -296,7 +301,7 @@ Building gains a growth stack lasting 1 seconds. If the buidling already contain
 | Throne            | Royalty   | 300d      | **Large**. End of Game: +1 VP per building                                 |
 | Palace Gate       | Royalty   | 500d      | **Large**, **Ghost**. Plebs gain **Rush** + **Exploit** passing through    |
 | Census Office     | Royalty   | 250d      | On Placement: +1 VP per 3 plebs                                            |
-
+| Flag              | Royalty   | 100d      | On attack: Nearby pleb gains exploit                                       |
 
 ---
 
@@ -346,13 +351,7 @@ Building gains a growth stack lasting 1 seconds. If the buidling already contain
 
 ### Card Packs
 
-## Cards:
-| Name      | Cost | Effect                                                  |
-|-----------|------|---------------------------------------------------------|
-| Toll road | 200d | On activate: gain 5 coins                               |
-| House     | 200d | Gain two plebs                                          |
-
-## Urban:
+#### Urban:
 
 1. Industrial Block - Generate and harvest stone
 2. Factory - Generate income based on activation
@@ -361,7 +360,7 @@ Building gains a growth stack lasting 1 seconds. If the buidling already contain
 5. Trading - Passive income
 6. Skyscraper - Stone collection, mega structure
 
-## Nature:
+##### Nature:
 
 1. Greentide - Buildings that increase pleb limit and spawn plebs quickly
 2. Ferality - Aggressive units and buildings
