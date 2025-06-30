@@ -18,7 +18,7 @@ func _ready() -> void:
 	
 
 
-func spawn(map_manager: MapManager, local_pos: Vector2, scene_name: String, team: int = 0) -> Node:
+func spawn(map_manager: MapManager, local_pos: Vector2, scene_name: String, team: int = 0, pre_ready: Callable = func(n: Node): return ) -> Node:
 	if scenes.has(scene_name):
 		var instance = scenes[scene_name].instantiate()
 		instance.global_position = local_pos
@@ -30,6 +30,7 @@ func spawn(map_manager: MapManager, local_pos: Vector2, scene_name: String, team
 			instance.map_manager = map_manager
 		if prop_names.has("gm"):
 			instance.gm = gm
+		pre_ready.call(instance)
 		add_child(instance)
 		return instance
 	else:

@@ -7,5 +7,6 @@ script = ExtResource("1_rllcf")
 building_name = 1
 cost = 200
 rarity = 0
-description = "Gain two plebs"
+description = "Populate 2"
+keywords = Array[int]([3])
 metadata/_custom_type_script = "uid://cy0pssy0lw0bn"

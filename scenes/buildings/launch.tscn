@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctcc123ahhfjd"]
+
+[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/buildings/building.tscn" id="1_du6ac"]
+
+[node name="launch" instance=ExtResource("1_du6ac")]
+
+[node name="Sprite2D" parent="." index="0"]
+frame = 7

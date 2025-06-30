@@ -1,5 +1,14 @@
 extends Node
 
+enum BuildingKeyword {
+	DIRECTIONAL,
+	CONCRETE,
+	LARGE,
+	POPULATE,
+	ZONED,
+	GHOST
+}
+
 enum Rarity {
 	COMMON,
 	RARE,
@@ -11,7 +20,12 @@ enum BuildingName {
 	HQ,
 	HOUSE,
 	STALL,
-	
+	WALL,
+	CAMPFIRE,
+	LAUNCH,
+	TOWER,
+	CRATE,
+	BRIDGE,
 }
 
 enum Speed {
@@ -32,7 +46,13 @@ const RARITY_TO_STRING := {
 const BUILDING_NAME_TO_STRING := {
 	BuildingName.HQ: "hq",
 	BuildingName.HOUSE: "house",
-	BuildingName.STALL: "stall"
+	BuildingName.STALL: "stall",
+	BuildingName.WALL: "wall",
+	BuildingName.CAMPFIRE: "campfire",
+	BuildingName.LAUNCH: "launch",
+	BuildingName.TOWER: "tower",
+	BuildingName.CRATE: "crate",
+	BuildingName.BRIDGE: "bridge",
 }
 
 const SPEED_TO_SCALE := {

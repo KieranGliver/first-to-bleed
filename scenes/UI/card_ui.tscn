@@ -1,72 +1,85 @@
-[gd_scene load_steps=13 format=3 uid="uid://dpeclu1mk0hx7"]
+[gd_scene load_steps=6 format=3 uid="uid://dpeclu1mk0hx7"]
 
+[ext_resource type="Texture2D" uid="uid://ctyl0o5e7xwb4" path="res://Sprites/CardNinePatch.png" id="1_ekcna"]
 [ext_resource type="Script" uid="uid://b7rj1meldq0d" path="res://scripts/ui/card_ui.gd" id="1_jxgmb"]
+[ext_resource type="Script" uid="uid://c7a6b12j5gkre" path="res://scripts/card_area.gd" id="2_x05kw"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jxgmb"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vu8sv"]
+bg_color = Color(1, 0.984314, 0.94902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x05kw"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ekcna"]
+size = Vector2(119.5, 155)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ekcna"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vu8sv"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a6rhs"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eib7d"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t0h6h"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_afi7b"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wqr8b"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rjcnw"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_umxem"]
-
-[node name="CardUI" type="PanelContainer"]
-custom_minimum_size = Vector2(200, 0)
-offset_right = 86.0
-offset_bottom = 91.0
+[node name="CardUI" type="NinePatchRect"]
+offset_right = 120.0
+offset_bottom = 155.0
+texture = ExtResource("1_ekcna")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
 script = ExtResource("1_jxgmb")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="cost" type="Label" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-
-[node name="cost" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
+offset_left = 79.0
+offset_top = 7.0
+offset_right = 112.0
+offset_bottom = 27.0
 size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
 text = "100"
+horizontal_alignment = 2
 
-[node name="name" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="name" type="Label" parent="."]
 layout_mode = 2
+offset_left = 11.0
+offset_top = 29.0
+offset_right = 109.0
+offset_bottom = 52.0
 size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
 text = "Name"
+horizontal_alignment = 1
 
-[node name="description" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 58.0
+offset_right = 110.0
+offset_bottom = 145.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vu8sv")
+
+[node name="description" type="Label" parent="Panel"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 95.0
+offset_bottom = 84.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
 text = "etc, etc, etc"
+autowrap_mode = 3
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_jxgmb")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_x05kw")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ekcna")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_vu8sv")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_a6rhs")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_eib7d")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_t0h6h")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_afi7b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_wqr8b")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_rjcnw")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_umxem")
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("2_x05kw")
+min_drag_dist = 100
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(60.25, 77.5)
+shape = SubResource("RectangleShape2D_ekcna")
+
+[connection signal="drag" from="Area2D" to="." method="_on_area_2d_drag"]
+[connection signal="mouse_down" from="Area2D" to="." method="_on_area_2d_mouse_down"]

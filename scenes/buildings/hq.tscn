@@ -5,6 +5,7 @@
 
 [node name="HQ" instance=ExtResource("1_tajum")]
 script = ExtResource("2_t2i80")
+pop_val = 4
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(0, -30)

@@ -4,8 +4,9 @@
 
 [resource]
 script = ExtResource("1_aroxr")
-building_name = 2
-cost = 200
+building_name = 3
+cost = 100
 rarity = 0
-description = "On Touch: Gain 5 ducats"
+description = "Concrete"
+keywords = Array[int]([1])
 metadata/_custom_type_script = "uid://cy0pssy0lw0bn"

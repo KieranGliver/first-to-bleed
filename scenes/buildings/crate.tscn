@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqawkxb670yuw"]
+
+[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/buildings/building.tscn" id="1_ak58w"]
+[ext_resource type="Script" uid="uid://dpr1p06wfvyjf" path="res://crate.gd" id="2_bvr4u"]
+
+[node name="Crate" instance=ExtResource("1_ak58w")]
+script = ExtResource("2_bvr4u")
+
+[node name="Sprite2D" parent="." index="0"]
+frame = 6

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://crpk50yl4r2ja"]
+[gd_scene load_steps=29 format=3 uid="uid://crpk50yl4r2ja"]
 
 [ext_resource type="Texture2D" uid="uid://dt6hox27kgbeg" path="res://Sprites/Sheets/FloorTiles.png" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://dxxftcmn0kmk2" path="res://scripts/main.gd" id="1_tbgi4"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" uid="uid://cb100xtt2jy3l" path="res://scripts/game_manager.gd" id="3_tipki"]
 [ext_resource type="Script" uid="uid://mant6s3os11m" path="res://scripts/ui/tile_ui.gd" id="5_ynf5e"]
 [ext_resource type="Script" uid="uid://cwk8kx5hv4e7g" path="res://scripts/map_manager.gd" id="7_hptm8"]
-[ext_resource type="Script" uid="uid://c2hfj26o5n63v" path="res://scripts/build_cursor.gd" id="8_3pmx8"]
 [ext_resource type="Script" uid="uid://d1tfj266glfq" path="res://scripts/ui/ui.gd" id="8_6iyac"]
 [ext_resource type="Script" uid="uid://1q7ievnbbw18" path="res://scripts/ui/timer_ui.gd" id="9_fdnlq"]
 [ext_resource type="Script" uid="uid://cur355hgohous" path="res://scripts/spawner.gd" id="11_6iyac"]
@@ -87,13 +86,6 @@ folder_path = "res://Scenes/buildings/"
 [node name="PlebLayer" type="Node2D" parent="GM/MapManager"]
 script = ExtResource("11_6iyac")
 folder_path = "res://Scenes/plebs/"
-
-[node name="BuildCursor" type="Sprite2D" parent="GM/MapManager"]
-visible = false
-position = Vector2(32, 32)
-texture = ExtResource("15_k12tt")
-hframes = 2
-script = ExtResource("8_3pmx8")
 
 [node name="Camera2D" type="Camera2D" parent="GM"]
 script = ExtResource("3_jyhfs")
@@ -174,7 +166,7 @@ grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
 script = ExtResource("13_wsu2k")
-deck = Array[ExtResource("14_gt3je")]([ExtResource("16_ee4r6"), ExtResource("16_ee4r6"), ExtResource("17_gt3je"), ExtResource("17_gt3je"), ExtResource("19_u50mg")])
+deck = Array[ExtResource("14_gt3je")]([ExtResource("16_ee4r6"), ExtResource("16_ee4r6"), ExtResource("16_ee4r6"), ExtResource("16_ee4r6"), ExtResource("17_gt3je"), ExtResource("17_gt3je"), ExtResource("17_gt3je"), ExtResource("17_gt3je")])
 
 [node name="MarginContainer" type="MarginContainer" parent="GM/CanvasLayer/UI/Deck"]
 layout_mode = 2
@@ -250,6 +242,10 @@ origin = Vector2(580, 20)
 script = ExtResource("2_o6xl0")
 gm = NodePath("..")
 autostart = true
+
+[node name="BuildCursor" type="Sprite2D" parent="GM"]
+texture = ExtResource("15_k12tt")
+hframes = 2
 
 [node name="Sounds" type="Node" parent="."]
 

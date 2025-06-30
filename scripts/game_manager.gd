@@ -2,54 +2,45 @@ extends Node2D
 
 class_name GameManager
 
+
 @onready var map_manager: MapManager = $MapManager
 @onready var ui: UserInterface = $CanvasLayer/UI
 @onready var timer: GameTimer = $Timer
+@onready var deck: Deck = $CanvasLayer/UI/Deck
+@onready var build_cursor: Sprite2D = $MapManager/BuildCursor
 
-var house = ResourceLoader.load("res://Cards/house.tres")
-var stall = ResourceLoader.load("res://Cards/stall.tres")
 
+var hq = ResourceLoader.load("res://Cards/hq.tres")
 var running := true
 var last_speed := Data.Speed.NORMAL
 var current_speed := Data.Speed.PAUSED
 var ducats := [200, 200, 200, 200]
 var tiles := [0, 0, 0, 0]
 var selected_card : CardData
-var hand : Array[CardData] = [house, stall]
+var card_index: int = 0
 
-
-func add_ducats(amount: int, team: int = 0):
-	ducats[team] += amount
-	if (team == 0):
-		ui.ducat.update(ducats[team])
-
-func add_tiles(amount: int, team: int = 0):
-	tiles[team] += amount
-	ui.score.update(tiles)
-
-func setup():
-	map_manager.upkeep()
-	var start_pos: Array[Vector2] = [Vector2(2, 2), Vector2(2, 13), Vector2(13, 13), Vector2(13, 2)]
-	
-	for i in range(4):
-		# Spawns plebs on the map
-		map_manager.spawn_pleb(start_pos[i] + Vector2(1, 0), i, 4)
-		map_manager.spawn_building(start_pos[i], i, 'hq')
-	
-	# Reset data values
-	ducats = [200, 200, 200, 200]
-	tiles = [0, 0, 0, 0]
-	selected_card = null
 
 func _ready():
-	ui.hand.update(hand)
 	setup()
 
 
 func _process(_delta) -> void:
 	ui.timer.update(timer.format_time())
 
+
 func _input(event: InputEvent) -> void:
+	if selected_card and selected_card.keywords.has(Data.BuildingKeyword.DIRECTIONAL):
+		if event.is_action_pressed("rotate"):
+			build_cursor.facing = build_cursor.facing + 1 % 4
+		elif event.is_action_pressed("set_north"):
+			build_cursor.facing = 0
+		elif event.is_action_pressed("set_east"):
+			build_cursor.facing = 1
+		elif event.is_action_pressed("set_south"):
+			build_cursor.facing = 2
+		elif event.is_action_pressed("set_west"):
+			build_cursor.facing = 3
+	
 	if running:
 		if event.is_action_pressed("ui_pause"):
 			if current_speed != Data.Speed.PAUSED:
@@ -66,32 +57,82 @@ func _input(event: InputEvent) -> void:
 		elif event.is_action_pressed("ui_speed_4"):
 			current_speed = Data.Speed.X8
 
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			print('click')
+		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 			try_place_card(get_global_mouse_position())
 
-func _on_hand_ui_card_chosen(card_data: CardData) -> void:
+
+func add_ducats(amount: int, team: int = 0):
+	ducats[team] += amount
+	if (team == 0):
+		ui.ducat.update(ducats[team])
+
+
+func add_tiles(amount: int, team: int = 0):
+	tiles[team] += amount
+	ui.score.update(tiles)
+
+
+func setup():
+	deck.draw()
+	map_manager.upkeep()
+	var start_pos: Array[Vector2] = [Vector2(2, 2), Vector2(2, 13), Vector2(13, 13), Vector2(13, 2)]
+	
+	for i in range(4):
+		map_manager.spawn_building(start_pos[i], hq, i)
+	
+	# Reset data values
+	ducats = [200, 200, 200, 200]
+	tiles = [0, 0, 0, 0]
+	selected_card = null
+
+
+func _on_hand_ui_card_chosen(card_data: CardData, index: int) -> void:
 	selected_card = card_data
+	card_index = index
+	build_cursor.large = selected_card.keywords.has(Data.BuildingKeyword.LARGE)
+	if selected_card.keywords.has(Data.BuildingKeyword.DIRECTIONAL):
+		build_cursor.frame = 1
+	else:
+		build_cursor.frame = 0
+	build_cursor.facing = 0
+	build_cursor.visible = true
+
 
 func try_place_card(global_pos: Vector2, team: int = 0):
 	if not selected_card:
 		return
-
+	
 	var coords = map_manager.local_to_map(map_manager.to_local(global_pos))
+	var checks = true
+	
+		# Check if it's a valid floor tile
+	if not map_manager.build_map[coords.x][coords.y] && not selected_card.keywords.has(Data.BuildingKeyword.ZONED):
+		print("Invalid floor tile")
+		checks = false
+	
+		# Check if tile is claimed by the team
+	if map_manager.claim_map[coords.x][coords.y] != team:
+		print("Tile not owned by team " + str(team))
+		checks = false
 	
 	# Check if you can afford it
 	if ducats[team] < selected_card.cost:
 		print("Not enough ducats")
-		return
+		checks = false
 	
-	# You could also check for terrain, enemies, etc. here
-	if map_manager.building_map.has(coords):
-		print("Already a building here")
-		return
-
+	var radius = 0 if selected_card.keywords.has(Data.BuildingKeyword.ZONED) else 1
+	if map_manager.get_buildings_radius(coords, radius).filter(func (el): return not el.keywords.has(Data.BuildingKeyword.ZONED)).size() > 0:
+		print("Too close to other buildings")
+		checks = false
+	
 	# All checks passed, deduct and build
-	add_ducats(-selected_card.cost, team)
-	map_manager.spawn_building(coords, team, Data.BUILDING_NAME_TO_STRING[selected_card.building_name])
+	if checks:
+		add_ducats(-selected_card.cost, team)
+		map_manager.spawn_building(coords, selected_card, team)
+		deck.discard(card_index)
+	
 	selected_card = null
+	build_cursor.visible = false

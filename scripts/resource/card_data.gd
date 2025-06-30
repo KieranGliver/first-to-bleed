@@ -6,3 +6,4 @@ class_name CardData
 @export var cost: int
 @export var rarity: Data.Rarity
 @export var description: String
+@export var keywords: Array[Data.BuildingKeyword]

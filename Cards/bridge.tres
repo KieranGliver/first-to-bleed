@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://lr1i7yjcc2ix"]
+
+[ext_resource type="Script" uid="uid://cy0pssy0lw0bn" path="res://scripts/resource/card_data.gd" id="1_t16sq"]
+
+[resource]
+script = ExtResource("1_t16sq")
+building_name = 8
+cost = 100
+rarity = 0
+description = "Can be placed outside of territory. Can be placed on water"
+keywords = Array[int]([0])
+metadata/_custom_type_script = "uid://cy0pssy0lw0bn"
