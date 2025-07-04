@@ -8,5 +8,5 @@ building_name = 0
 cost = 1000
 rarity = 3
 description = "On touch: Gain 10 gold"
-keywords = Array[int]([3])
+keywords = Array[int]([5])
 metadata/_custom_type_script = "uid://cy0pssy0lw0bn"

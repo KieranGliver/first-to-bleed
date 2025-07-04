@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://c70cekbjxeabg"]
+[gd_scene load_steps=5 format=3 uid="uid://c70cekbjxeabg"]
 
-[ext_resource type="Script" uid="uid://drniabncs3kcj" path="res://scripts/building.gd" id="1_ilf1y"]
+[ext_resource type="Script" uid="uid://drniabncs3kcj" path="res://scripts/building/building.gd" id="1_ilf1y"]
 [ext_resource type="Texture2D" uid="uid://cgo3t7uj227f7" path="res://Sprites/Sheets/Buildings.png" id="2_gp7k3"]
+[ext_resource type="Script" uid="uid://b4xgekfiw3stj" path="res://scripts/game_timer.gd" id="3_gp7k3"]
+[ext_resource type="Script" uid="uid://cur355hgohous" path="res://scripts/spawner.gd" id="4_g8imh"]
 
 [node name="Building" type="Node2D"]
 script = ExtResource("1_ilf1y")
@@ -10,3 +12,12 @@ script = ExtResource("1_ilf1y")
 position = Vector2(0, -41)
 texture = ExtResource("2_gp7k3")
 hframes = 9
+
+[node name="Timer" type="Node" parent="."]
+script = ExtResource("3_gp7k3")
+
+[node name="ProjectileSpawner" type="Node2D" parent="."]
+script = ExtResource("4_g8imh")
+folder_path = "res://Scenes/projectiles"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

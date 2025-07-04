@@ -1,12 +1,13 @@
 extends Node2D
 
-@onready var gm : GameManager
+class_name Spawner
+
+@onready var gm : GameManager = get_tree().get_first_node_in_group('game_manager')
 @export var folder_path = "res://Scenes/"
 var names: Array[String] = []
 var scenes: Dictionary = {}
 
 func _ready() -> void:
-	gm = get_tree().get_first_node_in_group('game_manager')
 	var paths = FileExplorer.traverse_directory(folder_path)
 	for path in paths:
 		if path.get_extension().to_lower() == "tscn":
@@ -15,7 +16,6 @@ func _ready() -> void:
 			if packed_scene is PackedScene:
 				scenes[scene_name] = packed_scene
 				names.append(scene_name)
-	
 
 
 func spawn(map_manager: MapManager, local_pos: Vector2, scene_name: String, team: int = 0, pre_ready: Callable = func(n: Node): return ) -> Node:

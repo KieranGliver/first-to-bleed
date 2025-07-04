@@ -2,27 +2,27 @@ extends Sprite2D
 
 class_name Pleb
 
-const FORCE_DECAY := 50.0
-const MIN_FORCE_THRESHOLD := 0.5
-const ANGLE_EPSILON := 0.01  
+const FORCE_DECAY := 0.75
 
 @export var gm: GameManager
 @export var map_manager: MapManager
 @export var team: int = 0
-@export_range(0, 360, 0.1, "radians_as_degrees") var angle: float = 0
-@export_range(0, 128.0, 0.1) var magnitude: float = 64.0
-
-var external_forces: Dictionary = {}
+@export_range(0, 360, 0.1, "radians_as_degrees") var constant_angle: float = 0
+@export_range(0, 128.0, 0.1) var constant_magnitude: float = 64.0
+@export_range(0, 360, 0.1, "radians_as_degrees") var external_angle: float = 0
+@export var external_magnitude: float = 0
 
 
 func _ready() -> void:
-	angle = deg_to_rad(randi_range(0, 360))
+	constant_angle = deg_to_rad(randi_range(0, 360))
 	frame_coords = Vector2(0, team)
 
 
 func _physics_process(delta: float) -> void:
 	var velocity = calculate_linear_velocity() + calculate_external_velocity()
-	var time_scaled_velocity = velocity * delta * Data.SPEED_TO_SCALE[gm.current_speed]
+	var scaled_delta = delta * Data.SPEED_TO_SCALE[gm.current_speed]
+	reduce_external_velocity(scaled_delta)
+	var time_scaled_velocity = velocity * scaled_delta
 	var target_position = global_position + time_scaled_velocity
 	
 	var cur_tile := map_manager.local_to_map(map_manager.to_local(global_position))
@@ -35,9 +35,17 @@ func _physics_process(delta: float) -> void:
 			next_tile.y >= 0 and next_tile.y < map_manager.map_size.y
 		)
 		
-		# Bounce off the edge or invalid floor
-		if not in_bounds or not map_manager.floor_map[next_tile.y][next_tile.x]:
+		# Bounce off the edge, invalid floor or cliff
+		if not in_bounds or not map_manager.floor_map[next_tile.y][next_tile.x] or map_manager.cliff_map[next_tile.x][next_tile.y]:
 			bounce_from_tile(next_tile, cur_tile, velocity)
+			return
+		
+		var yield_on_tile = map_manager.yield_map.has(next_tile)
+		
+		if yield_on_tile:
+			bounce_from_tile(next_tile, cur_tile, velocity)
+			var y = map_manager.yield_map[next_tile]
+			y._on_attack(self)
 			return
 		
 		var building_on_tile = map_manager.building_map.has(next_tile)
@@ -45,12 +53,14 @@ func _physics_process(delta: float) -> void:
 		# Bounce off building
 		if building_on_tile:
 			var building = map_manager.building_map[next_tile]
-			if not building.keywords.has(Data.BuildingKeyword.GHOST):
-				bounce_from_tile(next_tile, cur_tile, velocity)
 			if building.team == team:
 				building._on_touch(self)
 			else:
 				building._on_attack(self)
+			
+			if not building.keywords.has(Data.BuildingKeyword.GHOST):
+				bounce_from_tile(next_tile, cur_tile, velocity)
+				return
 		
 		var tile_owner = map_manager.claim_map[next_tile.x][next_tile.y]
 		
@@ -72,7 +82,7 @@ func _physics_process(delta: float) -> void:
 	global_position = target_position
 
 func calculate_linear_velocity() -> Vector2:
-	return Vector2(cos(angle), sin(angle)) * magnitude
+	return Vector2(cos(constant_angle), sin(constant_angle)) * constant_magnitude
 
 func bounce_from_tile(hit_tile: Vector2i, from_tile: Vector2i, velocity: Vector2) -> void:
 	var offset_rad = deg_to_rad(randf_range(-15.0, 15.0))
@@ -81,77 +91,32 @@ func bounce_from_tile(hit_tile: Vector2i, from_tile: Vector2i, velocity: Vector2
 	if normal != Vector2.ZERO:
 		# Reflect main movement direction
 		var reflected = velocity.bounce(normal)
-		angle = reflected.angle() + offset_rad
+		constant_angle = reflected.angle() + offset_rad
+	
+		# Reflect external force
+		if external_magnitude > 0:
+			var external_velocity = calculate_external_velocity()
+			var external_reflected = external_velocity.bounce(normal)
+			external_angle = external_reflected.angle()
+			external_magnitude = external_magnitude * 0.90
 
-		# Bounce and decay external forces
-		var updated_forces: Dictionary = {}
-		for dir_str in external_forces.keys():
-			var dir = str_to_vec(dir_str)
-			var mag = external_forces[dir_str]
+func calculate_external_velocity() -> Vector2:
+	return Vector2(cos(external_angle), sin(external_angle)) * external_magnitude
 
-			# Reflect the direction
-			var bounced_dir = dir.bounce(normal).normalized()
-			var bounced_mag = mag * 0.5  # decay by 50% on bounce
+func reduce_external_velocity(delta: float) -> void:
+	external_magnitude -= external_magnitude * FORCE_DECAY * delta
+	if external_magnitude <= constant_magnitude:
+		external_magnitude = 0
 
-			# Skip weak results
-			if bounced_mag < MIN_FORCE_THRESHOLD:
-				continue
-
-			var bounced_str = vec_to_str(bounced_dir)
-			updated_forces[bounced_str] = bounced_mag
-
-		external_forces = updated_forces
+func apply_impulse(dir: float, mag: float):
+	var current = Vector2(cos(external_angle), sin(external_angle)) * external_magnitude
+	var impulse = Vector2(cos(dir), sin(dir)) * mag
+	
+	var result = current + impulse
+	external_magnitude = result.length()
+	
+	external_angle = result.angle()
 
 
 func detonate():
 	queue_free()
-
-
-func calculate_external_velocity() -> Vector2:
-	var total_velocity := Vector2.ZERO
-	var keys_to_remove := []
-	
-	for dir_str in external_forces.keys():
-		var dir = str_to_vec(dir_str)
-		var mag = external_forces[dir_str]
-		
-		total_velocity += dir * mag
-		mag = max(mag - FORCE_DECAY * get_physics_process_delta_time(), 0)
-		
-		if mag < MIN_FORCE_THRESHOLD:
-			keys_to_remove.append(dir_str)
-		else:
-			external_forces[dir_str] = mag
-	
-	for key in keys_to_remove:
-		external_forces.erase(key)
-	
-	return total_velocity
-
-func apply_force(direction: Vector2, magnitude: float) -> void:
-	if direction == Vector2.ZERO:
-		return
-	
-	var dir_normalized = direction.normalized()
-	var dir_key = vec_to_str(dir_normalized)
-
-	# Combine forces in same direction (fuzzy merge)
-	for key in external_forces.keys():
-		var existing_dir = str_to_vec(key)
-		if existing_dir.angle_to(dir_normalized) < ANGLE_EPSILON:
-			external_forces[key] += magnitude
-			return
-	
-	# New force
-	if external_forces.has(dir_key):
-		external_forces[dir_key] += magnitude
-	else:
-		external_forces[dir_key] = magnitude
-
-# Vector serialization helpers
-func vec_to_str(v: Vector2) -> String:
-	return "%f,%f" % [v.x, v.y]
-
-func str_to_vec(s: String) -> Vector2:
-	var parts = s.split(",")
-	return Vector2(parts[0].to_float(), parts[1].to_float())

@@ -1,12 +1,20 @@
 extends Node
 
 enum BuildingKeyword {
+	VANGUARD,
+	WATER,
 	DIRECTIONAL,
 	CONCRETE,
 	LARGE,
 	POPULATE,
 	ZONED,
 	GHOST
+}
+
+enum YieldName {
+	WOOD,
+	STONE,
+	VINES,
 }
 
 enum Rarity {
@@ -26,6 +34,37 @@ enum BuildingName {
 	TOWER,
 	CRATE,
 	BRIDGE,
+	ONEWAY,
+	CAFE,
+	RANGEFINDER,
+	GATE,
+	GATLING_GUN,
+	IRS,
+	GROCERY_STORE,
+	REINFORCED_WALL,
+	MALL,
+	STONE_QUARRY,
+	CANOPY,
+	PEA_SHOOTER,
+	LUMBERYARD,
+	DAM,
+	BOMB,
+	WINDMILL,
+	MINE,
+	OUTPOST,
+	FOREST,
+	SWAMP,
+	ALARM_TOWER,
+	VINEPIT,
+	STATUE,
+	LIBRARY,
+	FARM,
+	BAZAAR,
+	MINT,
+	THRONE,
+	PALACE_GATE,
+	CENSUS_OFFICE,
+	FLAG
 }
 
 enum Speed {
@@ -53,6 +92,37 @@ const BUILDING_NAME_TO_STRING := {
 	BuildingName.TOWER: "tower",
 	BuildingName.CRATE: "crate",
 	BuildingName.BRIDGE: "bridge",
+	BuildingName.ONEWAY: "oneway",
+	BuildingName.CAFE: "cafe",
+	BuildingName.RANGEFINDER: "rangefinder",
+	BuildingName.GATE: "gate",
+	BuildingName.GATLING_GUN: "gatling gun",
+	BuildingName.IRS: "irs",
+	BuildingName.GROCERY_STORE: "grocery store",
+	BuildingName.REINFORCED_WALL: "reinforced wall",
+	BuildingName.MALL: "mall",
+	BuildingName.STONE_QUARRY: "stone quarry",
+	BuildingName.CANOPY: "canopy",
+	BuildingName.PEA_SHOOTER: "pea shooter",
+	BuildingName.LUMBERYARD: "lumberyard",
+	BuildingName.DAM: "dam",
+	BuildingName.BOMB: "bomb",
+	BuildingName.WINDMILL: "windmill",
+	BuildingName.MINE: "mine",
+	BuildingName.OUTPOST: "outpost",
+	BuildingName.FOREST: "forest",
+	BuildingName.SWAMP: "swamp",
+	BuildingName.ALARM_TOWER: "alarm tower",
+	BuildingName.VINEPIT: "vinepit",
+	BuildingName.STATUE: "statue",
+	BuildingName.LIBRARY: "library",
+	BuildingName.FARM: "farm",
+	BuildingName.BAZAAR: "bazaar",
+	BuildingName.MINT: "mint",
+	BuildingName.THRONE: "throne",
+	BuildingName.PALACE_GATE: "palace gate",
+	BuildingName.CENSUS_OFFICE: "census office",
+	BuildingName.FLAG: "flag"
 }
 
 const SPEED_TO_SCALE := {

@@ -8,5 +8,5 @@ building_name = 7
 cost = 100
 rarity = 0
 description = "Zoned, on placement: Gain 50 ducats"
-keywords = Array[int]([4])
+keywords = Array[int]([6])
 metadata/_custom_type_script = "uid://cy0pssy0lw0bn"

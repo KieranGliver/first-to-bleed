@@ -8,5 +8,5 @@ building_name = 8
 cost = 100
 rarity = 0
 description = "Can be placed outside of territory. Can be placed on water"
-keywords = Array[int]([0])
+keywords = Array[int]([0, 1, 7])
 metadata/_custom_type_script = "uid://cy0pssy0lw0bn"

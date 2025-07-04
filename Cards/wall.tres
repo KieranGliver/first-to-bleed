@@ -8,5 +8,5 @@ building_name = 3
 cost = 100
 rarity = 0
 description = "Concrete"
-keywords = Array[int]([1])
+keywords = Array[int]([3])
 metadata/_custom_type_script = "uid://cy0pssy0lw0bn"

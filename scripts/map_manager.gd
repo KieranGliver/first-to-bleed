@@ -2,23 +2,42 @@ extends Node2D
 
 class_name MapManager
 
+enum Pattern {
+	FIELD,
+	LAKE,
+	MAZE,
+	HIGHLANDS,
+	SWAMP,
+	WASTELAND,
+	FORTRESS,
+	DEATHMATCH,
+	HILL
+}
+
 @onready var floor_layer = $FloorLayer
 @onready var claim_layer = $ClaimLayer
 @onready var building_layer = $BuildingLayer
+@onready var cliff_layer = $CliffLayer
+@onready var yield_layer = $YieldLayer
 @onready var pleb_layer = $PlebLayer
 @onready var build_cursor = $BuildCursor
 
 @export var map_size: Vector2i = Vector2i(15, 15)
 
 var floor_map: Array = []
+var cliff_map: Array = []
 var claim_map: Array = []
 var build_map: Array = []
 var building_map: Dictionary = {}
+var yield_map: Dictionary = {}
+var pattern_generators = {
+	Pattern.FIELD: _generate_field_pattern,
+	Pattern.LAKE: _generate_lake_pattern,
+	Pattern.HIGHLANDS: _generate_highlands_pattern
+}
 
 const TILE_SIZE = 64
 
-func _ready():
-	upkeep()
 
 func _initialize_floor_map() -> void:
 	floor_layer.clear()
@@ -27,9 +46,20 @@ func _initialize_floor_map() -> void:
 		var row := []
 		for x in range(map_size.x):
 			var tile_coords = Vector2i(x, y)
-			row.append(true) 
-			floor_layer.set_cell(tile_coords, 0, Vector2(0, 0))
+			row.append(true)
+			floor_layer.set_cell(tile_coords, 0, Vector2(0,0))
 		floor_map.append(row)
+
+
+func _initialize_cliff_map() -> void:
+	cliff_layer.clear()
+	cliff_map.clear()
+	for y in range(map_size.y):
+		var row := []
+		for x in range(map_size.x):
+			row.append(false)
+		cliff_map.append(row)
+
 
 func _initialize_claim_map() -> void:
 	claim_layer.clear()
@@ -40,6 +70,7 @@ func _initialize_claim_map() -> void:
 			row.append(-1)
 		claim_map.append(row)
 
+
 func _initialize_build_map() -> void:
 	build_map.clear()
 	for y in range(map_size.y):
@@ -48,20 +79,38 @@ func _initialize_build_map() -> void:
 			row.append(true)
 		build_map.append(row)
 
+
+func _initialize_yield_map() -> void:
+	yield_map.clear()
+	yield_layer.clear()
+
+
 func _initialize_building_map() -> void:
 	building_layer.clear()
 	building_map.clear()
 
+
 func _initialize_pleb_layer() -> void:
 	pleb_layer.clear()
 
+
 func upkeep() -> void:
 	_initialize_floor_map()
+	_initialize_cliff_map()
 	_initialize_claim_map()
 	_initialize_build_map()
+	_initialize_yield_map()
 	_initialize_building_map()
 	_initialize_pleb_layer()
+
+
+func generate_map(pattern: Pattern) -> void:
+	upkeep()  # Clears and resets all map layers
 	
+	if pattern_generators.has(pattern):
+		pattern_generators[pattern].call()
+	else:
+		push_error("Pattern not implemented: " + str(pattern))
 
 
 func local_to_map(local_pos: Vector2) -> Vector2i:
@@ -79,7 +128,10 @@ func claim(coords: Vector2i, team: int = -1) -> void:
 	else:
 		claim_layer.set_cell(coords, 0, Vector2(team, 0))
 
+
 func spawn_building(coords: Vector2i, card_data: CardData, team: int = 0) -> void:
+	if building_map.keys().has(coords):
+		building_map.erase(coords)
 	var tile_position: Vector2 = Vector2(coords) * TILE_SIZE
 	var pre_ready = func(building: Building):
 		building.keywords = card_data.keywords
@@ -103,8 +155,21 @@ func spawn_building(coords: Vector2i, card_data: CardData, team: int = 0) -> voi
 			var t_coords = Vector2(clamp(coords.x + dx, 0, map_size.x), clamp(coords.y + dy, 0, map_size.y))
 			build_map[t_coords.x][t_coords.y] = false
 	
+	if not floor_map[coords.x][coords.y]:
+		floor_map[coords.x][coords.y] = true
+	
 	if building_instance:
 		building_map[coords] = building_instance
+
+
+func spawn_yield(coords: Vector2, name: String = 'yield') -> void:
+	if yield_map.keys().has(coords):
+		yield_map.erase(coords)
+	var tile_position: Vector2 = Vector2(coords) * TILE_SIZE
+	var yield_instance = yield_layer.spawn(self, tile_position, name)
+	if yield_instance:
+		yield_map[coords] = yield_instance
+
 
 func spawn_pleb(coords: Vector2, team: int = 0, quant: int = 1, name: String = 'pleb') -> void:
 	for i in range(quant):
@@ -143,7 +208,18 @@ func destroy_building(building: Building) -> void:
 					res = false
 			build_map[t_coords.x][t_coords.y] = res
 	
+	# If the building was placed on water turn floor back to water
+	if building.keywords.has(Data.BuildingKeyword.WATER):
+		floor_map[coords.x][coords.y] = false
+	building_map.erase(coords)
 	building.queue_free()
+
+
+func destroy_yield(y: Yield) -> void:
+	var coords = yield_map.keys().find(func (pos): return yield_map[pos] == y)
+	yield_map.erase(coords)
+	y.queue_free()
+
 
 func get_buildings_radius(coords: Vector2i = Vector2i.ZERO, radius: int = -1) -> Array[Building]:
 	var buildings: Array[Building] = []
@@ -161,3 +237,64 @@ func get_buildings_radius(coords: Vector2i = Vector2i.ZERO, radius: int = -1) ->
 				buildings.append(building_map[pos])
 
 	return buildings
+
+
+func set_floor(x: int, y: int, is_floor: bool) -> void:
+	if x >= 0 and y >= 0 and x < map_size.x and y < map_size.y:
+		floor_map[x][y] = is_floor
+		if is_floor:
+			floor_layer.set_cell(Vector2i(x, y), 0, Vector2(0, 0))  # Your floor tile
+		else:
+			floor_layer.erase_cell(Vector2i(x, y))  # No floor = water
+
+
+func set_cliff(cells: Array[Vector2i], is_cliff: bool) -> void:
+	var ref = cells.filter(func(cell): return cell.x >= 0 and cell.y >= 0 and cell.x < map_size.x and cell.y < map_size.y)
+	for cell in ref:
+		cliff_map[cell.x][cell.y] = is_cliff
+		
+	if is_cliff:
+		cliff_layer.set_cells_terrain_connect(ref, 0, 0)
+	else:
+		for cell in ref:
+			cliff_layer.erase_cell(cell)
+
+
+func _generate_field_pattern() -> void:
+	pass
+
+
+func _generate_lake_pattern() -> void:
+	# Carve a big lake in the center (odd width)
+	var lake_size = int(min(map_size.x, map_size.y) * 0.4)  # e.g., 6x6 on a 15x15
+	var start = Vector2i((map_size.x - lake_size) / 2, (map_size.y - lake_size) / 2)
+	
+	for x in range(start.x, start.x + lake_size):
+		for y in range(start.y, start.y + lake_size):
+			set_floor(x, y, false)  # Remove floor to make water
+
+
+func _generate_highlands_pattern() -> void:
+	var cliff_cells: Array[Vector2i] = []
+	
+	for x in range(map_size.x):
+		for y in range(map_size.y):
+			var cell = Vector2i(x, y)
+			# Random chance to have a cliff, higher = more cliffs
+			if randi() % 100 < 70:
+				cliff_cells.append(cell)
+	
+	set_cliff(cliff_cells, true)
+	
+	# Optional: Add sparse clearings by removing random cliff clusters
+	var clearing_count := 4
+	var clearing_radius := 2
+	
+	for i in range(clearing_count):
+		var cx := randi() % map_size.x
+		var cy := randi() % map_size.y
+		for dx in range(-clearing_radius, clearing_radius + 1):
+			for dy in range(-clearing_radius, clearing_radius + 1):
+				var px = clamp(cx + dx, 0, map_size.x - 1)
+				var py = clamp(cy + dy, 0, map_size.y - 1)
+				set_cliff([Vector2i(px, py)], false)

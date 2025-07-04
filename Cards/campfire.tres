@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_amxki")
-building_name = 0
+building_name = 4
 cost = 200
 rarity = 0
 description = "Countdown (10s): Gain 20 gold"

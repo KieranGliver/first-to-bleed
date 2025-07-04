@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://be83rg4b5xli8"]
+
+[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/buildings/building.tscn" id="1_uobwo"]
+[ext_resource type="Script" uid="uid://csntnsvej216u" path="res://scripts/building/campfire.gd" id="2_dxlpn"]
+
+[node name="Campfire" instance=ExtResource("1_uobwo")]
+script = ExtResource("2_dxlpn")
+
+[node name="Sprite2D" parent="." index="0"]
+frame = 2
+
+[node name="Timer" parent="." index="1"]
+time_length = 10.0
+autostart = true

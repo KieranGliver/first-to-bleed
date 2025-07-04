@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://di5cotbyjveom"]
+
+[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/buildings/building.tscn" id="1_33j2i"]
+[ext_resource type="Script" uid="uid://dwf4bi3uokyx7" path="res://tower.gd" id="2_lxyp5"]
+
+[node name="Tower" instance=ExtResource("1_33j2i")]
+script = ExtResource("2_lxyp5")
+
+[node name="Sprite2D" parent="." index="0"]
+frame = 8

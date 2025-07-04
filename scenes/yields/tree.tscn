@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cb2hfngso0tdx"]
+
+[ext_resource type="PackedScene" uid="uid://dmcd2hlr6r0fv" path="res://Scenes/yields/yield.tscn" id="1_bxlvm"]
+
+[node name="Tree" instance=ExtResource("1_bxlvm")]
+max_health = 2
+wood = Array[int]([1, 2])
