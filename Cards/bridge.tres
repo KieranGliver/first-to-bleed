@@ -6,6 +6,7 @@
 script = ExtResource("1_t16sq")
 building_name = 8
 cost = 100
+faction = 0
 rarity = 0
 description = "Can be placed outside of territory. Can be placed on water"
 keywords = Array[int]([0, 1, 7])

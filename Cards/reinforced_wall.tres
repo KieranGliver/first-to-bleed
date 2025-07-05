@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://bc8l045vpnr5p"]
+
+[ext_resource type="Script" uid="uid://cy0pssy0lw0bn" path="res://scripts/resource/card_data.gd" id="1_4dy0d"]
+
+[resource]
+script = ExtResource("1_4dy0d")
+building_name = 16
+cost = 200
+faction = 1
+rarity = 0
+description = "Zoned, Connected buildings gain Concrete"
+keywords = Array[int]([6])
+metadata/_custom_type_script = "uid://cy0pssy0lw0bn"

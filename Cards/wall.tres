@@ -6,6 +6,7 @@
 script = ExtResource("1_aroxr")
 building_name = 3
 cost = 100
+faction = 0
 rarity = 0
 description = "Concrete"
 keywords = Array[int]([3])

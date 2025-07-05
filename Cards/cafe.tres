@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://biojnpyn11gkr"]
+
+[ext_resource type="Script" uid="uid://cy0pssy0lw0bn" path="res://scripts/resource/card_data.gd" id="1_bucsh"]
+
+[resource]
+script = ExtResource("1_bucsh")
+building_name = 10
+cost = 400
+faction = 1
+rarity = 2
+description = "Countdown (5s): Nearest 2 plebs gain Industrial"
+keywords = Array[int]([])
+metadata/_custom_type_script = "uid://cy0pssy0lw0bn"

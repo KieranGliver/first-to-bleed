@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://ba5ys2u4bh7v0"]
+
+[ext_resource type="Script" uid="uid://cy0pssy0lw0bn" path="res://scripts/resource/card_data.gd" id="1_lwitd"]
+
+[resource]
+script = ExtResource("1_lwitd")
+building_name = 13
+cost = 300
+faction = 1
+rarity = 2
+description = "+1 projectile per connection ; Countdown (15s): Fire within 3 tiles"
+keywords = Array[int]([])
+metadata/_custom_type_script = "uid://cy0pssy0lw0bn"

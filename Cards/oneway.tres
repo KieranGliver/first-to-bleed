@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://byfa8esy1wesb"]
+
+[ext_resource type="Script" uid="uid://cy0pssy0lw0bn" path="res://scripts/resource/card_data.gd" id="1_rmcv7"]
+
+[resource]
+script = ExtResource("1_rmcv7")
+building_name = 9
+cost = 200
+faction = 0
+rarity = 1
+description = "Directional, Ghost, On Touch: Change pleb direction"
+keywords = Array[int]([2, 7])
+metadata/_custom_type_script = "uid://cy0pssy0lw0bn"

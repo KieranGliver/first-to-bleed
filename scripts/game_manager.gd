@@ -98,7 +98,7 @@ func setup():
 		map_manager.spawn_building(start_pos[i], hq, i)
 	
 	# Reset data values
-	ducats = [200, 200, 200, 200]
+	ducats = [20000, 200, 200, 200]
 	wood = [0, 0, 0, 0]
 	stone = [0, 0, 0, 0]
 	tiles = [0, 0, 0, 0]

@@ -1,5 +1,18 @@
 extends Node
 
+enum EffectName {
+	INDUSTRIAL,
+	EXPLOIT,
+	RUSH
+}
+
+enum Faction {
+	DEFAULT,
+	URBAN,
+	ROYALTY,
+	NATURE
+}
+
 enum BuildingKeyword {
 	VANGUARD,
 	WATER,
@@ -96,14 +109,14 @@ const BUILDING_NAME_TO_STRING := {
 	BuildingName.CAFE: "cafe",
 	BuildingName.RANGEFINDER: "rangefinder",
 	BuildingName.GATE: "gate",
-	BuildingName.GATLING_GUN: "gatling gun",
+	BuildingName.GATLING_GUN: "gatling_gun",
 	BuildingName.IRS: "irs",
-	BuildingName.GROCERY_STORE: "grocery store",
-	BuildingName.REINFORCED_WALL: "reinforced wall",
+	BuildingName.GROCERY_STORE: "grocery_store",
+	BuildingName.REINFORCED_WALL: "reinforced_wall",
 	BuildingName.MALL: "mall",
-	BuildingName.STONE_QUARRY: "stone quarry",
+	BuildingName.STONE_QUARRY: "stone_quarry",
 	BuildingName.CANOPY: "canopy",
-	BuildingName.PEA_SHOOTER: "pea shooter",
+	BuildingName.PEA_SHOOTER: "pea_shooter",
 	BuildingName.LUMBERYARD: "lumberyard",
 	BuildingName.DAM: "dam",
 	BuildingName.BOMB: "bomb",
@@ -112,7 +125,7 @@ const BUILDING_NAME_TO_STRING := {
 	BuildingName.OUTPOST: "outpost",
 	BuildingName.FOREST: "forest",
 	BuildingName.SWAMP: "swamp",
-	BuildingName.ALARM_TOWER: "alarm tower",
+	BuildingName.ALARM_TOWER: "alarm_tower",
 	BuildingName.VINEPIT: "vinepit",
 	BuildingName.STATUE: "statue",
 	BuildingName.LIBRARY: "library",
@@ -120,8 +133,8 @@ const BUILDING_NAME_TO_STRING := {
 	BuildingName.BAZAAR: "bazaar",
 	BuildingName.MINT: "mint",
 	BuildingName.THRONE: "throne",
-	BuildingName.PALACE_GATE: "palace gate",
-	BuildingName.CENSUS_OFFICE: "census office",
+	BuildingName.PALACE_GATE: "palace_gate",
+	BuildingName.CENSUS_OFFICE: "census_office",
 	BuildingName.FLAG: "flag"
 }
 

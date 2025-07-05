@@ -14,10 +14,13 @@ var max_health: int = 10
 var team: int = 0
 var current_health: int
 var facing: Vector2 = Vector2.UP
+var coords: Vector2i = Vector2i.ZERO
+var range_bonus: int = 0
 
 @export var pop_val: int = 0
 
 func _ready() -> void:
+	map_manager.update_connections(self)
 	if keywords.has(Data.BuildingKeyword.POPULATE):
 		var coords = map_manager.local_to_map(map_manager.to_local(global_position))
 		map_manager.spawn_pleb(coords, team, pop_val)
@@ -46,8 +49,9 @@ func _spawn_projectile(time: float, final_position: Vector2, max_height: float):
 func fire_projectiles(quant: int, radius: int, time: float = 3.0, max_height: float = 50.0):
 	var coords = Vector2(map_manager.local_to_map(map_manager.to_local(global_position)))
 	var arr: Array[Vector2] = []
-	for dx in range(-radius, radius + 1):
-		for dy in range(-radius, radius + 1):
+	var d_radius = radius + range_bonus
+	for dx in range(-d_radius, d_radius + 1):
+		for dy in range(-d_radius, d_radius + 1):
 			var new_coords = Vector2(coords.x + dx, coords.y + dy)
 			if 0 <= new_coords.x and new_coords.x < map_manager.map_size.x and 0 <= new_coords.y and new_coords.y < map_manager.map_size.y:
 				if map_manager.claim_map[new_coords.x][new_coords.y] != team and map_manager.floor_map[new_coords.x][new_coords.y]:
@@ -59,6 +63,14 @@ func fire_projectiles(quant: int, radius: int, time: float = 3.0, max_height: fl
 			_spawn_projectile(time, (pos - coords) * map_manager.TILE_SIZE, max_height)
 			if arr.size() == 0:
 				return
+
+
+func get_nearby_plebs(quant: int):
+	var plebs = get_tree().get_nodes_in_group('pleb')
+	var team_plebs = plebs.filter(func(pleb: Pleb): return pleb.team == team)
+	team_plebs.sort_custom(func(a: Pleb, b: Pleb): return a.global_position.distance_to(global_position) < b.global_position.distance_to(global_position))
+	team_plebs.resize(quant)
+	return team_plebs
 
 
 func _on_placed() -> void:
@@ -78,4 +90,12 @@ func _on_destroyed() -> void:
 
 
 func _on_timer_timeout() -> void:
+	pass
+
+
+func _apply_group_effect(group: Array[Building]) -> void:
+	pass
+
+
+func _remove_group_effect(group: Array[Building]) -> void:
 	pass

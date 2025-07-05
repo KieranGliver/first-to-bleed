@@ -6,6 +6,7 @@
 script = ExtResource("1_gc2px")
 building_name = 0
 cost = 1000
+faction = 0
 rarity = 3
 description = "On touch: Gain 10 gold"
 keywords = Array[int]([5])

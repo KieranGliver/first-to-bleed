@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dolgru5dtl4ke"]
+
+[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/buildings/building.tscn" id="1_y2i1j"]
+[ext_resource type="Script" uid="uid://qji7retqb0v4" path="res://scripts/building/grocery_store.gd" id="2_ejr2c"]
+
+[node name="GroceryStore" instance=ExtResource("1_y2i1j")]
+script = ExtResource("2_ejr2c")
+
+[node name="Timer" parent="." index="1"]
+time_length = 15.0
+autostart = true

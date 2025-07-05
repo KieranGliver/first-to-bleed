@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://dpax5bjlcs7i1"]
+
+[ext_resource type="Script" uid="uid://cy0pssy0lw0bn" path="res://scripts/resource/card_data.gd" id="1_5vheo"]
+
+[resource]
+script = ExtResource("1_5vheo")
+building_name = 15
+cost = 500
+faction = 1
+rarity = 2
+description = "Countdown (15s): Gain 5 Ducats per connection"
+keywords = Array[int]([])
+metadata/_custom_type_script = "uid://cy0pssy0lw0bn"

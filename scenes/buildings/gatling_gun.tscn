@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dytqrjorlawfl"]
+
+[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/buildings/building.tscn" id="1_xsbyd"]
+[ext_resource type="Script" uid="uid://cyiwl2a6fi4rm" path="res://scripts/building/gatling_gun.gd" id="2_sdaln"]
+
+[node name="GatlingGun" instance=ExtResource("1_xsbyd")]
+script = ExtResource("2_sdaln")
+
+[node name="Sprite2D" parent="." index="0"]
+frame = 8
+
+[node name="Timer" parent="." index="1"]
+time_length = 15.0
+autostart = true

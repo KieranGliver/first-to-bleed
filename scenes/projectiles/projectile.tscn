@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cmho4vifcu61d"]
 
-[ext_resource type="Script" uid="uid://bliooy1emv2a7" path="res://projectile.gd" id="1_pybd6"]
+[ext_resource type="Script" uid="uid://bliooy1emv2a7" path="res://scripts/projectile.gd" id="1_pybd6"]
 [ext_resource type="Texture2D" uid="uid://dq1wow6tcfpl8" path="res://Sprites/projectile.png" id="2_kmewo"]
 [ext_resource type="Script" uid="uid://b4xgekfiw3stj" path="res://scripts/game_timer.gd" id="3_go3f5"]
 

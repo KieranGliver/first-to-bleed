@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://bs1wtbiiyyb1t"]
+
+[ext_resource type="Script" uid="uid://cy0pssy0lw0bn" path="res://scripts/resource/card_data.gd" id="1_vtrk8"]
+
+[resource]
+script = ExtResource("1_vtrk8")
+building_name = 11
+cost = 200
+faction = 1
+rarity = 1
+description = "Zoned, Buildings within the connection gain +2 range"
+keywords = Array[int]([6])
+metadata/_custom_type_script = "uid://cy0pssy0lw0bn"

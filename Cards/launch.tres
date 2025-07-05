@@ -6,6 +6,7 @@
 script = ExtResource("1_eu643")
 building_name = 5
 cost = 200
+faction = 0
 rarity = 1
 description = "Directional, Ghost, On Touch: Launch plebs"
 keywords = Array[int]([2, 7])

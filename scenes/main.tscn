@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://crpk50yl4r2ja"]
+[gd_scene load_steps=47 format=4 uid="uid://crpk50yl4r2ja"]
 
 [ext_resource type="Texture2D" uid="uid://dt6hox27kgbeg" path="res://Sprites/Sheets/FloorTiles.png" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://dxxftcmn0kmk2" path="res://scripts/main.gd" id="1_tbgi4"]
@@ -22,10 +22,23 @@
 [ext_resource type="Texture2D" uid="uid://dtrssav5r5pht" path="res://Sprites/Sheets/tile_hover.png" id="15_k12tt"]
 [ext_resource type="Resource" uid="uid://c21uvj3m18745" path="res://Cards/house.tres" id="16_ee4r6"]
 [ext_resource type="Resource" uid="uid://b3mhsg3u6irfm" path="res://Cards/stall.tres" id="17_gt3je"]
+[ext_resource type="Resource" uid="uid://biojnpyn11gkr" path="res://Cards/cafe.tres" id="18_1w6v2"]
 [ext_resource type="Resource" uid="uid://ck754yhnd0rgy" path="res://Cards/wall.tres" id="18_3pmx8"]
+[ext_resource type="Resource" uid="uid://lr1i7yjcc2ix" path="res://Cards/bridge.tres" id="18_536cc"]
 [ext_resource type="Resource" uid="uid://xlc4p1xi06y1" path="res://Cards/crate.tres" id="19_u50mg"]
-[ext_resource type="Resource" uid="uid://bt4acf35xgsvn" path="res://Cards/tower.tres" id="20_1w6v2"]
+[ext_resource type="Resource" uid="uid://byfa8esy1wesb" path="res://Cards/oneway.tres" id="19_ueoa1"]
+[ext_resource type="Resource" uid="uid://bt4acf35xgsvn" path="res://Cards/tower.tres" id="20_6vcvc"]
 [ext_resource type="Resource" uid="uid://b73htcdp0j88j" path="res://Cards/launch.tres" id="20_cbgmd"]
+[ext_resource type="Resource" uid="uid://c1jljet8l7qym" path="res://Cards/irs.tres" id="21_1w6v2"]
+[ext_resource type="Resource" uid="uid://bs1wtbiiyyb1t" path="res://Cards/rangefinder.tres" id="21_7k868"]
+[ext_resource type="Resource" uid="uid://ba5ys2u4bh7v0" path="res://Cards/gatling_gun.tres" id="22_7k868"]
+[ext_resource type="Resource" uid="uid://6gexsvaeojut" path="res://Cards/gate.tres" id="22_aqgau"]
+[ext_resource type="Resource" uid="uid://dk0c1jfulfrxn" path="res://Cards/campfire.tres" id="22_ueoa1"]
+[ext_resource type="Resource" uid="uid://dpax5bjlcs7i1" path="res://Cards/grocery_store.tres" id="24_8cuat"]
+[ext_resource type="Resource" uid="uid://dwreqt8qm65y5" path="res://Cards/hq.tres" id="26_o1aky"]
+[ext_resource type="Resource" uid="uid://dm04f3i0vdlw6" path="res://Cards/mall.tres" id="29_kwxat"]
+[ext_resource type="Resource" uid="uid://bc8l045vpnr5p" path="res://Cards/reinforced_wall.tres" id="32_aa8k8"]
+[ext_resource type="Resource" uid="uid://duqjarap1iuwl" path="res://Cards/stone_quarry.tres" id="34_kqrg6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o5qli"]
 texture = ExtResource("1_o5qli")
@@ -551,7 +564,7 @@ grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
 script = ExtResource("13_wsu2k")
-deck = Array[ExtResource("14_gt3je")]([ExtResource("16_ee4r6"), ExtResource("16_ee4r6"), ExtResource("17_gt3je"), ExtResource("17_gt3je"), ExtResource("20_1w6v2")])
+deck = Array[ExtResource("14_gt3je")]([ExtResource("18_536cc"), ExtResource("18_1w6v2"), ExtResource("22_ueoa1"), ExtResource("19_u50mg"), ExtResource("22_aqgau"), ExtResource("22_7k868"), ExtResource("24_8cuat"), ExtResource("16_ee4r6"), ExtResource("26_o1aky"), ExtResource("21_1w6v2"), ExtResource("20_cbgmd"), ExtResource("29_kwxat"), ExtResource("19_ueoa1"), ExtResource("21_7k868"), ExtResource("32_aa8k8"), ExtResource("17_gt3je"), ExtResource("34_kqrg6"), ExtResource("20_6vcvc"), ExtResource("18_3pmx8")])
 
 [node name="MarginContainer" type="MarginContainer" parent="GM/CanvasLayer/UI/Deck"]
 layout_mode = 2

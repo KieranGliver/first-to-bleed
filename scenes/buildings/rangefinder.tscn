@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqspaoayie2b8"]
+
+[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/buildings/building.tscn" id="1_t404l"]
+[ext_resource type="Script" uid="uid://da3bkb4mcy3n6" path="res://scripts/building/rangefinder.gd" id="2_062jp"]
+
+[node name="Rangefinder" instance=ExtResource("1_t404l")]
+script = ExtResource("2_062jp")
+
+[node name="Sprite2D" parent="." index="0"]
+frame = 5

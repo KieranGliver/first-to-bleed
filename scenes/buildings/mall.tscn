@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://ci0dyih7tbi4t"]
+
+[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/buildings/building.tscn" id="1_nqhcc"]
+
+[node name="Mall" instance=ExtResource("1_nqhcc")]

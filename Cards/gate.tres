@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://6gexsvaeojut"]
+
+[ext_resource type="Script" uid="uid://cy0pssy0lw0bn" path="res://scripts/resource/card_data.gd" id="1_1nurn"]
+
+[resource]
+script = ExtResource("1_1nurn")
+building_name = 12
+cost = 200
+faction = 1
+rarity = 1
+description = "Ghosted, Zoned"
+keywords = Array[int]([6, 7])
+metadata/_custom_type_script = "uid://cy0pssy0lw0bn"

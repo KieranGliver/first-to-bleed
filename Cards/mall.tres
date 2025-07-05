@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://dm04f3i0vdlw6"]
+
+[ext_resource type="Script" uid="uid://cy0pssy0lw0bn" path="res://scripts/resource/card_data.gd" id="1_0yk2n"]
+
+[resource]
+script = ExtResource("1_0yk2n")
+building_name = 17
+cost = 300
+faction = 1
+rarity = 2
+description = "Zoned, +1 VP per Mall connected at End of Game"
+keywords = Array[int]([6])
+metadata/_custom_type_script = "uid://cy0pssy0lw0bn"

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://5wtbal6ie8rv"]
+
+[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/buildings/building.tscn" id="1_3ldp6"]
+[ext_resource type="Script" uid="uid://dyj3nj0p6kh3v" path="res://scripts/building/reinforced_wall.gd" id="2_nvh8p"]
+
+[node name="ReinforcedWall" instance=ExtResource("1_3ldp6")]
+script = ExtResource("2_nvh8p")
+
+[node name="Sprite2D" parent="." index="0"]
+frame = 4

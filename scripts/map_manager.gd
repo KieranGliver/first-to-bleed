@@ -35,9 +35,11 @@ var pattern_generators = {
 	Pattern.LAKE: _generate_lake_pattern,
 	Pattern.HIGHLANDS: _generate_highlands_pattern
 }
+var building_groups: Dictionary = {}
 
 const TILE_SIZE = 64
 
+signal building_placed(building: Building)
 
 func _initialize_floor_map() -> void:
 	floor_layer.clear()
@@ -114,7 +116,6 @@ func generate_map(pattern: Pattern) -> void:
 
 
 func local_to_map(local_pos: Vector2) -> Vector2i:
-	
 	var grid_x := int(floor(local_pos.x / TILE_SIZE))
 	var grid_y := int(floor(local_pos.y / TILE_SIZE))
 	
@@ -137,6 +138,7 @@ func spawn_building(coords: Vector2i, card_data: CardData, team: int = 0) -> voi
 		building.keywords = card_data.keywords
 		building.building_name = card_data.building_name
 		building.rarity = card_data.rarity
+		building.coords = coords
 		match(build_cursor.facing):
 			0:
 				building.facing = Vector2.UP
@@ -146,20 +148,20 @@ func spawn_building(coords: Vector2i, card_data: CardData, team: int = 0) -> voi
 				building.facing = Vector2.DOWN
 			3:
 				building.facing = Vector2.LEFT
+		building_map[coords] = building
 	
 	var building_instance = building_layer.spawn(self, tile_position, Data.BUILDING_NAME_TO_STRING[card_data.building_name], team, pre_ready)
 	
 	var radius = 0 if card_data.keywords.has(Data.BuildingKeyword.ZONED) else 1
 	for dx in range(-radius, radius + 1):
 		for dy in range(-radius, radius + 1):
-			var t_coords = Vector2(clamp(coords.x + dx, 0, map_size.x), clamp(coords.y + dy, 0, map_size.y))
+			var t_coords = Vector2i(clamp(coords.x + dx, 0, map_size.x - 1), clamp(coords.y + dy, 0, map_size.y - 1))
 			build_map[t_coords.x][t_coords.y] = false
 	
 	if not floor_map[coords.x][coords.y]:
 		floor_map[coords.x][coords.y] = true
 	
-	if building_instance:
-		building_map[coords] = building_instance
+	building_placed.emit(building_instance)
 
 
 func spawn_yield(coords: Vector2, name: String = 'yield') -> void:
@@ -191,13 +193,9 @@ func destroy_pleb(team: int = 0, quant: int = 1, _name: String = 'pleb') -> void
 
 func destroy_building(building: Building) -> void:
 	var radius = 0 if building.keywords.has(Data.BuildingKeyword.ZONED) else 0
-	# Get the coords from the building map using building
-	var coords = building_map.keys().find(func (pos): return building_map[pos] == building)
+
+	var coords = building.coords
 	
-	if coords == null:
-		push_error("Building not found in building_map")
-		return
-		
 	for dx in range(-radius, radius + 1):
 		for dy in range(-radius, radius + 1):
 			var t_coords = Vector2(clamp(coords.x + dx, 0, map_size.x), clamp(coords.y + dy, 0, map_size.y))
@@ -211,6 +209,7 @@ func destroy_building(building: Building) -> void:
 	# If the building was placed on water turn floor back to water
 	if building.keywords.has(Data.BuildingKeyword.WATER):
 		floor_map[coords.x][coords.y] = false
+	update_connections(building, true)
 	building_map.erase(coords)
 	building.queue_free()
 
@@ -298,3 +297,113 @@ func _generate_highlands_pattern() -> void:
 				var px = clamp(cx + dx, 0, map_size.x - 1)
 				var py = clamp(cy + dy, 0, map_size.y - 1)
 				set_cliff([Vector2i(px, py)], false)
+
+
+func update_connections(building: Building, is_removal: bool = false):
+	if is_removal:
+		_remove_building_from_group(building)
+	else:
+		_add_building_to_group(building)
+	print_building_groups_debug()
+
+
+func _add_building_to_group(building: Building):
+	var coords = building.coords
+	
+	var connected_groups: Array = []
+	
+	for offset in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+		var neighbour_coords = coords + offset
+		if building_map.has(neighbour_coords):
+			var neighbour = building_map[neighbour_coords]
+			if building_groups.has(neighbour):
+				var group = building_groups[neighbour]
+				if not connected_groups.has(group):
+					connected_groups.append(group)
+	
+	var new_group: Array[Building] = [building]
+	
+	for group in connected_groups:
+		for b in group:
+			if not new_group.has(b):
+				new_group.append(b)
+	
+	for b in new_group:
+		building_groups[b] = new_group
+	
+	for b in new_group:
+		b._apply_group_effect(new_group)
+
+
+func _remove_building_from_group(building: Building) -> void:
+	var old_group = building_groups[building]
+	for b in old_group:
+		b._remove_group_effect(old_group)
+	old_group.erase(building)
+	building_groups.erase(building)
+	var coords = building.coords
+	
+	var visited: Array[Building] = []
+	var subgroups: Array = []
+
+	for offset in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+		var neighbor_coords = coords + offset
+		if building_map.has(neighbor_coords):
+			var neighbor = building_map[neighbor_coords]
+			if not visited.has(neighbor):
+				var subgroup = _flood_fill_group(neighbor, visited)
+				subgroups.append(subgroup)
+	
+	for group in subgroups:
+		for b in group:
+			building_groups[b] = group
+	
+	for group in subgroups:
+		for b in group:
+			b._apply_group_effect(group)
+
+
+func _flood_fill_group(start: Building, visited: Array[Building]) -> Array[Building]:
+	var group: Array[Building] = []
+	var queue: Array[Building] = [start]
+	
+	while not queue.is_empty():
+		var current = queue.pop_front()
+		if visited.has(current):
+			continue
+		visited.append(current)
+		group.append(current)
+		
+		var coords = current.coords
+		
+		for offset in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+			var neighbor_coords = coords + offset
+			if building_map.has(neighbor_coords):
+				var neighbor = building_map[neighbor_coords]
+				if not visited.has(neighbor):
+					queue.append(neighbor)
+	
+	return group
+
+
+func print_building_groups_debug() -> void:
+	print("==== BUILDING GROUP DEBUG ====")
+	var printed_groups: Array = []
+	var group_index := 0
+	
+	for group in building_groups.values():
+		# Avoid printing duplicate groups (since multiple keys may point to the same Array)
+		if printed_groups.has(group):
+			continue
+		printed_groups.append(group)
+		
+		print("\nGroup %d:" % group_index)
+		group_index += 1
+		
+		for building in group:
+			var label = "[%s] (%s) at %s" % [
+				building.building_name,
+				building.get_class(),
+				str(building.coords)
+			]
+			print("  - " + label)

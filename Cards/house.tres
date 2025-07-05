@@ -6,6 +6,7 @@
 script = ExtResource("1_rllcf")
 building_name = 1
 cost = 200
+faction = 0
 rarity = 0
 description = "Populate 2"
 keywords = Array[int]([5])
