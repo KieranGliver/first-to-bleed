@@ -246,6 +246,14 @@ The number of buildings that either are connected to this building or connected 
 
 Building gains a growth stack lasting 1 seconds. If the buidling already contains a growth stack a vine appears nearby and clears the growth stack. Vines are resources with two health that are owned by a the building owner. Vines can be traversed by the owner.
 
+#### Vanguard
+
+Building can be placed outside of territory
+
+#### Waterbound
+
+Building can only be placed on water
+
 ### Building Types
 
 - **Income** – Boosts resource generation  
@@ -264,20 +272,19 @@ Building gains a growth stack lasting 1 seconds. If the buidling already contain
 | Stall             | Default   | 200d      | On Touch: Gain 5 Ducats                                                    |
 | Campfire          | Default   | 200d      | Countdown (10s): Gain 20 gold                                              |
 | House             | Default   | 200d      | **Populate** 2                                                             |
-| Launch            | Default   | 200d      | **Ghost**, On Touch: **Launch** 5                                          |
+| Launch            | Default   | 200d      | **Ghost**, **Directional**, On Touch: Launch Pleb                          |
 | Tower             | Default   | 200d      | On Touch: Fire projectile within 3 tiles                                   |
-| Bridge            | Default   | 100d      | Can be placed outside of territory. Can be placed on water                 |
+| Bridge            | Default   | 100d      | **Ghost**, **Vanguard**, **Waterbound**                                    |
 | Crate             | Default   | 100d      | **Dense**, on placement: Gain 50 ducats                                    |
-| One Way           | Urban     | 200d      | **Directional**, **Ghost**, On Touch: **Launch** 1                         |
-| Tube              | Urban     | 100d      | **Zoned**                                                                  |
+| One Way           | Urban     | 200d      | **Directional**, **Ghost**, On Touch: Change pleb direction                |
 | Café              | Urban     | 400d      | Countdown (5s): Nearest 2 plebs gain **Industrial**                        |
-| Rangefinder       | Urban     | 300d      | **Zoned**. Buildings within the connection gian +2 range                   |
+| Rangefinder       | Urban     | 300d      | **Zoned**, Buildings within the connection gain +2 range                   |
 | Gate              | Urban     | 200d      | **Ghosted**, **Zoned**                                                     |
-| Gatling Gun       | Urban     | 300d      | +1 projectile per **connection** ; Countdown (15s): Fire within 3 tiles    |
+| Gatling Gun       | Urban     | 300d      | +1 projectile per connection ; Countdown (15s): Fire within 3 tiles        |
 | IRS               | Urban     | 500d      | On any building placed: Gain 50 Ducats                                     |
-| Grocery           | Urban     | 200d      | Countdown (15s): Gain 5 Ducats per **connection**                          |
-| Reinforced Wall   | Urban     | 200d      | **Zoned**. Connected buildings gain **Concrete**                           |
-| Mall              | Urban     | 300d      | **Zoned**. +1 VP per Mall connected at End of Game                         |
+| Grocery           | Urban     | 200d      | Countdown (15s): Gain 5 Ducats per connection                              |
+| Reinforced Wall   | Urban     | 200d      | **Zoned**, Connected buildings gain **Concrete**                           |
+| Mall              | Urban     | 300d      | **Zoned**, +1 VP per Mall connected at End of Game                         |
 | Stone Quarry      | Urban     | 200d      | On Touch: Gain 1 Stone                                                     |
 | Canopy            | Nature    | 200d      | On Touch: Plebs gain **Rush**                                              |
 | Pea Shooter       | Nature    | 500d      | On touch: **Overgrowth**, Countdown (7s): Fire 3 projectiles within 1 tile, +1 range per Vines within 1 tile |
