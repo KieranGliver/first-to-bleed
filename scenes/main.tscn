@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://crpk50yl4r2ja"]
+[gd_scene load_steps=49 format=4 uid="uid://crpk50yl4r2ja"]
 
 [ext_resource type="Texture2D" uid="uid://dt6hox27kgbeg" path="res://Sprites/Sheets/FloorTiles.png" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://dxxftcmn0kmk2" path="res://scripts/main.gd" id="1_tbgi4"]
@@ -18,9 +18,11 @@
 [ext_resource type="Script" uid="uid://ntfx8lio8tgj" path="res://scripts/deck_ui.gd" id="13_wsu2k"]
 [ext_resource type="Script" uid="uid://cy0pssy0lw0bn" path="res://scripts/resource/card_data.gd" id="14_gt3je"]
 [ext_resource type="Script" uid="uid://cxobmr13fusm" path="res://scripts/hand_ui.gd" id="14_k12tt"]
+[ext_resource type="Texture2D" uid="uid://be536g23n2f73" path="res://Sprites/tile_0106.png" id="15_8cuat"]
 [ext_resource type="PackedScene" uid="uid://dpeclu1mk0hx7" path="res://Scenes/UI/card_ui.tscn" id="15_h1bgf"]
 [ext_resource type="Texture2D" uid="uid://dtrssav5r5pht" path="res://Sprites/Sheets/tile_hover.png" id="15_k12tt"]
 [ext_resource type="Resource" uid="uid://c21uvj3m18745" path="res://Cards/house.tres" id="16_ee4r6"]
+[ext_resource type="Texture2D" uid="uid://dq1wow6tcfpl8" path="res://Sprites/projectile.png" id="16_o1aky"]
 [ext_resource type="Resource" uid="uid://b3mhsg3u6irfm" path="res://Cards/stall.tres" id="17_gt3je"]
 [ext_resource type="Resource" uid="uid://biojnpyn11gkr" path="res://Cards/cafe.tres" id="18_1w6v2"]
 [ext_resource type="Resource" uid="uid://ck754yhnd0rgy" path="res://Cards/wall.tres" id="18_3pmx8"]
@@ -524,6 +526,48 @@ texture = ExtResource("3_85g3d")
 expand_mode = 2
 
 [node name="Label" type="Label" parent="GM/CanvasLayer/UI/Ducat"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "200"
+
+[node name="Wood" type="HBoxContainer" parent="GM/CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -104.0
+offset_top = 47.0
+offset_bottom = 92.0
+grow_horizontal = 0
+script = ExtResource("3_choun")
+
+[node name="TextureRect" type="TextureRect" parent="GM/CanvasLayer/UI/Wood"]
+layout_mode = 2
+texture = ExtResource("15_8cuat")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="GM/CanvasLayer/UI/Wood"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "200"
+
+[node name="Stone" type="HBoxContainer" parent="GM/CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -104.0
+offset_top = 95.0
+offset_bottom = 140.0
+grow_horizontal = 0
+script = ExtResource("3_choun")
+
+[node name="TextureRect" type="TextureRect" parent="GM/CanvasLayer/UI/Stone"]
+layout_mode = 2
+texture = ExtResource("16_o1aky")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="GM/CanvasLayer/UI/Stone"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "200"

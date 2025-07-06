@@ -74,14 +74,14 @@ func add_ducats(amount: int, team: int = 0):
 
 func add_wood(amount: int, team: int = 0):
 	wood[team] += amount
-	#if team == 0:
-		#ui.wood.update(wood[team])
+	if team == 0:
+		ui.wood.update(wood[team])
 
 
 func add_stone(amount: int, team: int = 0):
 	stone[team] += amount
-	#if team == 0:
-		#ui.stone.update(stone[team])
+	if team == 0:
+		ui.stone.update(stone[team])
 
 
 func add_tiles(amount: int, team: int = 0):

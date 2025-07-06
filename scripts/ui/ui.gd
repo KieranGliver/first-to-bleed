@@ -6,3 +6,5 @@ class_name UserInterface
 @onready var ducat = $Ducat
 @onready var score = $Score
 @onready var deck = $Deck
+@onready var wood = $Wood
+@onready var stone = $Stone
