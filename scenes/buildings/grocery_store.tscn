@@ -6,6 +6,9 @@
 [node name="GroceryStore" instance=ExtResource("1_y2i1j")]
 script = ExtResource("2_ejr2c")
 
+[node name="Sprite2D" parent="." index="0"]
+frame = 11
+
 [node name="Timer" parent="." index="1"]
 time_length = 15.0
 autostart = true

@@ -7,4 +7,4 @@
 script = ExtResource("2_bvr4u")
 
 [node name="Sprite2D" parent="." index="0"]
-frame = 6
+frame = 22

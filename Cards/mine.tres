@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://d4ed1fewq68op"]
+
+[ext_resource type="Script" uid="uid://cy0pssy0lw0bn" path="res://scripts/resource/card_data.gd" id="1_tvgny"]
+
+[resource]
+script = ExtResource("1_tvgny")
+building_name = 24
+cost = 100
+faction = 3
+rarity = 0
+description = "Countdown (10s): Gain 1 Ducat per Pleb"
+keywords = Array[int]([])
+metadata/_custom_type_script = "uid://cy0pssy0lw0bn"

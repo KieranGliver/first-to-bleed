@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://djhmw0ipp0go6"]
+
+[ext_resource type="Script" uid="uid://cy0pssy0lw0bn" path="res://scripts/resource/card_data.gd" id="1_me2od"]
+
+[resource]
+script = ExtResource("1_me2od")
+building_name = 26
+cost = 100
+faction = 3
+rarity = 0
+description = "Populate 1"
+keywords = Array[int]([5])
+metadata/_custom_type_script = "uid://cy0pssy0lw0bn"

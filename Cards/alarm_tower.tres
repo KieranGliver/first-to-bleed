@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://4hdfte1hu1gk"]
+
+[ext_resource type="Script" uid="uid://cy0pssy0lw0bn" path="res://scripts/resource/card_data.gd" id="1_w4hur"]
+
+[resource]
+script = ExtResource("1_w4hur")
+building_name = 28
+cost = 300
+faction = 3
+rarity = 0
+description = "On touch: Overgrowth. Countdown (5s): Turn vine into tree resource"
+keywords = Array[int]([])
+metadata/_custom_type_script = "uid://cy0pssy0lw0bn"

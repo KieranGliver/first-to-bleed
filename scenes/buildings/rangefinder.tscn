@@ -7,4 +7,4 @@
 script = ExtResource("2_062jp")
 
 [node name="Sprite2D" parent="." index="0"]
-frame = 5
+frame = 17

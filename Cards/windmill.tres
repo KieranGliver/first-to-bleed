@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://bq4sv322udrm7"]
+
+[ext_resource type="Script" uid="uid://cy0pssy0lw0bn" path="res://scripts/resource/card_data.gd" id="1_ae3kg"]
+
+[resource]
+script = ExtResource("1_ae3kg")
+building_name = 23
+cost = 200
+faction = 3
+rarity = 0
+description = "Countdown (10s): Self-destruct; Remove terrain in 2-tile radius"
+keywords = Array[int]([])
+metadata/_custom_type_script = "uid://cy0pssy0lw0bn"

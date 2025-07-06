@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://1tm8l6bl20c2"]
+
+[ext_resource type="Script" uid="uid://cy0pssy0lw0bn" path="res://scripts/resource/card_data.gd" id="1_hyhi8"]
+
+[resource]
+script = ExtResource("1_hyhi8")
+building_name = 22
+cost = 200
+faction = 3
+rarity = 0
+description = "On tree destruction: Plebs gain Rush"
+keywords = Array[int]([])
+metadata/_custom_type_script = "uid://cy0pssy0lw0bn"

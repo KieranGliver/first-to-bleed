@@ -7,4 +7,4 @@
 script = ExtResource("2_cwc01")
 
 [node name="Sprite2D" parent="." index="0"]
-frame = 4
+frame = 19

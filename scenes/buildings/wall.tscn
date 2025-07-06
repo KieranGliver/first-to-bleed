@@ -5,4 +5,4 @@
 [node name="Wall" instance=ExtResource("1_pieci")]
 
 [node name="Sprite2D" parent="." index="0"]
-frame = 7
+frame = 23

@@ -308,6 +308,16 @@ Building can only be placed on water
 | Census Office     | Royalty   | 250d      | On Placement: +1 VP per 3 plebs                                            |
 | Flag              | Royalty   | 100d      | On attack: Nearby pleb gains exploit                                       |
 
+
+### Additional
+
+| Name              | Faction   | Cost      | Description                                                                |
+|-------------------|-----------|-----------|----------------------------------------------------------------------------|
+| Subway            | Urban     | 300d      | **Directional**, **Ghost**, On Touch: Warp pleb to another station         |
+| Skyscrapper       | Urban     | 600d      | **Large**, **Zoned**, countdown(5s): all friendly plebs gain industrial    |
+| Power Plant       | Urban     | 300d      | On Touch: Connected buildings trigger countdown effects                    |
+| Sewer             | Urban     | 200d      | On Touch: Spawn a temp pleb that despawns after 10s                        |
+
 ---
 
 ## Resources

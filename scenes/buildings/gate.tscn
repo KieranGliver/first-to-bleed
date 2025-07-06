@@ -5,4 +5,5 @@
 [node name="Gate" instance=ExtResource("1_8cmtd")]
 
 [node name="Sprite2D" parent="." index="0"]
-frame = 7
+position = Vector2(-5.5, -41)
+frame = 16

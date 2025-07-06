@@ -1,17 +1,18 @@
 [gd_scene load_steps=5 format=3 uid="uid://c70cekbjxeabg"]
 
 [ext_resource type="Script" uid="uid://drniabncs3kcj" path="res://scripts/building/building.gd" id="1_ilf1y"]
-[ext_resource type="Texture2D" uid="uid://cgo3t7uj227f7" path="res://Sprites/Sheets/Buildings.png" id="2_gp7k3"]
+[ext_resource type="Texture2D" uid="uid://b1wxkbdbpkixr" path="res://Sprites/Sheets/Buildings.png" id="2_g8imh"]
 [ext_resource type="Script" uid="uid://b4xgekfiw3stj" path="res://scripts/game_timer.gd" id="3_gp7k3"]
 [ext_resource type="Script" uid="uid://cur355hgohous" path="res://scripts/spawner.gd" id="4_g8imh"]
 
-[node name="Building" type="Node2D"]
+[node name="Building" type="Node2D" groups=["building"]]
 script = ExtResource("1_ilf1y")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -41)
-texture = ExtResource("2_gp7k3")
+texture = ExtResource("2_g8imh")
 hframes = 9
+vframes = 3
 
 [node name="Timer" type="Node" parent="."]
 script = ExtResource("3_gp7k3")
