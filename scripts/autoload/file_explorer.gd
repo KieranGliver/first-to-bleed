@@ -1,6 +1,7 @@
 extends Node
 
-func traverse_directory(dir_path:String):
+
+func traverse_directory(dir_path: String, nested: bool = true):
 	
 	var dir = DirAccess.open(dir_path)
 	var ret = []
@@ -12,7 +13,8 @@ func traverse_directory(dir_path:String):
 		var file_path = dir_path + "/" + element_name
 		
 		if dir.current_is_dir():
-			ret.append_array(traverse_directory(file_path))
+			if nested:
+				ret.append_array(traverse_directory(file_path))
 		else:
 			ret.append(file_path)
 		

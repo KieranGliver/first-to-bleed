@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://c70cekbjxeabg"]
 
-[ext_resource type="Script" uid="uid://drniabncs3kcj" path="res://scripts/building/building.gd" id="1_ilf1y"]
+[ext_resource type="Script" uid="uid://drniabncs3kcj" path="res://Scripts/Buildings/building.gd" id="1_ilf1y"]
 [ext_resource type="Texture2D" uid="uid://b1wxkbdbpkixr" path="res://Sprites/Sheets/Buildings.png" id="2_g8imh"]
-[ext_resource type="Script" uid="uid://b4xgekfiw3stj" path="res://scripts/game_timer.gd" id="3_gp7k3"]
-[ext_resource type="Script" uid="uid://cur355hgohous" path="res://scripts/spawner.gd" id="4_g8imh"]
+[ext_resource type="Script" uid="uid://b4xgekfiw3stj" path="res://Scripts/game_timer.gd" id="3_gp7k3"]
+[ext_resource type="Script" uid="uid://cur355hgohous" path="res://Scripts/spawner.gd" id="4_g8imh"]
 
 [node name="Building" type="Node2D" groups=["building"]]
 script = ExtResource("1_ilf1y")
@@ -21,4 +21,11 @@ script = ExtResource("3_gp7k3")
 script = ExtResource("4_g8imh")
 folder_path = "res://Scenes/projectiles"
 
+[node name="OvergrowthTimer" type="Node" parent="."]
+script = ExtResource("3_gp7k3")
+time_length = 1.0
+restart = false
+metadata/_custom_type_script = "uid://b4xgekfiw3stj"
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="OvergrowthTimer" to="." method="_on_overgrowth_timer_timeout"]

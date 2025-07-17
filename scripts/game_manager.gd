@@ -2,15 +2,15 @@ extends Node2D
 
 class_name GameManager
 
-
+@onready var main: Main = get_tree().get_nodes_in_group('main').pop_front()
 @onready var map_manager: MapManager = $MapManager
 @onready var ui: UserInterface = $CanvasLayer/UI
 @onready var timer: GameTimer = $Timer
 @onready var deck: Deck = $CanvasLayer/UI/Deck
+@onready var popup_manager: PopupManager = $CanvasLayer/UI/PopupManager
 @onready var build_cursor: Sprite2D = $MapManager/BuildCursor
+@onready var camera: Camera2D = $Camera2D
 
-
-var hq = ResourceLoader.load("res://Cards/hq.tres")
 var running := true
 var last_speed := Data.Speed.NORMAL
 var current_speed := Data.Speed.PAUSED
@@ -28,20 +28,32 @@ func _ready():
 
 func _process(_delta) -> void:
 	ui.timer.update(timer.format_time())
+	ui.coords.update(map_manager.local_to_map(get_local_mouse_position()))
 
 
 func _input(event: InputEvent) -> void:
-	if selected_card and selected_card.keywords.has(Data.BuildingKeyword.DIRECTIONAL):
-		if event.is_action_pressed("rotate"):
-			build_cursor.facing = build_cursor.facing + 1 % 4
-		elif event.is_action_pressed("set_north"):
-			build_cursor.facing = 0
-		elif event.is_action_pressed("set_east"):
-			build_cursor.facing = 1
-		elif event.is_action_pressed("set_south"):
-			build_cursor.facing = 2
-		elif event.is_action_pressed("set_west"):
-			build_cursor.facing = 3
+	if selected_card:
+		if selected_card.keywords.has(Data.BuildingKeyword.DIRECTIONAL):
+			if event.is_action_pressed("rotate"):
+				build_cursor.facing = build_cursor.facing + 1 % 4
+			elif event.is_action_pressed("set_north"):
+				build_cursor.facing = 0
+			elif event.is_action_pressed("set_east"):
+				build_cursor.facing = 1
+			elif event.is_action_pressed("set_south"):
+				build_cursor.facing = 2
+			elif event.is_action_pressed("set_west"):
+				build_cursor.facing = 3
+		
+		if event.is_action_released('select'):
+			try_place_card(get_global_mouse_position())
+	else:
+		if event.is_action_pressed('select'):
+			var local_position = get_local_mouse_position()
+			var mouse_coords = map_manager.local_to_map(local_position)
+			if map_manager.building_map.keys().has(mouse_coords):
+				var building = map_manager.building_map[mouse_coords]
+				popup_manager.initalize_building_popup(building.data, ui.get_local_mouse_position())
 	
 	if running:
 		if event.is_action_pressed("ui_pause"):
@@ -58,12 +70,6 @@ func _input(event: InputEvent) -> void:
 			current_speed = Data.Speed.X4
 		elif event.is_action_pressed("ui_speed_4"):
 			current_speed = Data.Speed.X8
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
-			try_place_card(get_global_mouse_position())
 
 
 func add_ducats(amount: int, team: int = 0):
@@ -90,19 +96,33 @@ func add_tiles(amount: int, team: int = 0):
 
 
 func setup():
+	var deck_data = SessionManager.session["deck"]
+	for key in deck_data.keys():
+		for i in deck_data[key]:
+			deck.data.append(CollectionManager.get_card_data(key))
+	
 	deck.draw()
-	map_manager.generate_map(map_manager.Pattern.LAKE)
-	var start_pos: Array[Vector2] = [Vector2(2, 2), Vector2(2, 13), Vector2(13, 13), Vector2(13, 2)]
-	
-	for i in range(4):
-		map_manager.spawn_building(start_pos[i], hq, i)
-	
-	# Reset data values
-	ducats = [20000, 200, 200, 200]
+	map_manager.init_map(0)
+	ducats = [200, 200, 200, 200]
 	wood = [0, 0, 0, 0]
 	stone = [0, 0, 0, 0]
 	tiles = [0, 0, 0, 0]
 	selected_card = null
+	
+	# Calculate spawn points for each team
+	var size: Vector2i = map_manager.map_size
+	var margin := 2  # prevents spawns too close to edge
+	var start_pos: Array[Vector2] = [
+		Vector2(randi_range(margin, margin + 1), randi_range(margin, margin + 1)),  # Top-left
+		Vector2(randi_range(margin, margin + 1), randi_range(size.y - margin - 2, size.y - margin - 1)),  # Bottom-left
+		Vector2(randi_range(size.x - margin - 2, size.x - margin - 1), randi_range(size.y - margin - 2, size.y - margin - 1)),  # Bottom-right
+		Vector2(randi_range(size.x - margin - 2, size.x - margin - 1), randi_range(margin, margin + 1))  # Top-right
+	]
+	
+	for i in range(4):
+		map_manager.init_team(i, start_pos[i])
+	
+
 
 
 func _on_hand_ui_card_chosen(card_data: CardData, index: int) -> void:
@@ -123,6 +143,12 @@ func try_place_card(global_pos: Vector2, team: int = 0):
 	
 	var coords = map_manager.local_to_map(map_manager.to_local(global_pos))
 	var checks = true
+	
+	if coords.x < 0 or coords.x >= map_manager.map_size.x or coords.y < 0 or coords.y >= map_manager.map_size.y:
+		print("Tile out of bounds")
+		selected_card = null
+		build_cursor.visible = false
+		return
 	
 		# Check if it's a valid floor tile
 	if not map_manager.build_map[coords.x][coords.y] && not selected_card.keywords.has(Data.BuildingKeyword.ZONED):
@@ -152,7 +178,7 @@ func try_place_card(global_pos: Vector2, team: int = 0):
 		#checks = false
 	
 	var radius = 0 if selected_card.keywords.has(Data.BuildingKeyword.ZONED) else 1
-	if map_manager.get_buildings_radius(coords, radius).filter(func (el): return not el.keywords.has(Data.BuildingKeyword.ZONED)).size() > 0:
+	if map_manager.get_buildings_radius(coords, radius).filter(func (el): return not el.data.keywords.has(Data.BuildingKeyword.ZONED)).size() > 0:
 		print("Too close to other buildings")
 		checks = false
 	
@@ -169,3 +195,24 @@ func try_place_card(global_pos: Vector2, team: int = 0):
 	
 	selected_card = null
 	build_cursor.visible = false
+
+
+func _on_restart_pressed() -> void:
+	setup()
+
+
+func _on_map_manager_claim_tile(from: int, to: int) -> void:
+	if not from == -1:
+		add_tiles(-1, from)
+	if not to == -1:
+		add_tiles(1, to)
+
+
+func end():
+	SessionManager.session['day'] += 1
+	SessionManager.save_session()
+
+
+func _on_timer_timeout() -> void:
+	end()
+	main.switch_scene('store')

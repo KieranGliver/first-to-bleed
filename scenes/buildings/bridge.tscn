@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://uqklin0p8riq"]
 
-[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/buildings/building.tscn" id="1_l0lnj"]
+[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/Buildings/building.tscn" id="1_l0lnj"]
 
 [node name="Bridge" instance=ExtResource("1_l0lnj")]
 

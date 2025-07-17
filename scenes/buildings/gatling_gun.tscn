@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dytqrjorlawfl"]
 
-[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/buildings/building.tscn" id="1_xsbyd"]
-[ext_resource type="Script" uid="uid://cyiwl2a6fi4rm" path="res://scripts/building/gatling_gun.gd" id="2_sdaln"]
+[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/Buildings/building.tscn" id="1_xsbyd"]
+[ext_resource type="Script" uid="uid://cyiwl2a6fi4rm" path="res://Scripts/Buildings/gatling_gun.gd" id="2_sdaln"]
 
 [node name="GatlingGun" instance=ExtResource("1_xsbyd")]
 script = ExtResource("2_sdaln")

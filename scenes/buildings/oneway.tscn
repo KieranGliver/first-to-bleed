@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d02kgyhjg1fls"]
 
-[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/buildings/building.tscn" id="1_ok6s7"]
-[ext_resource type="Script" uid="uid://bc41t6tcsfklc" path="res://scripts/building/one_way.gd" id="2_eab00"]
+[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/Buildings/building.tscn" id="1_ok6s7"]
+[ext_resource type="Script" uid="uid://bc41t6tcsfklc" path="res://Scripts/Buildings/one_way.gd" id="2_eab00"]
 
 [node name="OneWay" instance=ExtResource("1_ok6s7")]
 script = ExtResource("2_eab00")

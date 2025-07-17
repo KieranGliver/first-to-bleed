@@ -9,6 +9,7 @@ class_name GameTimer
 		time_length = value
 		remaining_time = value
 @export var autostart: bool = false
+@export var restart: bool = true
 
 @onready var gm: GameManager = get_tree().get_first_node_in_group('game_manager')
 var running: bool
@@ -20,12 +21,16 @@ func _ready():
 	remaining_time = time_length
 	running = autostart
 
+func start():
+	remaining_time = time_length
+	running = true
+
 func _process(delta):
 	if running:
 		var scaled_delta = delta * Data.SPEED_TO_SCALE[gm.current_speed]
 		if gm.current_speed != Data.Speed.PAUSED:
 			remaining_time -= scaled_delta
-		if remaining_time <= 0:
+		if remaining_time <= 0 and restart:
 			reset()
 
 func format_time() -> String:

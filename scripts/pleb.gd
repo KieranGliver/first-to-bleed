@@ -72,7 +72,7 @@ func _physics_process(delta: float) -> void:
 				if active_effects.has(Data.EffectName.EXPLOIT):
 					building._on_attack(self)
 			
-			if not building.keywords.has(Data.BuildingKeyword.GHOST):
+			if not building.data.keywords.has(Data.BuildingKeyword.GHOST):
 				bounce_from_tile(next_tile, cur_tile, velocity)
 				return
 		
@@ -85,10 +85,8 @@ func _physics_process(delta: float) -> void:
 			if tile_owner == -1:
 				map_manager.claim(next_tile, team)
 				gm.add_ducats(5, team)
-				gm.add_tiles(1, team)
 			else:
 				map_manager.claim(next_tile, -1)
-				gm.add_tiles(-1, tile_owner)
 			
 			return
 	

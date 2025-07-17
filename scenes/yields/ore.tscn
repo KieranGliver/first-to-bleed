@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cvooj6p5tclyw"]
 
-[ext_resource type="PackedScene" uid="uid://dmcd2hlr6r0fv" path="res://Scenes/yields/yield.tscn" id="1_eqiwp"]
+[ext_resource type="PackedScene" uid="uid://dmcd2hlr6r0fv" path="res://Scenes/Yields/yield.tscn" id="1_eqiwp"]
 
 [node name="Ore" instance=ExtResource("1_eqiwp")]
 gold = Array[int]([15])

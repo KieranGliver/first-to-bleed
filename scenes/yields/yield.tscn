@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dmcd2hlr6r0fv"]
 
-[ext_resource type="Script" uid="uid://m1vgp3dsquid" path="res://scripts/yield.gd" id="1_risx0"]
+[ext_resource type="Script" uid="uid://m1vgp3dsquid" path="res://Scripts/yield.gd" id="1_risx0"]
 [ext_resource type="Texture2D" uid="uid://trup57vsk62n" path="res://Sprites/Sheets/Material.png" id="2_jknse"]
 
 [node name="Yield" type="Node2D"]

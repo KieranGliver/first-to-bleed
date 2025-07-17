@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://dpeclu1mk0hx7"]
 
 [ext_resource type="Texture2D" uid="uid://ctyl0o5e7xwb4" path="res://Sprites/CardNinePatch.png" id="1_ekcna"]
-[ext_resource type="Script" uid="uid://b7rj1meldq0d" path="res://scripts/ui/card_ui.gd" id="1_jxgmb"]
-[ext_resource type="Script" uid="uid://c7a6b12j5gkre" path="res://scripts/card_area.gd" id="2_x05kw"]
+[ext_resource type="Script" uid="uid://b7rj1meldq0d" path="res://Scripts/UI/card_ui.gd" id="1_jxgmb"]
+[ext_resource type="Script" uid="uid://c7a6b12j5gkre" path="res://Scripts/card_area.gd" id="2_x05kw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vu8sv"]
 bg_color = Color(1, 0.984314, 0.94902, 1)

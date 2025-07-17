@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://che0dko7mjpy5"]
+
+[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/Buildings/building.tscn" id="1_a4j1j"]
+[ext_resource type="Script" uid="uid://gp7invnh2p3o" path="res://Scripts/Buildings/canopy.gd" id="2_r1uj0"]
+
+[node name="Canopy" instance=ExtResource("1_a4j1j")]
+script = ExtResource("2_r1uj0")
+
+[node name="Sprite2D" parent="." index="0"]
+frame = 21

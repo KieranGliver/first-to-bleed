@@ -1,0 +1,122 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpt2snc50irms"]
+
+[ext_resource type="Script" uid="uid://by7p8ds6w2uav" path="res://Scripts/store.gd" id="1_c3i85"]
+[ext_resource type="Script" uid="uid://dtxf12pfwqnap" path="res://Scripts/UI/shop_button_ui.gd" id="2_lkwxl"]
+[ext_resource type="Script" uid="uid://bjh6sm161oq1d" path="res://Scripts/UI/deck_viewer.gd" id="3_h38w0"]
+
+[node name="Store" type="Node2D"]
+script = ExtResource("1_c3i85")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Bucks" type="Label" parent="CanvasLayer/UI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 32
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.067
+anchor_right = 1.0
+anchor_bottom = 0.748
+offset_top = -0.00400162
+offset_bottom = 0.223969
+grow_horizontal = 2
+theme_override_constants/margin_left = 45
+theme_override_constants/margin_top = 45
+theme_override_constants/margin_right = 45
+theme_override_constants/margin_bottom = 45
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ShopButton1" type="Button" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+script = ExtResource("2_lkwxl")
+
+[node name="ShopButton2" type="Button" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+script = ExtResource("2_lkwxl")
+
+[node name="ShopButton3" type="Button" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+script = ExtResource("2_lkwxl")
+
+[node name="Reroll" type="Button" parent="CanvasLayer/UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 24
+text = "Reroll"
+
+[node name="NextDayButton" type="Button" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -376.0
+offset_top = -112.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+theme_override_font_sizes/font_size = 48
+text = "Next Day"
+
+[node name="DeckButton" type="Button" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+offset_right = 8.0
+grow_vertical = 0
+focus_mode = 0
+theme_override_font_sizes/font_size = 24
+text = "View Deck"
+
+[node name="DeckViewer" type="PanelContainer" parent="CanvasLayer/UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_h38w0")
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/DeckViewer"]
+layout_mode = 2
+
+[connection signal="pressed" from="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/ShopButton1" to="." method="_on_shop_button_pressed" binds= [0]]
+[connection signal="pressed" from="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/ShopButton2" to="." method="_on_shop_button_pressed" binds= [1]]
+[connection signal="pressed" from="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/ShopButton3" to="." method="_on_shop_button_pressed" binds= [2]]
+[connection signal="pressed" from="CanvasLayer/UI/MarginContainer/VBoxContainer/Reroll" to="." method="_on_reroll_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/NextDayButton" to="." method="_on_next_day_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/DeckButton" to="." method="_on_deck_button_pressed"]

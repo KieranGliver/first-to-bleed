@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpqo2auqtrydn"]
+
+[ext_resource type="Script" uid="uid://nfpdbmi36y51" path="res://Scripts/UI/building_popup.gd" id="1_vyob1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ws5px"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d204b"]
+
+[node name="BuildingPopup" type="PanelContainer"]
+visible = false
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -90.0
+offset_right = 188.0
+offset_bottom = 90.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ws5px")
+script = ExtResource("1_vyob1")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_d204b")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Cost" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Cost"
+horizontal_alignment = 2
+
+[node name="Name" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "Name"
+horizontal_alignment = 1
+
+[node name="Panel" type="PanelContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Description" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Panel"]
+custom_minimum_size = Vector2(168, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 11
+text = "Description"
+autowrap_mode = 3

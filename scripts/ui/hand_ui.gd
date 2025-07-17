@@ -1,21 +1,19 @@
-extends HBoxContainer
+extends Panel
 
-class_name HandUI
-
+@onready var gm : GameManager = get_tree().get_first_node_in_group('game_manager')
+@export var deck : Deck
 @export var card_ui_scene: PackedScene = preload("res://Scenes/UI/card_ui.tscn")
-var current_hand: Array[CardData] = []
 signal card_chosen(card_data: CardData)
 
 func update(cards: Array[CardData]):
 	clear_hand()
-	for card in cards:
+	for i in range(cards.size()):
 		var card_instance = card_ui_scene.instantiate()
-		card_instance.card_data = card
-		card_instance.card_selected.connect(_on_card_selected)
+		card_instance.card_data = cards[i]
+		card_instance.origin = Vector2(20 + 140 * i, 20)
+		card_instance.position = card_instance.origin
+		card_instance.card_selected.connect(gm._on_hand_ui_card_chosen)
 		add_child(card_instance)
-
-func _on_card_selected(card_data: CardData):
-	card_chosen.emit(card_data)
 
 func clear_hand():
 	for child in get_children():

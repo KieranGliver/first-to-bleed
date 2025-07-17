@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://w31qryt6qium"]
 
-[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/buildings/building.tscn" id="1_lv3px"]
-[ext_resource type="Script" uid="uid://c1hhn57smmbsi" path="res://scripts/building/stone_quarry.gd" id="2_cwc01"]
+[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/Buildings/building.tscn" id="1_lv3px"]
+[ext_resource type="Script" uid="uid://c1hhn57smmbsi" path="res://Scripts/Buildings/stone_quarry.gd" id="2_cwc01"]
 
 [node name="StoneQuarry" instance=ExtResource("1_lv3px")]
 script = ExtResource("2_cwc01")

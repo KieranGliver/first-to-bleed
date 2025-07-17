@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bs8nwa84avbi7"]
 
-[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/buildings/building.tscn" id="1_001jv"]
-[ext_resource type="Script" uid="uid://cwvwuyegxla71" path="res://scripts/building/irs.gd" id="2_37veh"]
+[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/Buildings/building.tscn" id="1_001jv"]
+[ext_resource type="Script" uid="uid://cwvwuyegxla71" path="res://Scripts/Buildings/irs.gd" id="2_37veh"]
 
 [node name="IRS" instance=ExtResource("1_001jv")]
 script = ExtResource("2_37veh")

@@ -2,12 +2,9 @@ extends Camera2D
 
 var picked = false
 
-const ZOOM_OUT_MAX = 0.1
-const ZOOM_IN_MAX = 2.4
+const ZOOM_OUT_MAX = 0.5
+const ZOOM_IN_MAX = 2.0
 const ZOOM_SPEED = 0.25
-
-func _ready():
-	enabled = true
 
 func _input(event):
 	if event is InputEventMouseButton:

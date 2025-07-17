@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d2q7ma66dn61y"]
 
-[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/buildings/building.tscn" id="1_yya2x"]
+[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/Buildings/building.tscn" id="1_yya2x"]
 
 [node name="House" instance=ExtResource("1_yya2x")]
 pop_val = 2

@@ -35,7 +35,7 @@ func _process(_delta):
 
 func _input(event):
 		if event is InputEventMouseButton:
-			if not event.pressed and is_clicking:
+			if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed and is_clicking:
 				
 				if is_clicking:
 					if mode == "DEBUG":
@@ -54,7 +54,7 @@ func _input(event):
 
 func _unhandled_input(event):
 		if event is InputEventMouseButton:
-			if event.pressed and hit_check(to_local(event.global_position)):
+			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and hit_check(to_local(event.global_position)):
 				
 				if mode == "DEBUG":
 					print("Click Down on: " + name)

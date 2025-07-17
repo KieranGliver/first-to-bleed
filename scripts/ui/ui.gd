@@ -8,3 +8,4 @@ class_name UserInterface
 @onready var deck = $Deck
 @onready var wood = $Wood
 @onready var stone = $Stone
+@onready var coords = $Coords

@@ -1,0 +1,109 @@
+[gd_scene load_steps=10 format=3 uid="uid://63pk82m54lv3"]
+
+[ext_resource type="Script" uid="uid://ntfx8lio8tgj" path="res://Scripts/UI/deck_ui.gd" id="1_m80sn"]
+[ext_resource type="Script" uid="uid://cxobmr13fusm" path="res://Scripts/UI/hand_ui.gd" id="2_qaait"]
+[ext_resource type="PackedScene" uid="uid://dpeclu1mk0hx7" path="res://Scenes/UI/card_ui.tscn" id="3_b6s74"]
+[ext_resource type="Resource" uid="uid://c21uvj3m18745" path="res://Cards/house.tres" id="4_sdsun"]
+[ext_resource type="Resource" uid="uid://b3mhsg3u6irfm" path="res://Cards/stall.tres" id="5_ceiee"]
+[ext_resource type="Resource" uid="uid://ck754yhnd0rgy" path="res://Cards/wall.tres" id="6_35mri"]
+[ext_resource type="Resource" uid="uid://xlc4p1xi06y1" path="res://Cards/crate.tres" id="7_u2x0q"]
+[ext_resource type="Resource" uid="uid://b73htcdp0j88j" path="res://Cards/launch.tres" id="8_mvuea"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h1bgf"]
+bg_color = Color(0.937255, 0.937255, 0.937255, 0.533333)
+
+[node name="Deck" type="PanelContainer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -730.0
+offset_top = -245.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("1_m80sn")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="Minimize" type="Button" parent="MarginContainer/VBox/HSplitContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+focus_mode = 0
+text = "v"
+
+[node name="Reroll" type="Button" parent="MarginContainer/VBox/HSplitContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+focus_mode = 0
+text = "Reroll"
+
+[node name="Hand" type="Panel" parent="MarginContainer/VBox" node_paths=PackedStringArray("deck")]
+custom_minimum_size = Vector2(720, 200)
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_h1bgf")
+script = ExtResource("2_qaait")
+deck = NodePath("../../..")
+
+[node name="CardUI" parent="MarginContainer/VBox/Hand" instance=ExtResource("3_b6s74")]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 140.0
+offset_bottom = 175.0
+card_data = ExtResource("4_sdsun")
+origin = Vector2(20, 20)
+
+[node name="CardUI2" parent="MarginContainer/VBox/Hand" instance=ExtResource("3_b6s74")]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 20.0
+offset_right = 280.0
+offset_bottom = 175.0
+card_data = ExtResource("5_ceiee")
+origin = Vector2(160, 20)
+
+[node name="CardUI3" parent="MarginContainer/VBox/Hand" instance=ExtResource("3_b6s74")]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 20.0
+offset_right = 420.0
+offset_bottom = 175.0
+card_data = ExtResource("6_35mri")
+origin = Vector2(300, 20)
+
+[node name="CardUI4" parent="MarginContainer/VBox/Hand" instance=ExtResource("3_b6s74")]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 20.0
+offset_right = 560.0
+offset_bottom = 175.0
+card_data = ExtResource("7_u2x0q")
+origin = Vector2(440, 20)
+
+[node name="CardUI5" parent="MarginContainer/VBox/Hand" instance=ExtResource("3_b6s74")]
+layout_mode = 0
+offset_left = 580.0
+offset_top = 20.0
+offset_right = 700.0
+offset_bottom = 175.0
+card_data = ExtResource("8_mvuea")
+origin = Vector2(580, 20)
+
+[connection signal="pressed" from="MarginContainer/VBox/HSplitContainer/Minimize" to="." method="_on_minimize_pressed"]
+[connection signal="pressed" from="MarginContainer/VBox/HSplitContainer/Reroll" to="." method="_on_reroll_pressed"]

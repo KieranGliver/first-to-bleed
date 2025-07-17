@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://56t1v8sbu325"]
 
-[ext_resource type="Script" uid="uid://cy0pssy0lw0bn" path="res://scripts/resource/card_data.gd" id="1_tpvhc"]
+[ext_resource type="Script" uid="uid://cy0pssy0lw0bn" path="res://Scripts/Resource/card_data.gd" id="1_tpvhc"]
 
 [resource]
 script = ExtResource("1_tpvhc")
-building_name = 20
-cost = 500
+building_name = 21
+cost = 200
 faction = 3
 rarity = 0
-description = "On touch: Overgrowth, Countdown (7s): Fire 3 projectiles within 1 tile, +1 range per Vines within 1 tile"
+description = "On Pleb attack on forest: Gain 10 ducats"
 keywords = Array[int]([])
 metadata/_custom_type_script = "uid://cy0pssy0lw0bn"
