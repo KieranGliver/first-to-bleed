@@ -109,14 +109,11 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
 ### Day Cycle
 
 - **Dawn – Shop Phase:**  
-  - Earn **Bucks** based on income.  
+  - Earn **Bucks** based on income.
   - Spend Bucks to buy or reroll cards.
 
 - **Day – Battle Phase:**  
   - Real-time 4-player FFA match.
-
-- **Evening – Reward Phase:**  
-  - 
 
 ---
 
@@ -130,9 +127,10 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
   - 4-player FFA (1v1v1v1).
   - Rounds start at **2 minutes**, increasing by 30s per round (capped at **6 minutes**).
   - Cards played are discarded to the graveyard. If there are cards in the deck always draw to hand size (5).
+  - The user should be able to view active deck and graveyard here!
   - **Real-time** play with time control:
 	- `Space` – Pause  
-	- `1–4` – Speed tiers (4 = unlimited)
+	- `1–4` – Speed tiers
 
 - **Battle-Results:**
   - Ranked by **tile count** at round end.
@@ -141,9 +139,7 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
 
 ---
 
-## Core Mechanics
-
-### Plebs
+## Plebs
 
 - Plebs can't die. When a pleb is on a square that is being switched they fly back to their hq
 - Pleb count can be increased by buildings that will instantly spawn plebs. When building is destroyed plebs will be removed.
@@ -158,14 +154,36 @@ Players face off in competitive, real-time rounds by deploying units ("Plebs") a
   - Slight randomness to increase excitement
   - Force is reflected on bounce lossing magnitude
   - Some Plebs have bounce direction preferences?
+  
+### Keywords
+
+#### Rush
+
+Plebs gain a movement speed buff for three seconds up to three stacks. (125%, 150%, 200%)
+
+#### Industrial
+
+Plebs will trigger on touch effects twice for five seconds
+
+#### Exploit
+
+Plebs will deal double damage for five seconds
+
+#### Bewitched
+
+Plebs moved randomly for 5 seconds
 
 ---
 
 ## Buildings
 
-### Rarity
+### Building Data
 
-Buildings come in Common, Rare, and Legendary tiers, affecting cost and power.
+- id: A constant number given to all buildings
+- cost: Total cost of ducats in game
+- faction: The faction the building belongs to
+- rarity: Common, Rare, Epic, and Legendary tiers, affecting cost and power.
+- description: Text describing how a building operates
 
 ### Placement
 
@@ -201,22 +219,6 @@ Buildings come in Common, Rare, and Legendary tiers, affecting cost and power.
 #### Directional
 
 Building can be rotated
-
-#### Bewitched
-
-Plebs moved randomly for 5 seconds
-
-#### Rush
-
-Plebs gain a movement speed buff for three seconds up to three stacks. (125%, 150%, 200%)
-
-#### Industrial
-
-Plebs will trigger on touch effects twice for five seconds
-
-#### Exploit
-
-Plebs will deal double damage for five seconds
 
 #### Concrete
 
@@ -309,7 +311,7 @@ Building can only be placed on water
 | Flag              | Royalty   | 100d      | On attack: Nearby pleb gains exploit                                       |
 
 
-### Additional
+### DLC
 
 | Name              | Faction   | Cost      | Description                                                                |
 |-------------------|-----------|-----------|----------------------------------------------------------------------------|
@@ -327,9 +329,12 @@ Building can only be placed on water
 | Type       | Use                               | Gained From                               |
 |------------|-----------------------------------|-------------------------------------------|
 | **Bucks**  | Shop purchases                    | Start of each round, based on income      |
+| **Reroll** | Reroll hand and store             | Purchase at the shop                      |
 | **Ducats** | Placing cards (buildings)         | - Buildings<br>- Plebs hitting gold or neutral tiles |
 | **Wood**   | Placing specific building cards   | Plebs hitting **trees**                   |
 | **Stone**  | Placing specific building cards   | Plebs hitting **rocks/stones**            |
+
+In battles wood is more common than stone
 
 ### Map resources
 
@@ -340,56 +345,17 @@ Building can only be placed on water
   
 ---
 
-## Deck & Store
+## Store
 
-### Card Packs
+Gain 10 coins each day, it doesn't roll over.
 
-- A set of pairs of cards and quantities (e.g. 3xRoyal Decree, 1xThrone of Gold).
-- **Total**:
-	- 6 Urban - larger size (5)
-	- 6 Nature - smaller size (3)
-	- 6 Royal - average size (4)
-	- 6 Default - varity size (3-5)
-- Card packs can gain enhancements (Add Random Card, Clone a card, and Remove a card)  
-**When Upgraded** the card pack may recent different effects
-- Adding new cards
-- Removing old cards
-- Upgrading cards
-- Changing cost of cards
+### Store Options
+- **Buy Cards**: Spend bucks to buy cards. Display up to 3 cards. Cards cost three bucks.
+- **Buy Reroll**: Buy rerolls to use either in battle or store. Rerolls cost 1 dollar.
+- **Remove a Card**: Removes one card of the player's choice from their deck. Each subsequent use permently cost one more buck
 
-### Deck
+The user should be able to view their deck here!
 
-- A group of up to five card packs
-- Each card = one building or effect.
-- Each card in your deck is shuffled and drawn into your hand during the Battle Phase.
-- Starts with a basic package (generic utility buildings) and a faction package (based on chosen archetype)
-
-### Store (Dawn Phase)
-
-- Gain 10 coins each day, it doesn't roll over.
-- **Buy Charms**: Spend bucks to buy enhancements for the card packs
-- **Buy Cards**: Spend bucks to buy packs. Display up to 5 card packs. Buying up to three of the same pack will upgrade the pack. Max pack level is three.
-- **Buy Reroll**: Buy rerolls to use either in battle, store, or level-up
-
----
-
-### Card Packs
-
-#### Urban:
-
-1. Industrial Block - Generate and harvest stone
-2. Factory - Generate income based on activation
-3. Urban sprawl - Connect previously placed buildings, better housing, improves on activation
-4. City watch - Attack buildings, pleb limit increase
-5. Trading - Passive income
-6. Skyscraper - Stone collection, mega structure
-
-##### Nature:
-
-1. Greentide - Buildings that increase pleb limit and spawn plebs quickly
-2. Ferality - Aggressive units and buildings
-3. Canopy Surge - Increase speed of plebs
-4. 
 ---
 
 ## Map Generation
@@ -397,7 +363,7 @@ Building can only be placed on water
 **Goals**:
 - Tactical: Multiple viable paths and choke points.
 - Replayable: Never feel same-y.
-- Thematic: Feel distinct per faction or map theme.
+- Thematic: Feel distinct per map theme.
 - Fair: Each player should have roughly equal opportunity.
 
 ### Setup
@@ -431,9 +397,90 @@ Map will start at the base size 15x15 or 255 tiles. Size will increase by 2 each
 
 ---
 
-## Asynchronous
+## Asynchronous multiplayer
 
-- Players will play against other players decks handled by ai.
-- Players will submit decks after each round
-- The game servers will send three other decks submitted previously by players at current day
-- If no decks could be found then generate new decks from scratch
+During battles the player will face three computer opponents controlling other users decks. These decks will be real decks made by other players on their runs
+
+### Uploading your deck
+
+The decks are saved in a sql database that contains two tables:
+
+#### sessions
+
+| id (uuid) | day (int) | created_at (timestamp) |
+|-----------|-----------|------------------------|
+
+#### decks
+
+| deck_id (uuid) | building_id (int) | amount (int) |
+|----------------|-------------------|--------------|
+
+- The primary key for sessions is id
+- The primary key for decks is deck_id, building_id
+- deck_id is a foreign key for id in sessions
+
+Before battle (After the store) the players deck is uploaded to the database
+
+### Loading your decks
+
+At the beginning of the battle the gamemanager will load three random decks from the day after to each opponent. The decks will be one day advanced as the ai cheats always.
+If the player isnt connected to the internet base decks will need to be manually stored in the game to load on each day.
+
+## ESC Menu
+
+Can only be pulled up when the player is currently in a run
+
+### Restart
+
+restarts the current run from the beginning
+
+### Settings
+
+Includes different settings the user may want to change:
+- Audio: Volume sliders for music, effects, ambient sounds.
+- Graphics: Display size, UI scaling.
+- Controls: Key bindings overview, toggle mouse/touch/gamepad support.
+
+### Encyclopedia
+
+Contains useful information about gameplay and buildings
+
+### Save & Quit
+
+Saves the current deck and session and exits to the main menu. If the run is currently in a battle it will count as a loss
+
+### Quick Access
+
+small buttons at bottom for easy user access
+
+- Mute button: Controls sound
+
+## Main Menu
+
+Displayed when the player boots up the game. Cool splash screen with movement and music!
+
+### New Game
+
+Start a new game and overwrite previous save
+
+### Load Game
+
+If the player has an unfinished run they may resume it. The current deck and date is displayed to the user
+
+### Encyclopedia
+
+Contains useful information about gameplay and buildings
+
+### Quit
+
+Exits Game
+
+### Quick Access
+
+small buttons at bottom for easy user access
+
+- Mute button: Controls sound
+- Credits: Displays my glory
+- Settings: Opens setting menu
+
+
