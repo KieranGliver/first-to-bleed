@@ -1,0 +1,77 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjwq3d5nwhk8v"]
+
+[ext_resource type="Script" uid="uid://caye6jsxecjk2" path="res://Scripts/UI/score_bar.gd" id="1_8bxj6"]
+[ext_resource type="Texture2D" uid="uid://dh2d3ka021wdq" path="res://Sprites/Borders.svg" id="2_w0t70"]
+[ext_resource type="Texture2D" uid="uid://udlbwbk74det" path="res://Sprites/blue.png" id="3_0ssjv"]
+[ext_resource type="Texture2D" uid="uid://6nfto2rcsswm" path="res://Sprites/red.png" id="4_s5i7w"]
+[ext_resource type="Texture2D" uid="uid://do76g4hs8gci" path="res://Sprites/green.png" id="5_a1auj"]
+[ext_resource type="Texture2D" uid="uid://br3dpkwfkpcmo" path="res://Sprites/gray.png" id="6_1xans"]
+
+[node name="ScoreBar" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+script = ExtResource("1_8bxj6")
+team_1_score = 1
+team_2_score = 1
+team_3_score = 1
+team_4_score = 1
+y_offset = 20
+width = 400
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -213.0
+offset_top = 20.0
+offset_right = 213.0
+offset_bottom = 72.0
+grow_horizontal = 2
+texture = ExtResource("2_w0t70")
+region_rect = Rect2(3, 4, 128, 128)
+patch_margin_left = 13
+patch_margin_top = 13
+patch_margin_right = 13
+patch_margin_bottom = 13
+
+[node name="Team1" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = -200.0
+offset_top = 26.0
+offset_right = -100.0
+offset_bottom = 66.0
+texture = ExtResource("3_0ssjv")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Team2" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = -100.0
+offset_top = 26.0
+offset_bottom = 66.0
+texture = ExtResource("4_s5i7w")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Team3" type="TextureRect" parent="."]
+layout_mode = 1
+offset_top = 26.0
+offset_right = 100.0
+offset_bottom = 66.0
+texture = ExtResource("5_a1auj")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Team4" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 100.0
+offset_top = 26.0
+offset_right = 200.0
+offset_bottom = 66.0
+texture = ExtResource("6_1xans")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true

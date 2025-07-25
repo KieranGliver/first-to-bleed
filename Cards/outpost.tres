@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_q3moy")
-building_name = 25
+building_name = 26
 cost = 200
 faction = 3
 rarity = 0

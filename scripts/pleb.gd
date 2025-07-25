@@ -20,78 +20,79 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	var velocity = calculate_linear_velocity() + calculate_external_velocity()
-	var scaled_delta = delta * Data.SPEED_TO_SCALE[gm.current_speed]
-	
-	reduce_external_velocity(scaled_delta)
-	
-	for effect_name in active_effects.keys():
-		active_effects[effect_name].time_left -= scaled_delta
-		if active_effects[effect_name].time_left <= 0:
-			active_effects.erase(effect_name)
-	
-	var time_scaled_velocity = velocity * scaled_delta
-	var target_position = global_position + time_scaled_velocity
-	
-	var cur_tile := map_manager.local_to_map(map_manager.to_local(global_position))
-	var next_tile := map_manager.local_to_map(map_manager.to_local(target_position))
-	
-	if cur_tile != next_tile:
+	if gm and gm.running:
+		var velocity = calculate_linear_velocity() + calculate_external_velocity()
+		var scaled_delta = delta * Data.SPEED_TO_SCALE[gm.current_speed]
 		
-		var in_bounds := (
-			next_tile.x >= 0 and next_tile.x < map_manager.map_size.x and
-			next_tile.y >= 0 and next_tile.y < map_manager.map_size.y
-		)
+		reduce_external_velocity(scaled_delta)
 		
-		# Bounce off the edge, invalid floor or cliff
-		if not in_bounds or not map_manager.floor_map[next_tile.y][next_tile.x] or map_manager.cliff_map[next_tile.x][next_tile.y]:
-			bounce_from_tile(next_tile, cur_tile, velocity)
-			return
+		for effect_name in active_effects.keys():
+			active_effects[effect_name].time_left -= scaled_delta
+			if active_effects[effect_name].time_left <= 0:
+				active_effects.erase(effect_name)
 		
-		var yield_on_tile = map_manager.yield_map.has(next_tile)
+		var time_scaled_velocity = velocity * scaled_delta
+		var target_position = global_position + time_scaled_velocity
 		
-		if yield_on_tile:
-			bounce_from_tile(next_tile, cur_tile, velocity)
-			var y = map_manager.yield_map[next_tile]
-			y._on_attack(self)
-			if active_effects.has(Data.EffectName.EXPLOIT):
-				y._on_attack(self)
-			return
+		var cur_tile := map_manager.local_to_map(map_manager.to_local(global_position))
+		var next_tile := map_manager.local_to_map(map_manager.to_local(target_position))
 		
-		var building_on_tile = map_manager.building_map.has(next_tile)
-		
-		# Bounce off building
-		if building_on_tile:
-			var building = map_manager.building_map[next_tile]
-			if building.team == team:
-				building._on_touch(self)
-				if active_effects.has(Data.EffectName.INDUSTRIAL):
-					building._on_touch(self)
-			else:
-				building._on_attack(self)
-				if active_effects.has(Data.EffectName.EXPLOIT):
-					building._on_attack(self)
+		if cur_tile != next_tile:
 			
-			if not building.data.keywords.has(Data.BuildingKeyword.GHOST):
+			var in_bounds := (
+				next_tile.x >= 0 and next_tile.x < map_manager.map_size.x and
+				next_tile.y >= 0 and next_tile.y < map_manager.map_size.y
+			)
+			
+			# Bounce off the edge, invalid floor or cliff
+			if not in_bounds or not map_manager.floor_map[next_tile.y][next_tile.x] or map_manager.cliff_map[next_tile.x][next_tile.y]:
 				bounce_from_tile(next_tile, cur_tile, velocity)
 				return
-		
-		var tile_owner = map_manager.claim_map[next_tile.x][next_tile.y]
-		
-		# Bounce off neutral and opponent tiles
-		if tile_owner != team:
-			bounce_from_tile(next_tile, cur_tile, velocity)
 			
-			if tile_owner == -1:
-				map_manager.claim(next_tile, team)
-				gm.add_ducats(5, team)
-			else:
-				map_manager.claim(next_tile, -1)
+			var yield_on_tile = map_manager.yield_map.has(next_tile)
 			
-			return
-	
-	# normal movement
-	global_position = target_position
+			if yield_on_tile:
+				bounce_from_tile(next_tile, cur_tile, velocity)
+				var y = map_manager.yield_map[next_tile]
+				y._on_attack(self)
+				if active_effects.has(Data.EffectName.EXPLOIT):
+					y._on_attack(self)
+				return
+			
+			var building_on_tile = map_manager.building_map.has(next_tile)
+			
+			# Bounce off building
+			if building_on_tile:
+				var building = map_manager.building_map[next_tile]
+				if building.team == team:
+					building._on_touch(self)
+					if active_effects.has(Data.EffectName.INDUSTRIAL):
+						building._on_touch(self)
+				else:
+					building._on_attack(self)
+					if active_effects.has(Data.EffectName.EXPLOIT):
+						building._on_attack(self)
+				
+				if not building.data.keywords.has(Data.BuildingKeyword.GHOST):
+					bounce_from_tile(next_tile, cur_tile, velocity)
+					return
+			
+			var tile_owner = map_manager.claim_map[next_tile.x][next_tile.y]
+			
+			# Bounce off neutral and opponent tiles
+			if tile_owner != team:
+				bounce_from_tile(next_tile, cur_tile, velocity)
+				
+				if tile_owner == -1:
+					map_manager.claim(next_tile, team)
+					gm.add_ducats(5, team)
+				else:
+					map_manager.claim(next_tile, -1)
+				
+				return
+		
+		# normal movement
+		global_position = target_position
 
 
 func calculate_linear_velocity() -> Vector2:
@@ -123,6 +124,8 @@ func bounce_from_tile(hit_tile: Vector2i, from_tile: Vector2i, velocity: Vector2
 			var external_reflected = external_velocity.bounce(normal)
 			external_angle = external_reflected.angle()
 			external_magnitude = external_magnitude * 0.90
+	
+	gm.add_bounce(1, team)
 
 
 func calculate_external_velocity() -> Vector2:

@@ -1,10 +1,10 @@
 extends Control
 
-class_name UserInterface
+class_name BattleUI
 
 @onready var timer = $Timer
 @onready var ducat = $Ducat
-@onready var score = $Score
+@onready var score = $ScoreBar
 @onready var deck = $Deck
 @onready var wood = $Wood
 @onready var stone = $Stone

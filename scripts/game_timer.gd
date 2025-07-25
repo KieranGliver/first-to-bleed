@@ -30,8 +30,12 @@ func _process(delta):
 		var scaled_delta = delta * Data.SPEED_TO_SCALE[gm.current_speed]
 		if gm.current_speed != Data.Speed.PAUSED:
 			remaining_time -= scaled_delta
-		if remaining_time <= 0 and restart:
-			reset()
+		if remaining_time <= 0:
+			timeout.emit()
+			if restart:
+				remaining_time = time_length
+			else:
+				running = false
 
 func format_time() -> String:
 	var seconds = remaining_time
@@ -40,5 +44,4 @@ func format_time() -> String:
 	return "%02d:%02d" % [mins, secs]
 
 func reset() -> void:
-	timeout.emit()
 	remaining_time = time_length

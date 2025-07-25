@@ -1,0 +1,85 @@
+[gd_scene load_steps=4 format=3 uid="uid://8gdvuvu2atwd"]
+
+[ext_resource type="Script" uid="uid://cwkyv5fh03r0x" path="res://Scripts/UI/team_stats.gd" id="1_fsp1h"]
+[ext_resource type="Script" uid="uid://d4kc8l2fj2g7k" path="res://Scripts/UI/stat_box.gd" id="2_bymsd"]
+[ext_resource type="StyleBox" uid="uid://ch0astdjamdou" path="res://Resources/blue.tres" id="2_ss44r"]
+
+[node name="TeamStats" type="MarginContainer"]
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 45
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 45
+script = ExtResource("1_fsp1h")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_ss44r")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="TeamLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Team 1"
+horizontal_alignment = 1
+
+[node name="TileBox" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("2_bymsd")
+
+[node name="Title" type="Label" parent="PanelContainer/VBoxContainer/TileBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Title"
+
+[node name="Data" type="Label" parent="PanelContainer/VBoxContainer/TileBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Data"
+
+[node name="GoldBox" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("2_bymsd")
+
+[node name="Title" type="Label" parent="PanelContainer/VBoxContainer/GoldBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Title"
+
+[node name="Data" type="Label" parent="PanelContainer/VBoxContainer/GoldBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Data"
+
+[node name="BounceBox" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("2_bymsd")
+
+[node name="Title" type="Label" parent="PanelContainer/VBoxContainer/BounceBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Title"
+
+[node name="Data" type="Label" parent="PanelContainer/VBoxContainer/BounceBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Data"
+
+[node name="CardBox" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("2_bymsd")
+
+[node name="Title" type="Label" parent="PanelContainer/VBoxContainer/CardBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Title"
+
+[node name="Data" type="Label" parent="PanelContainer/VBoxContainer/CardBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Data"

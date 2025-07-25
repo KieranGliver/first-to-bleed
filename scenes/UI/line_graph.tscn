@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5cudd32u4c6u"]
+
+[ext_resource type="Script" uid="uid://baxgbrk71ex7c" path="res://Scripts/UI/line_graph.gd" id="1_i35s0"]
+[ext_resource type="FontFile" uid="uid://bbttmepeoqd47" path="res://Fonts/LEMONMILK-Regular.otf" id="2_5kltv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3826q"]
+
+[node name="LineGraph" type="Panel"]
+offset_right = 1088.0
+offset_bottom = 612.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3826q")
+script = ExtResource("1_i35s0")
+update_g = false
+min_x = -1.0
+max_x = 121.0
+min_y = -1.0
+max_y = 101.0
+top_margin = 20
+right_margin = 20
+bot_margin = 25
+left_margin = 40
+graph_width = 1028
+graph_height = 567
+x_label_font = ExtResource("2_5kltv")
+y_label_font = ExtResource("2_5kltv")
