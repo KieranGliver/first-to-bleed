@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://uebnqy3kf6ug"]
+
+[ext_resource type="Script" uid="uid://bjh6sm161oq1d" path="res://Scripts/UI/deck_viewer.gd" id="1_ry2wp"]
+
+[node name="DeckViewer" type="Panel"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -450.0
+offset_top = -200.0
+offset_right = 450.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("1_ry2wp")

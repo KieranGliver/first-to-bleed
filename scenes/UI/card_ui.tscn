@@ -83,3 +83,5 @@ shape = SubResource("RectangleShape2D_ekcna")
 
 [connection signal="drag" from="Area2D" to="." method="_on_area_2d_drag"]
 [connection signal="mouse_down" from="Area2D" to="." method="_on_area_2d_mouse_down"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

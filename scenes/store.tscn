@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://by7p8ds6w2uav" path="res://Scripts/store.gd" id="1_c3i85"]
 [ext_resource type="Script" uid="uid://dtxf12pfwqnap" path="res://Scripts/UI/shop_button_ui.gd" id="2_lkwxl"]
-[ext_resource type="Script" uid="uid://bjh6sm161oq1d" path="res://Scripts/UI/deck_viewer.gd" id="3_h38w0"]
+[ext_resource type="PackedScene" uid="uid://uebnqy3kf6ug" path="res://Scenes/UI/deck_viewer.tscn" id="3_h38w0"]
 
 [node name="Store" type="Node2D"]
 script = ExtResource("1_c3i85")
@@ -16,6 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Bucks" type="Label" parent="CanvasLayer/UI"]
 layout_mode = 0
@@ -95,24 +96,11 @@ focus_mode = 0
 theme_override_font_sizes/font_size = 24
 text = "View Deck"
 
-[node name="DeckViewer" type="PanelContainer" parent="CanvasLayer/UI"]
+[node name="DeckViewer" parent="CanvasLayer/UI" instance=ExtResource("3_h38w0")]
 visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("3_h38w0")
-
-[node name="Label" type="Label" parent="CanvasLayer/UI/DeckViewer"]
-layout_mode = 2
+offset_top = -244.0
+offset_bottom = -44.0
 
 [connection signal="pressed" from="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/ShopButton1" to="." method="_on_shop_button_pressed" binds= [0]]
 [connection signal="pressed" from="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/ShopButton2" to="." method="_on_shop_button_pressed" binds= [1]]

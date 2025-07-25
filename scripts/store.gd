@@ -38,6 +38,7 @@ func _on_shop_button_pressed(index: int) -> void:
 		bucks -= 3
 		bucks_ui.text = str(bucks)
 		buttons[index].disabled = true
+		deck_viewer.update(SessionManager.session["deck"])
 
 
 func _on_deck_button_pressed() -> void:

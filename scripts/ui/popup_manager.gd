@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 			if gm.map_manager.building_map.keys().has(hover_coords):
 				var building = gm.map_manager.building_map[hover_coords]
 				if building != hover_building:
-					print('timer start')
+					hover_building = building
 					timer.paused = false
 					timer.start()
 			else:
@@ -57,6 +57,4 @@ func initalize_building_popup(card_data: CardData, local_position: Vector2):
 
 func _on_timer_timeout() -> void:
 	var zoom_factor = gm.get_viewport().get_camera_2d().zoom
-	hover_building = gm.map_manager.building_map[hover_coords]
-	print('timeout')
 	initalize_building_popup(hover_building.data, get_viewport().canvas_transform * (hover_building.position + Vector2(32, 32)) + OFFSET * zoom_factor)
