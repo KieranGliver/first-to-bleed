@@ -1,12 +1,16 @@
-[gd_scene load_steps=38 format=4 uid="uid://croejtbjaf7wb"]
+[gd_scene load_steps=42 format=4 uid="uid://croejtbjaf7wb"]
 
 [ext_resource type="Script" uid="uid://cb100xtt2jy3l" path="res://Scripts/game_manager.gd" id="1_nqt80"]
 [ext_resource type="Script" uid="uid://cwk8kx5hv4e7g" path="res://Scripts/MapManager/map_manager.gd" id="2_1d2vk"]
 [ext_resource type="Texture2D" uid="uid://dt6hox27kgbeg" path="res://Sprites/Sheets/FloorTiles.png" id="3_ec1wg"]
 [ext_resource type="Texture2D" uid="uid://bt1j84rs03yle" path="res://Sprites/Sheets/ClaimedTiles.png" id="4_1oupu"]
+[ext_resource type="Script" uid="uid://4c1nei7d67vd" path="res://Scenes/field.gd" id="4_2tr26"]
 [ext_resource type="Script" uid="uid://bk0mfmj154pfn" path="res://Scripts/MapManager/map.gd" id="4_4v3ut"]
 [ext_resource type="Texture2D" uid="uid://s4ch0ikmx8bj" path="res://Sprites/Sheets/simple_cliff_0.png" id="5_2fwoa"]
+[ext_resource type="Script" uid="uid://4r0dyvfebu1x" path="res://Scenes/lake.gd" id="5_2iq1k"]
+[ext_resource type="Script" uid="uid://dotnwbs6dc58e" path="res://Scenes/terrain.gd" id="6_0bx6p"]
 [ext_resource type="Script" uid="uid://cur355hgohous" path="res://Scripts/spawner.gd" id="6_24t7q"]
+[ext_resource type="Script" uid="uid://c0g65dpn8x8pa" path="res://Scenes/highlands.gd" id="6_ntr3o"]
 [ext_resource type="Texture2D" uid="uid://dtrssav5r5pht" path="res://Sprites/Sheets/tile_hover.png" id="7_0013m"]
 [ext_resource type="Script" uid="uid://c2hfj26o5n63v" path="res://Scripts/UI/build_cursor.gd" id="8_rqgld"]
 [ext_resource type="Script" uid="uid://dqhrlqem88w8c" path="res://Scripts/camera.gd" id="9_fb30h"]
@@ -449,6 +453,42 @@ script = ExtResource("2_1d2vk")
 
 [node name="MapInitializer" type="Node2D" parent="MapManager"]
 script = ExtResource("9_irkqx")
+
+[node name="Field" type="Node" parent="MapManager/MapInitializer" node_paths=PackedStringArray("map_manager")]
+script = ExtResource("4_2tr26")
+map_manager = NodePath("../..")
+
+[node name="Lake" type="Node" parent="MapManager/MapInitializer" node_paths=PackedStringArray("map_manager")]
+script = ExtResource("5_2iq1k")
+map_manager = NodePath("../..")
+
+[node name="Maze" type="Node" parent="MapManager/MapInitializer"]
+script = ExtResource("6_0bx6p")
+metadata/_custom_type_script = "uid://dotnwbs6dc58e"
+
+[node name="Highlands" type="Node" parent="MapManager/MapInitializer" node_paths=PackedStringArray("map_manager")]
+script = ExtResource("6_ntr3o")
+map_manager = NodePath("../..")
+
+[node name="Swamp" type="Node" parent="MapManager/MapInitializer"]
+script = ExtResource("6_0bx6p")
+metadata/_custom_type_script = "uid://dotnwbs6dc58e"
+
+[node name="Wasteland" type="Node" parent="MapManager/MapInitializer"]
+script = ExtResource("6_0bx6p")
+metadata/_custom_type_script = "uid://dotnwbs6dc58e"
+
+[node name="Fortress" type="Node" parent="MapManager/MapInitializer"]
+script = ExtResource("6_0bx6p")
+metadata/_custom_type_script = "uid://dotnwbs6dc58e"
+
+[node name="DeathMatch" type="Node" parent="MapManager/MapInitializer"]
+script = ExtResource("6_0bx6p")
+metadata/_custom_type_script = "uid://dotnwbs6dc58e"
+
+[node name="Hill" type="Node" parent="MapManager/MapInitializer"]
+script = ExtResource("6_0bx6p")
+metadata/_custom_type_script = "uid://dotnwbs6dc58e"
 
 [node name="Map" type="Node2D" parent="MapManager"]
 script = ExtResource("4_4v3ut")
