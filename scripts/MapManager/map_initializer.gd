@@ -2,7 +2,7 @@ extends Node2D
 
 class_name MapInitializer
 
-enum Pattern {
+enum PatternNum {
 	FIELD,
 	LAKE,
 	MAZE,
@@ -16,7 +16,17 @@ enum Pattern {
 
 @onready var map_manager: MapManager = $".."
 @onready var map: Map = $"../Map"
-@onready var terrain_patterns: Array[Terrain] = [$Field, $Lake, $Maze, $Highlands, $Swamp, $Wasteland, $Fortress, $DeathMatch, $Hill]
+@onready var terrain_patterns: Array[Pattern] = [
+	$Field, 
+	$Lake, 
+	$Maze, 
+	$Highlands, 
+	$Swamp, 
+	$Wasteland, 
+	$Fortress, 
+	$DeathMatch, 
+	$Hill
+]
 
 
 func upkeep() -> void:
@@ -29,9 +39,8 @@ func upkeep() -> void:
 	_initialize_pleb_layer()
 
 
-func generate_map(pattern: Pattern) -> void:
+func generate_map(pattern: PatternNum) -> void:
 	upkeep()  # Clears and resets all map layers
-	
 	terrain_patterns[pattern].initalize()
 
 

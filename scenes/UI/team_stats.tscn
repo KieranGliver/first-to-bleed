@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cwkyv5fh03r0x" path="res://Scripts/UI/team_stats.gd" id="1_fsp1h"]
 [ext_resource type="Script" uid="uid://d4kc8l2fj2g7k" path="res://Scripts/UI/stat_box.gd" id="2_bymsd"]
-[ext_resource type="StyleBox" uid="uid://ch0astdjamdou" path="res://Resources/blue.tres" id="2_ss44r"]
+[ext_resource type="StyleBox" uid="uid://ch0astdjamdou" path="res://Resources/Colour/blue.tres" id="2_ss44r"]
 
 [node name="TeamStats" type="MarginContainer"]
 size_flags_horizontal = 3
