@@ -1,6 +1,6 @@
 extends Node
 
-class_name Terrain
+class_name Pattern
 
 @export var map_manager: MapManager
 

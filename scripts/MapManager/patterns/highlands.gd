@@ -1,4 +1,4 @@
-extends Terrain
+extends Pattern
 
 func initialize():
 	var cliff_cells: Array[Vector2i] = []

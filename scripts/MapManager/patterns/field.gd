@@ -1,4 +1,4 @@
-extends Terrain
+extends Pattern
 
 func initialize():
 	pass

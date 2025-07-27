@@ -1,4 +1,4 @@
-extends Terrain
+extends Pattern
 
 func initialize():
 	# Carve a big lake in the center (odd width)
