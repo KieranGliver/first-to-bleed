@@ -28,5 +28,5 @@ var facing: Direction = Direction.NORTH:
 			Direction.WEST:
 				rotation = -PI / 2
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	position = Vector2(32, 32) + Vector2(map_manager.local_to_map(map_manager.to_local(get_global_mouse_position()))) * map_manager.TILE_SIZE

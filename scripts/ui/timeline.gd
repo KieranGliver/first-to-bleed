@@ -6,7 +6,6 @@ class_name Timeline
 @onready var line_graph: LineGraph = $VBoxContainer/LineGraphContainer/LineGraph
 
 func update_line_graph(data: Array[Dictionary]) -> void:
-	var x_interval := 30.0
 	var max_time := gm.timer.time_length
 	line_graph.min_x = 0
 	line_graph.max_x = max_time

@@ -80,19 +80,19 @@ func spawn_building(coords: Vector2i, card_data: CardData, team: int = 0) -> Bui
 	return building_instance
 
 
-func spawn_yield(coords: Vector2, name: String = 'yield') -> void:
+func spawn_yield(coords: Vector2, yield_name: String = 'yield') -> void:
 	if yield_map.keys().has(coords):
 		yield_map.erase(coords)
 	var tile_position: Vector2 = Vector2(coords) * TILE_SIZE
-	var yield_instance = map.yield_layer.spawn(self, tile_position, name)
+	var yield_instance = map.yield_layer.spawn(self, tile_position, yield_name)
 	if yield_instance:
 		yield_map[coords] = yield_instance
 
 
-func spawn_pleb(coords: Vector2, team: int = 0, quant: int = 1, name: String = 'pleb') -> void:
+func spawn_pleb(coords: Vector2, team: int = 0, quant: int = 1, pleb_name: String = 'pleb') -> void:
 	for i in range(quant):
 		var tile_position: Vector2 = Vector2(coords) * TILE_SIZE
-		var pleb_instance = map.pleb_layer.spawn(self, tile_position, name, team)
+		var pleb_instance = map.pleb_layer.spawn(self, tile_position, pleb_name, team)
 
 
 func destroy_pleb(team: int = 0, quant: int = 1, _name: String = 'pleb') -> void:

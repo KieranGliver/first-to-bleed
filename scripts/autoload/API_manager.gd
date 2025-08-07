@@ -7,7 +7,7 @@ const API_KEY = "8012199c-93d7-4bfd-95fd-e3c9ec716d23"
 
 func post(endpoint: String, data: Dictionary) -> void:
 	var url = BASE_URL + endpoint
-	var json_body = JSON.new().stringify(data)
+	var json_body = JSON.stringify(data)
 	var headers = [
 		"Content-Type: application/json",
 		"X-API-Key: " + API_KEY
@@ -22,7 +22,7 @@ func post(endpoint: String, data: Dictionary) -> void:
 		request_node.queue_free()
 		request_completed.emit(false, 0, "Failed to start request")
 
-func _on_temp_request_completed(result, response_code, headers, body, request_node):
+func _on_temp_request_completed(_result, response_code, _headers, body, request_node):
 	remove_child(request_node)
 	request_node.queue_free()
 

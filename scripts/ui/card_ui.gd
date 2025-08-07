@@ -27,7 +27,7 @@ func _ready():
 	pos_target = origin
 
 
-func _process(delta):
+func _process(_delta):
 		if state == PICKED:
 			pos_target = get_parent().get_local_mouse_position()
 		
@@ -49,13 +49,13 @@ func _input(event):
 				place()
 
 
-func _on_area_2d_mouse_down(event: InputEventMouseButton) -> void:
+func _on_area_2d_mouse_down(_event: InputEventMouseButton) -> void:
 	if mode == "GAMEPLAY":
 		pick()
 		card_selected.emit(card_data, (origin.x - 20)/140)
 
 
-func _on_area_2d_drag(event: InputEventMouseMotion) -> void:
+func _on_area_2d_drag(_event: InputEventMouseMotion) -> void:
 	if mode == "GAMEPLAY":
 		visible = false
 

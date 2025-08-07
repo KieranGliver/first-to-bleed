@@ -13,7 +13,7 @@ var hover_building: Building
 var hover_coords: Vector2i
 var popup: BuildingPopup
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if gm and gm.running:
 		var local_position = gm.get_local_mouse_position()
 		var new_coords = gm.map_manager.local_to_map(local_position)

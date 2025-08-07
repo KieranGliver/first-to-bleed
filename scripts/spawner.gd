@@ -18,7 +18,7 @@ func _ready() -> void:
 				names.append(scene_name)
 
 
-func spawn(map_manager: MapManager, local_pos: Vector2, scene_name: String, team: int = 0, pre_ready: Callable = func(n: Node): return ) -> Node:
+func spawn(map_manager: MapManager, local_pos: Vector2, scene_name: String, team: int = 0, pre_ready: Callable = func(_n: Node): return ) -> Node:
 	if scenes.has(scene_name):
 		var instance = scenes[scene_name].instantiate()
 		instance.global_position = local_pos

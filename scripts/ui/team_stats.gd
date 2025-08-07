@@ -36,7 +36,7 @@ enum Colour {BLUE, RED, GREEN, GREY}
 		bg_colour = value
 		panel.add_theme_stylebox_override("panel", colour_resource[value])
 
-var colour_resource = [load("res://Resources/blue.tres"), load("res://Resources/red.tres"), load("res://Resources/green.tres"), load("res://Resources/grey.tres")]
+var colour_resource = [load("res://Resources/Colour/blue.tres"), load("res://Resources/Colour/red.tres"), load("res://Resources/Colour/green.tres"), load("res://Resources/Colour/grey.tres")]
 
 func _ready() -> void:
 	tile_box.title = 'Total Tiles:'

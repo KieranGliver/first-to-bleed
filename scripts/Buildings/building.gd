@@ -22,7 +22,7 @@ var is_overgrowth: bool = false
 func _ready() -> void:
 	map_manager.update_connections(self)
 	if data.keywords.has(Data.BuildingKeyword.POPULATE):
-		var coords = map_manager.local_to_map(map_manager.to_local(global_position))
+		coords = map_manager.local_to_map(map_manager.to_local(global_position))
 		map_manager.spawn_pleb(coords, team, pop_val)
 	if data.keywords.has(Data.BuildingKeyword.CONCRETE):
 		max_health += 5
@@ -34,11 +34,11 @@ func _on_placed() -> void:
 	pass
 
 
-func _on_touch(pleb: Pleb) -> void:
+func _on_touch(_pleb: Pleb) -> void:
 	pass
 
 
-func _on_attack(pleb: Node) -> void:
+func _on_attack(_pleb: Node) -> void:
 	take_damage()
 
 
@@ -50,11 +50,11 @@ func _on_timer_timeout() -> void:
 	pass
 
 
-func _apply_group_effect(group: Array[Building]) -> void:
+func _apply_group_effect(_group: Array[Building]) -> void:
 	pass
 
 
-func _remove_group_effect(group: Array[Building]) -> void:
+func _remove_group_effect(_group: Array[Building]) -> void:
 	pass
 
 
@@ -80,7 +80,6 @@ func _spawn_projectile(time: float, final_position: Vector2, max_height: float):
 
 
 func fire_projectiles(quant: int, radius: int, time: float = 3.0, max_height: float = 50.0):
-	var coords = Vector2(map_manager.local_to_map(map_manager.to_local(global_position)))
 	var arr: Array[Vector2] = []
 	var d_radius = radius + range_bonus
 	for dx in range(-d_radius, d_radius + 1):

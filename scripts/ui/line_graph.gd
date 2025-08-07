@@ -157,7 +157,7 @@ func _ready():
 
 
 func update_size():
-	size = Vector2(left_margin + graph_width + right_margin, top_margin + graph_height + bot_margin)
+	set_deferred("size", Vector2(left_margin + graph_width + right_margin, top_margin + graph_height + bot_margin))
 	update_graph()
 
 

@@ -118,12 +118,15 @@ func setup():
 	for i in range(4):
 		map_manager.init_team(i, start_pos[i])
 	
+	add_ducats(0)
+	add_wood(0)
+	add_stone(0)
 	timestamp()
 
 
 func get_segmented_timestamp() -> float:
-	var timestamp = timer.time_length - timer.remaining_time
-	return floor(timestamp / TIMELINE_INTERVAL) * TIMELINE_INTERVAL
+	var ts = timer.time_length - timer.remaining_time
+	return floor(ts / TIMELINE_INTERVAL) * TIMELINE_INTERVAL
 
 
 func timestamp():
