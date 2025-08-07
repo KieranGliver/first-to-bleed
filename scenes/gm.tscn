@@ -633,22 +633,6 @@ offset_right = 40.0
 grow_vertical = 0
 script = ExtResource("42_v1eqv")
 
-[node name="Restart" type="Button" parent="CanvasLayer/BattleUI"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -251.0
-offset_top = -32.0
-offset_right = -186.0
-offset_bottom = -1.0
-grow_horizontal = 2
-grow_vertical = 0
-focus_mode = 0
-text = "Restart"
-
 [node name="ScoreBar" parent="CanvasLayer/BattleUI" instance=ExtResource("21_kxgms")]
 layout_mode = 1
 
@@ -841,7 +825,6 @@ restart = false
 
 [connection signal="claim_tile" from="MapManager" to="." method="_on_map_manager_claim_tile"]
 [connection signal="timeout" from="CanvasLayer/BattleUI/PopupManager/Timer" to="CanvasLayer/BattleUI/PopupManager" method="_on_timer_timeout"]
-[connection signal="pressed" from="CanvasLayer/BattleUI/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="CanvasLayer/ResultUI/PanelContainer/VBoxContainer/MarginContainer/TabContainer/Timeline/VBoxContainer/MarginContainer/HBoxContainer/Tiles" to="CanvasLayer/ResultUI/PanelContainer/VBoxContainer/MarginContainer/TabContainer/Timeline" method="_on_tiles_pressed"]
 [connection signal="pressed" from="CanvasLayer/ResultUI/PanelContainer/VBoxContainer/MarginContainer/TabContainer/Timeline/VBoxContainer/MarginContainer/HBoxContainer/Ducats" to="CanvasLayer/ResultUI/PanelContainer/VBoxContainer/MarginContainer/TabContainer/Timeline" method="_on_ducats_pressed"]
 [connection signal="pressed" from="CanvasLayer/ResultUI/PanelContainer/VBoxContainer/MarginContainer/TabContainer/Timeline/VBoxContainer/MarginContainer/HBoxContainer/Wood" to="CanvasLayer/ResultUI/PanelContainer/VBoxContainer/MarginContainer/TabContainer/Timeline" method="_on_wood_pressed"]

@@ -260,10 +260,6 @@ func try_place_card(global_pos: Vector2, team: int = 0):
 	build_cursor.visible = false
 
 
-func _on_restart_pressed() -> void:
-	setup()
-
-
 func _on_map_manager_claim_tile(from: int, to: int) -> void:
 	if not from == -1:
 		add_tiles(-1, from)
