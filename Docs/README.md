@@ -311,7 +311,7 @@ Building can only be placed on water
 | Flag              | Royalty   | 100d      | On attack: Nearby pleb gains exploit                                       |
 
 
-### DLC
+### Additional
 
 | Name              | Faction   | Cost      | Description                                                                |
 |-------------------|-----------|-----------|----------------------------------------------------------------------------|
