@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://croejtbjaf7wb"]
+[gd_scene load_steps=53 format=4 uid="uid://croejtbjaf7wb"]
 
 [ext_resource type="Script" uid="uid://cb100xtt2jy3l" path="res://Scripts/game_manager.gd" id="1_nqt80"]
 [ext_resource type="Script" uid="uid://cwk8kx5hv4e7g" path="res://Scripts/MapManager/map_manager.gd" id="2_1d2vk"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://crxco5hnhy74x" path="res://Sprites/coin.png" id="13_jedme"]
 [ext_resource type="Texture2D" uid="uid://be536g23n2f73" path="res://Sprites/tile_0106.png" id="14_bm7u4"]
 [ext_resource type="Texture2D" uid="uid://dq1wow6tcfpl8" path="res://Sprites/projectile.png" id="15_xtg4x"]
+[ext_resource type="ButtonGroup" uid="uid://bgjn4g6wq0lp8" path="res://Resources/ButtonGroup/time_button_group.tres" id="18_r6oyp"]
 [ext_resource type="PackedScene" uid="uid://63pk82m54lv3" path="res://Scenes/UI/deck_ui.tscn" id="20_kxgms"]
 [ext_resource type="PackedScene" uid="uid://cjwq3d5nwhk8v" path="res://Scenes/UI/score_bar.tscn" id="21_kxgms"]
 [ext_resource type="Script" uid="uid://pqbi7i383afk" path="res://Scripts/UI/result_ui.gd" id="22_6kbgp"]
@@ -436,6 +437,46 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.501961, 0.247059, 0.25098, 1)
 sources/0 = SubResource("TileSetAtlasSource_cbgmd")
 
+[sub_resource type="InputEventKey" id="InputEventKey_nhnne"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="Shortcut" id="Shortcut_lgthh"]
+events = [SubResource("InputEventKey_nhnne")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_wo0mi"]
+device = -1
+keycode = 49
+unicode = 49
+
+[sub_resource type="Shortcut" id="Shortcut_4k0dn"]
+events = [SubResource("InputEventKey_wo0mi")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_uy8v3"]
+device = -1
+keycode = 50
+unicode = 50
+
+[sub_resource type="Shortcut" id="Shortcut_hkp7c"]
+events = [SubResource("InputEventKey_uy8v3")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_irkqx"]
+device = -1
+keycode = 51
+unicode = 51
+
+[sub_resource type="Shortcut" id="Shortcut_4v3ut"]
+events = [SubResource("InputEventKey_irkqx")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_v1eqv"]
+device = -1
+keycode = 52
+unicode = 52
+
+[sub_resource type="Shortcut" id="Shortcut_ycq06"]
+events = [SubResource("InputEventKey_v1eqv")]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6kbgp"]
 bg_color = Color(0.10748, 0.10748, 0.10748, 1)
 corner_radius_top_left = 4
@@ -549,8 +590,75 @@ metadata/_edit_use_anchors_ = true
 wait_time = 0.5
 one_shot = true
 
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/BattleUI"]
+offset_top = 42.0
+offset_right = 116.0
+offset_bottom = 112.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/BattleUI/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BattleUI/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="PauseButton" type="Button" parent="CanvasLayer/BattleUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+button_group = ExtResource("18_r6oyp")
+shortcut = SubResource("Shortcut_lgthh")
+text = "Pause"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/BattleUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SpeedOne" type="Button" parent="CanvasLayer/BattleUI/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+toggle_mode = true
+button_group = ExtResource("18_r6oyp")
+shortcut = SubResource("Shortcut_4k0dn")
+text = "1x"
+
+[node name="SpeedTwo" type="Button" parent="CanvasLayer/BattleUI/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+toggle_mode = true
+button_group = ExtResource("18_r6oyp")
+shortcut = SubResource("Shortcut_hkp7c")
+text = "2x"
+
+[node name="SpeedThree" type="Button" parent="CanvasLayer/BattleUI/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+toggle_mode = true
+button_group = ExtResource("18_r6oyp")
+shortcut = SubResource("Shortcut_4v3ut")
+text = "4x"
+
+[node name="SpeedFour" type="Button" parent="CanvasLayer/BattleUI/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+toggle_mode = true
+button_group = ExtResource("18_r6oyp")
+shortcut = SubResource("Shortcut_ycq06")
+text = "8x"
+
 [node name="Timer" type="Label" parent="CanvasLayer/BattleUI"]
 layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0147059
+anchor_top = 0.00163399
+anchor_right = 0.0147059
+anchor_bottom = 0.00163399
 offset_right = 82.0
 offset_bottom = 45.0
 theme_override_font_sizes/font_size = 32
@@ -825,6 +933,11 @@ restart = false
 
 [connection signal="claim_tile" from="MapManager" to="." method="_on_map_manager_claim_tile"]
 [connection signal="timeout" from="CanvasLayer/BattleUI/PopupManager/Timer" to="CanvasLayer/BattleUI/PopupManager" method="_on_timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/BattleUI/PanelContainer/MarginContainer/VBoxContainer/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/BattleUI/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SpeedOne" to="." method="_on_speed_one_pressed"]
+[connection signal="pressed" from="CanvasLayer/BattleUI/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SpeedTwo" to="." method="_on_speed_two_pressed"]
+[connection signal="pressed" from="CanvasLayer/BattleUI/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SpeedThree" to="." method="_on_speed_three_pressed"]
+[connection signal="pressed" from="CanvasLayer/BattleUI/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SpeedFour" to="." method="_on_speed_four_pressed"]
 [connection signal="pressed" from="CanvasLayer/ResultUI/PanelContainer/VBoxContainer/MarginContainer/TabContainer/Timeline/VBoxContainer/MarginContainer/HBoxContainer/Tiles" to="CanvasLayer/ResultUI/PanelContainer/VBoxContainer/MarginContainer/TabContainer/Timeline" method="_on_tiles_pressed"]
 [connection signal="pressed" from="CanvasLayer/ResultUI/PanelContainer/VBoxContainer/MarginContainer/TabContainer/Timeline/VBoxContainer/MarginContainer/HBoxContainer/Ducats" to="CanvasLayer/ResultUI/PanelContainer/VBoxContainer/MarginContainer/TabContainer/Timeline" method="_on_ducats_pressed"]
 [connection signal="pressed" from="CanvasLayer/ResultUI/PanelContainer/VBoxContainer/MarginContainer/TabContainer/Timeline/VBoxContainer/MarginContainer/HBoxContainer/Wood" to="CanvasLayer/ResultUI/PanelContainer/VBoxContainer/MarginContainer/TabContainer/Timeline" method="_on_wood_pressed"]

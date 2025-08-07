@@ -68,22 +68,6 @@ func _input(event: InputEvent) -> void:
 			if map_manager.building_map.keys().has(mouse_coords):
 				var building = map_manager.building_map[mouse_coords]
 				popup_manager.initalize_building_popup(building.data, battle_ui.get_local_mouse_position())
-	
-	if running:
-		if event.is_action_pressed("ui_pause"):
-			if current_speed != Data.Speed.PAUSED:
-				last_speed = current_speed
-				current_speed = Data.Speed.PAUSED
-			else:
-				current_speed = last_speed
-		elif event.is_action_pressed("ui_speed_1"):
-			current_speed = Data.Speed.NORMAL
-		elif event.is_action_pressed("ui_speed_2"):
-			current_speed = Data.Speed.X2
-		elif event.is_action_pressed("ui_speed_3"):
-			current_speed = Data.Speed.X4
-		elif event.is_action_pressed("ui_speed_4"):
-			current_speed = Data.Speed.X8
 
 
 func setup():
@@ -122,6 +106,8 @@ func setup():
 	add_wood(0)
 	add_stone(0)
 	timestamp()
+	
+	#SoundManager.play("penis_music", -15)
 
 
 func get_segmented_timestamp() -> float:
@@ -300,3 +286,34 @@ func _on_timer_timeout() -> void:
 	result_ui.visible = true
 	timestamp()
 	running = false
+	SoundManager.stop("penis_music")
+
+
+func _on_pause_button_pressed() -> void:
+	if running:
+		if current_speed != Data.Speed.PAUSED:
+			last_speed = current_speed
+			current_speed = Data.Speed.PAUSED
+		else:
+			current_speed = last_speed
+			battle_ui.time_buttons[last_speed].button_pressed = true
+
+
+func _on_speed_one_pressed() -> void:
+	if running:
+		current_speed = Data.Speed.NORMAL
+
+
+func _on_speed_two_pressed() -> void:
+	if running:
+		current_speed = Data.Speed.X2
+
+
+func _on_speed_three_pressed() -> void:
+	if running:
+		current_speed = Data.Speed.X4
+
+
+func _on_speed_four_pressed() -> void:
+	if running:
+		current_speed = Data.Speed.X8

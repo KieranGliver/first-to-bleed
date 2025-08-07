@@ -23,6 +23,7 @@ Data="*res://Scripts/Autoload/data.gd"
 SessionManager="*res://Scripts/Autoload/session_manager.gd"
 CollectionManager="*res://Scripts/Autoload/collection_manager.gd"
 APIManager="*res://Scripts/Autoload/API_manager.gd"
+SoundManager="*res://scripts/Autoload/sound_manager.gd"
 
 [display]
 
