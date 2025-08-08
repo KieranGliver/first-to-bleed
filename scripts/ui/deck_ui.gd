@@ -42,7 +42,10 @@ func discard(index: int):
 
 
 func _on_reroll_pressed() -> void:
-	reroll()
+	var rerolls = SessionManager.session["reroll"]
+	if rerolls > 0:
+		reroll()
+		SessionManager.session["reroll"] -= 1
 
 
 func _on_minimize_pressed() -> void:

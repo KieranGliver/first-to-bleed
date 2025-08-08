@@ -3,16 +3,20 @@ extends Node2D
 class_name Store
 
 @onready var main: Main = get_tree().get_nodes_in_group('main').pop_front()
-@onready var buttons: Array[Button] = [$CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/ShopButton1, $CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/ShopButton2, $CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/ShopButton3]
+@onready var buttons: Array[Button] = [$CanvasLayer/UI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ShopButton1, $CanvasLayer/UI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ShopButton2, $CanvasLayer/UI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ShopButton3]
 @onready var deck_viewer = $CanvasLayer/UI/DeckViewer
 @onready var bucks_ui = $CanvasLayer/UI/Bucks
 
 var stock: Array[CardData] = []
-var bucks: int = 10
+var bucks: int = 10:
+	set(value):
+		bucks = value
+		if bucks_ui:
+			bucks_ui.text = str(value) + " Bucks"
 
 
 func _ready() -> void:
-	bucks_ui.text = str(bucks)
+	bucks = bucks
 	reroll()
 
 
@@ -36,7 +40,6 @@ func _on_shop_button_pressed(index: int) -> void:
 	if bucks >= 3:
 		SessionManager.add_card(stock[index].building_name)
 		bucks -= 3
-		bucks_ui.text = str(bucks)
 		buttons[index].disabled = true
 		deck_viewer.update(SessionManager.session["deck"])
 
@@ -47,7 +50,13 @@ func _on_deck_button_pressed() -> void:
 
 
 func _on_reroll_pressed() -> void:
-	if bucks > 0:
+	var rerolls = SessionManager.session["reroll"]
+	if rerolls > 0:
 		reroll()
-		bucks -= 1
-		bucks_ui.text = str(bucks)
+		SessionManager.session["reroll"] -= 1
+
+
+func _on_buy_reroll_button_pressed() -> void:
+	if bucks >= 2:
+		SessionManager.session["reroll"] += 1
+		bucks -= 2

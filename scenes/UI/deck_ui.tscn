@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://63pk82m54lv3"]
+[gd_scene load_steps=5 format=3 uid="uid://63pk82m54lv3"]
 
 [ext_resource type="Script" uid="uid://ntfx8lio8tgj" path="res://Scripts/UI/deck_ui.gd" id="1_m80sn"]
+[ext_resource type="Script" uid="uid://cudqyqab686jg" path="res://Scripts/UI/reroll.gd" id="2_1wcny"]
 [ext_resource type="Script" uid="uid://cxobmr13fusm" path="res://Scripts/UI/hand_ui.gd" id="2_qaait"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h1bgf"]
@@ -45,6 +46,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 focus_mode = 0
 text = "Reroll"
+script = ExtResource("2_1wcny")
 
 [node name="Hand" type="Panel" parent="MarginContainer/VBox" node_paths=PackedStringArray("deck")]
 custom_minimum_size = Vector2(720, 200)
