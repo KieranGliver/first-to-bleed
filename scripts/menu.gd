@@ -35,7 +35,8 @@ func start_new_game():
 		"day": 0,
 		"deck": {Data.BuildingName.HOUSE: 4, Data.BuildingName.STALL: 4},
 		"life": 3.0,
-		"victories": 0.0
+		"victories": 0.0,
+		"reroll": 3
 	}
 	SessionManager.save_session()
 	main.switch_scene("gm")

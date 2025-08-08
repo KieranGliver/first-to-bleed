@@ -6,12 +6,11 @@ var session: Dictionary = {
 	"day": 0,
 	"deck": {Data.BuildingName.HOUSE: 4, Data.BuildingName.STALL: 4},
 	"life": 3.0,
-	"victories": 0.0
+	"victories": 0.0,
+	"rerolls": 3
 }
 
 
-func _ready() -> void:
-	print("Save path: ", ProjectSettings.globalize_path("user://session.save"))
 func save_session():
 	var save_file = FileAccess.open(LOCATION, FileAccess.WRITE)
 	if save_file == null:
@@ -21,6 +20,7 @@ func save_session():
 	var json_string = JSON.stringify(session)
 	save_file.store_line(json_string)
 	save_file.close()
+
 
 func load_session():
 	if not FileAccess.file_exists(LOCATION):
@@ -55,7 +55,7 @@ func load_session():
 
 
 func upload_deck():
-	APIManager.post("/upload", session)
+	APIManager.post_http("/upload", session)
 
 
 func add_card(card_name: int, amount: int = 1):

@@ -15,6 +15,8 @@ const TIMELINE_INTERVAL := 0.5
 @onready var camera: Camera2D = $Camera2D
 
 var running := true
+var ai_teams: Array[int] = [1, 2, 3]
+var ai_decks: Array = [[], [], [], []]
 var last_speed := Data.Speed.NORMAL
 var current_speed := Data.Speed.PAUSED
 var selected_card : CardData
@@ -37,13 +39,15 @@ var bounce_timeline: Array[Dictionary] = [{}, {}, {}, {}]
 var card_timeline: Array[Dictionary] = [{}, {}, {}, {}]
 
 func _ready():
+	timer.running = false
+	load_decks()
 	setup()
+	timer.running = true
 
 
 func _process(_delta) -> void:
 	battle_ui.timer.update(timer.format_time())
 	battle_ui.coords.update(map_manager.local_to_map(get_local_mouse_position()))
-
 
 func _input(event: InputEvent) -> void:
 	if selected_card:
@@ -60,7 +64,7 @@ func _input(event: InputEvent) -> void:
 				build_cursor.facing = 3
 		
 		if event.is_action_released('select'):
-			try_place_card(get_global_mouse_position())
+			try_place_card(selected_card, get_global_mouse_position())
 	else:
 		if event.is_action_pressed('select'):
 			var local_position = get_local_mouse_position()
@@ -69,12 +73,22 @@ func _input(event: InputEvent) -> void:
 				var building = map_manager.building_map[mouse_coords]
 				popup_manager.initalize_building_popup(building.data, battle_ui.get_local_mouse_position())
 
-
-func setup():
+func load_decks():
+	var day = SessionManager.session["day"]
 	var deck_data = SessionManager.session["deck"]
 	for key in deck_data.keys():
 		for i in deck_data[key]:
-			deck.data.append(CollectionManager.get_card_data(key))
+			var card_data = CollectionManager.get_card_data(key)
+			deck.data.append(card_data)
+
+	APIManager.get_http("/opponents", {"day": day}, _on_request_completed)
+	await APIManager._on_temp_request_completed  # Wait for data to be ready
+	
+	for team in ai_teams:
+		for card in ai_decks[team]:
+			print(Data.BUILDING_NAME_TO_STRING[card.building_name])
+
+func setup():
 	
 	deck.draw()
 	map_manager.init_map(0)
@@ -183,9 +197,10 @@ func _on_hand_ui_card_chosen(card_data: CardData, index: int) -> void:
 	build_cursor.visible = true
 
 
-func try_place_card(global_pos: Vector2, team: int = 0):
-	if not selected_card:
-		return
+func try_place_card(card: CardData, global_pos: Vector2, team: int = 0):
+	var result = false
+	if not card:
+		return result
 	
 	var coords = map_manager.local_to_map(map_manager.to_local(global_pos))
 	var checks = true
@@ -197,53 +212,118 @@ func try_place_card(global_pos: Vector2, team: int = 0):
 		return
 	
 		# Check if it's a valid floor tile
-	if not map_manager.build_map[coords.x][coords.y] && not selected_card.keywords.has(Data.BuildingKeyword.ZONED):
+	if not map_manager.build_map[coords.x][coords.y] && not card.keywords.has(Data.BuildingKeyword.ZONED):
 		print("Invalid floor tile")
 		checks = false
 	
 		# Check if tile is claimed by the team
-	if map_manager.claim_map[coords.x][coords.y] != team && not selected_card.keywords.has(Data.BuildingKeyword.VANGUARD):
+	if map_manager.claim_map[coords.x][coords.y] != team && not card.keywords.has(Data.BuildingKeyword.VANGUARD):
 		print("Tile not owned by team " + str(team))
 		checks = false
 	
-	if not map_manager.floor_map[coords.x][coords.y] && not selected_card.keywords.has(Data.BuildingKeyword.WATER):
+	if not map_manager.floor_map[coords.x][coords.y] && not card.keywords.has(Data.BuildingKeyword.WATER):
 		print('Must be placed on floor tile')
 		checks = false
 	
 	# Check if you can afford it
-	if ducats[team] < selected_card.cost:
+	if ducats[team] < card.cost:
 		print("Not enough ducats")
 		checks = false
 	
-	#if wood[team] < selected_card.wood_cost:
+	#if wood[team] < card.wood_cost:
 		#print("Not enough wood")
 		#checks = false
 	
-	#if stone[team] < selected_card.stone_cost:
+	#if stone[team] < card.stone_cost:
 		#print("Not enough stone")
 		#checks = false
 	
-	var radius = 0 if selected_card.keywords.has(Data.BuildingKeyword.ZONED) else 1
+	var radius = 0 if card.keywords.has(Data.BuildingKeyword.ZONED) else 1
 	if map_manager.get_buildings_radius(coords, radius).filter(func (el): return not el.data.keywords.has(Data.BuildingKeyword.ZONED)).size() > 0:
 		print("Too close to other buildings")
 		checks = false
 	
 	# All checks passed, deduct and build
 	if checks:
-		add_ducats(-selected_card.cost, team)
-		#if selected_card.has("wood_cost"):
-			#add_wood(-selected_card.wood_cost, team)
-		#if selected_card.has("stone_cost"):
-			#add_stone(-selected_card.stone_cost, team)
+		add_ducats(-card.cost, team)
+		#if card.has("wood_cost"):
+			#add_wood(-card.wood_cost, team)
+		#if card.has("stone_cost"):
+			#add_stone(-card.stone_cost, team)
 		cards[team] += 1
 		var t = get_segmented_timestamp()
 		card_timeline[team][t] = cards[team]
-		map_manager.spawn_building(coords, selected_card, team)
-		deck.discard(card_index)
-		
+		map_manager.spawn_building(coords, card, team)
+		if team == 0:
+			deck.discard(card_index)
+		else:
+			ai_decks[team].erase(card)
+		result = true
 	
-	selected_card = null
-	build_cursor.visible = false
+	if (team == 0):
+		selected_card = null
+		build_cursor.visible = false
+	
+	return result
+
+
+func get_valid_tiles_for_card(card: CardData, team: int) -> Array:
+	var valid := []
+	var map_size = map_manager.map_size
+	
+	for x in range(map_size.x):
+		for y in range(map_size.y):
+			var coords = Vector2i(x, y)
+			
+			# Must be owned
+			if map_manager.claim_map[x][y] != team and not card.keywords.has(Data.BuildingKeyword.VANGUARD):
+				continue
+			
+			# Must have valid floor
+			if not map_manager.floor_map[x][y] and not card.keywords.has(Data.BuildingKeyword.WATER):
+				continue
+
+				
+			
+			var radius = 0 if card.keywords.has(Data.BuildingKeyword.ZONED) else 1
+			if map_manager.get_buildings_radius(coords, radius).filter(func (el): return not el.data.keywords.has(Data.BuildingKeyword.ZONED)).size() > 0:
+				continue
+
+			valid.append(coords)
+
+	return valid
+
+
+func ai_take_turn(team: int) -> void:
+	if not running:
+		return
+	
+	var deck = ai_decks[team]
+	if deck.is_empty():
+		return
+	
+	var affordable = deck.filter(func(c): return ducats[team] > c.cost)
+	if affordable.is_empty():
+		return
+	
+	affordable.shuffle()
+	
+	for card in affordable:
+		var valid_tiles = get_valid_tiles_for_card(card, team)
+		if valid_tiles.is_empty():
+			continue
+		
+		var success
+		
+		for i in range(10):
+			var coords = valid_tiles[randi() % valid_tiles.size()]
+			var global_pos = map_manager.to_global(map_manager.map_to_local(coords))
+			success = try_place_card(card, global_pos, team)
+			if success:
+				break
+		if success:
+			deck.erase(card)
+			break
 
 
 func _on_map_manager_claim_tile(from: int, to: int) -> void:
@@ -317,3 +397,42 @@ func _on_speed_three_pressed() -> void:
 func _on_speed_four_pressed() -> void:
 	if running:
 		current_speed = Data.Speed.X8
+
+
+func _on_ai_timer_timeout() -> void:
+	for team in ai_teams:
+		ai_take_turn(team)
+
+
+func _on_request_completed(_result, response_code, _headers, body):
+	if response_code != 200:
+		push_error("Failed to load opponent decks. Code: %s" % response_code)
+		return
+
+	var json = JSON.parse_string(body.get_string_from_utf8())
+	if typeof(json) != TYPE_ARRAY:
+		push_error("Invalid opponent deck response format.")
+		return
+
+	var i = 1
+	for team in json:
+		for card_id in team["deck"].keys():
+			var card_data = CollectionManager.get_card_data(int(card_id))
+			if card_data != null:
+				for _j in team["deck"][card_id]:
+					ai_decks[i].append(card_data)
+		i += 1
+	
+	while i <= 3:
+		var house = CollectionManager.get_card_data(1)
+		var stall = CollectionManager.get_card_data(2)
+		ai_decks[i] = [house, house, house, house, stall, stall, stall, stall]
+		var day = SessionManager.session["day"]
+		for _j in range(day):
+			for _k in range(3):
+				ai_decks[i].append(CollectionManager.random_card())
+		i += 1
+	for team in ai_teams:
+		print("team " + str(team))
+		for card in ai_decks[team]:
+			print(Data.BUILDING_NAME_TO_STRING[card.building_name])

@@ -92,7 +92,7 @@ func fire_projectiles(quant: int, radius: int, time: float = 3.0, max_height: fl
 		for i in range(quant):
 			var pos = arr.pick_random()
 			arr.erase(pos)
-			_spawn_projectile(time, (pos - coords) * map_manager.TILE_SIZE, max_height)
+			_spawn_projectile(time, (pos - Vector2(coords)) * map_manager.TILE_SIZE, max_height)
 			if arr.size() == 0:
 				return
 
