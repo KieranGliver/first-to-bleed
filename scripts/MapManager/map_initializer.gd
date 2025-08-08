@@ -41,7 +41,7 @@ func upkeep() -> void:
 
 func generate_map(pattern: PatternNum) -> void:
 	upkeep()  # Clears and resets all map layers
-	terrain_patterns[pattern].initalize()
+	terrain_patterns[pattern].initialize()
 
 
 func _initialize_floor_map() -> void:

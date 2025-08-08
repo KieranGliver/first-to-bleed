@@ -24,12 +24,12 @@ func take_damage(amount: int = 1) -> void:
 	if current_health <= 0:
 		map_manager.destroy_yield(self)
 
-func _on_attack(_pleb: Node) -> void:
+func _on_attack(pleb: Node) -> void:
 	var i = max_health - current_health
 	if gold.size() > i:
-		gm.add_ducats(gold[i])
+		gm.add_ducats(gold[i], pleb.team)
 	if wood.size() > i:
-		gm.add_wood(wood[i])
+		gm.add_wood(wood[i], pleb.team)
 	if stone.size() > i:
-		gm.add_wood(stone[i])
+		gm.add_stone(stone[i], pleb.team)
 	take_damage()

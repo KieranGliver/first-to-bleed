@@ -7,7 +7,7 @@
 script = ExtResource("1_risx0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -32)
+position = Vector2(32, 0)
 texture = ExtResource("2_jknse")
 hframes = 5
 vframes = 3

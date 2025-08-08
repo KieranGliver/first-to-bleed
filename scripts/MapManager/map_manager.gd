@@ -82,6 +82,7 @@ func spawn_building(coords: Vector2i, card_data: CardData, team: int = 0) -> Bui
 
 func spawn_yield(coords: Vector2, yield_name: String = 'yield') -> void:
 	if yield_map.keys().has(coords):
+		yield_map[coords].queue_free()
 		yield_map.erase(coords)
 	var tile_position: Vector2 = Vector2(coords) * TILE_SIZE
 	var yield_instance = map.yield_layer.spawn(self, tile_position, yield_name)
@@ -131,7 +132,7 @@ func destroy_building(building: Building) -> void:
 
 
 func destroy_yield(y: Yield) -> void:
-	var coords = yield_map.keys().find(func (pos): return yield_map[pos] == y)
+	var coords = yield_map.keys().filter(func (pos): return yield_map[Vector2(float(pos.x), float(pos.y))] == y).pop_back()
 	yield_map.erase(coords)
 	y.queue_free()
 

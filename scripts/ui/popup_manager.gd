@@ -28,7 +28,7 @@ func _process(_delta: float) -> void:
 			else:
 				timer.paused = true
 		
-		if popup:
+		if popup and hover_building:
 			var zoom_factor = gm.get_viewport().get_camera_2d().zoom
 			
 			var screen_pos = get_viewport().canvas_transform * (hover_building.position + Vector2(32, 32)) + OFFSET * zoom_factor

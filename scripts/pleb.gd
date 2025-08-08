@@ -48,15 +48,16 @@ func _physics_process(delta: float) -> void:
 			if not in_bounds or not map_manager.floor_map[next_tile.y][next_tile.x] or map_manager.cliff_map[next_tile.x][next_tile.y]:
 				bounce_from_tile(next_tile, cur_tile, velocity)
 				return
-			
-			var yield_on_tile = map_manager.yield_map.has(next_tile)
+				
+			var yield_on_tile = map_manager.yield_map.has(Vector2(float(next_tile.x), float(next_tile.y)))
 			
 			if yield_on_tile:
 				bounce_from_tile(next_tile, cur_tile, velocity)
-				var y = map_manager.yield_map[next_tile]
-				y._on_attack(self)
-				if active_effects.has(Data.EffectName.EXPLOIT):
+				var y = map_manager.yield_map[Vector2(float(next_tile.x), float(next_tile.y))]
+				if y:
 					y._on_attack(self)
+					if active_effects.has(Data.EffectName.EXPLOIT):
+						y._on_attack(self)
 				return
 			
 			var building_on_tile = map_manager.building_map.has(next_tile)
