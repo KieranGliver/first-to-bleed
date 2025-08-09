@@ -38,6 +38,9 @@ layout_mode = 2
 disabled = true
 text = "Load Game"
 
+[node name="Label" type="Label" parent="CanvasLayer/MenuUI/ButtonContainer"]
+layout_mode = 2
+
 [node name="Encyclopedia" type="Button" parent="CanvasLayer/MenuUI/ButtonContainer"]
 layout_mode = 2
 disabled = true

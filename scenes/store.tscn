@@ -20,44 +20,48 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Bucks" type="Label" parent="CanvasLayer/UI"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -377.0
+offset_top = -192.0
+offset_right = -140.0
+offset_bottom = -120.0
+grow_horizontal = 0
+grow_vertical = 0
 theme_override_font_sizes/font_size = 32
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI"]
+[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI"]
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -238.0
-offset_bottom = 115.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 10
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UI/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_top = 70
-theme_override_constants/margin_bottom = 120
-
-[node name="BuyRerollButton" type="Button" parent="CanvasLayer/UI/HBoxContainer/MarginContainer"]
-custom_minimum_size = Vector2(250, 0)
+[node name="BuyRerollButton" type="Button" parent="CanvasLayer/UI/HBoxContainer"]
+custom_minimum_size = Vector2(250, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Buy More Rerolls: Cost 2 Bucks"
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/UI/HBoxContainer"]
+custom_minimum_size = Vector2(0, 325)
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UI/HBoxContainer/PanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_left = 45
-theme_override_constants/margin_top = 45
-theme_override_constants/margin_right = 45
-theme_override_constants/margin_bottom = 45
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/HBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
@@ -103,6 +107,65 @@ focus_mode = 0
 autowrap_mode = 3
 script = ExtResource("2_lkwxl")
 
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UI/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_right = 450
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/UI/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UI/HBoxContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/HBoxContainer/MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/HBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Remove Cards from your Deck: Cost 3  Bucks"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UI/HBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 450
+theme_override_constants/margin_right = 20
+
+[node name="RerollDelete" type="Button" parent="CanvasLayer/UI/HBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "Reroll"
+script = ExtResource("2_j65sj")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/HBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="CanvasLayer/UI/HBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+clip_text = true
+script = ExtResource("2_lkwxl")
+
+[node name="Button2" type="Button" parent="CanvasLayer/UI/HBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+clip_text = true
+script = ExtResource("2_lkwxl")
+
+[node name="Button3" type="Button" parent="CanvasLayer/UI/HBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+clip_text = true
+script = ExtResource("2_lkwxl")
+
 [node name="NextDayButton" type="Button" parent="CanvasLayer/UI"]
 layout_mode = 1
 anchors_preset = 3
@@ -115,18 +178,25 @@ offset_top = -112.0
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
+mouse_filter = 1
 theme_override_font_sizes/font_size = 48
 text = "Next Day"
 
 [node name="DeckButton" type="Button" parent="CanvasLayer/UI"]
 layout_mode = 1
-anchors_preset = 2
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -8.0
-offset_right = 8.0
+offset_left = -134.0
+offset_top = -163.0
+offset_right = -8.0
+offset_bottom = -121.0
+grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
+mouse_filter = 1
 theme_override_font_sizes/font_size = 24
 text = "View Deck"
 
@@ -136,10 +206,14 @@ layout_mode = 1
 offset_top = -244.0
 offset_bottom = -44.0
 
-[connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/MarginContainer/BuyRerollButton" to="." method="_on_buy_reroll_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/BuyRerollButton" to="." method="_on_buy_reroll_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/Reroll" to="." method="_on_reroll_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ShopButton1" to="." method="_on_shop_button_pressed" binds= [0]]
 [connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ShopButton2" to="." method="_on_shop_button_pressed" binds= [1]]
 [connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ShopButton3" to="." method="_on_shop_button_pressed" binds= [2]]
+[connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/RerollDelete" to="." method="_on_reroll_delete_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_discard_button_pressed" binds= [0]]
+[connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button2" to="." method="_on_discard_button_pressed" binds= [1]]
+[connection signal="pressed" from="CanvasLayer/UI/HBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button3" to="." method="_on_discard_button_pressed" binds= [2]]
 [connection signal="pressed" from="CanvasLayer/UI/NextDayButton" to="." method="_on_next_day_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/DeckButton" to="." method="_on_deck_button_pressed"]

@@ -21,6 +21,7 @@ size = Vector2(119.5, 155)
 [node name="CardUI" type="NinePatchRect"]
 offset_right = 120.0
 offset_bottom = 155.0
+mouse_filter = 1
 texture = ExtResource("1_ekcna")
 region_rect = Rect2(0, 0, 16, 16)
 patch_margin_left = 6

@@ -121,6 +121,7 @@ func setup():
 	add_stone(0)
 	timestamp()
 	
+	camera.position = map_manager.map_to_local(start_pos[0])
 	#SoundManager.play("penis_music", -15)
 
 
@@ -432,7 +433,3 @@ func _on_request_completed(_result, response_code, _headers, body):
 			for _k in range(3):
 				ai_decks[i].append(CollectionManager.random_card())
 		i += 1
-	for team in ai_teams:
-		print("team " + str(team))
-		for card in ai_decks[team]:
-			print(Data.BUILDING_NAME_TO_STRING[card.building_name])

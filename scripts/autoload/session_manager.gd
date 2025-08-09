@@ -6,7 +6,7 @@ var session: Dictionary = {
 	"day": 0,
 	"deck": {Data.BuildingName.HOUSE: 4, Data.BuildingName.STALL: 4},
 	"life": 3.0,
-	"victories": 0.0,
+	"crown": 0.0,
 	"reroll": 3
 }
 

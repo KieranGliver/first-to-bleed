@@ -1,13 +1,17 @@
 extends Node2D
 
 @onready var main: Main = get_tree().get_nodes_in_group('main').pop_front()
+@onready var label = $CanvasLayer/MenuUI/ButtonContainer/Label
 @onready var new_game_confirm = $CanvasLayer/MenuUI/NewGameConfirm
 @onready var load_game_button = $CanvasLayer/MenuUI/ButtonContainer/Load
 
 
 func _ready() -> void:
 	if FileAccess.file_exists(SessionManager.LOCATION):
+		SessionManager.load_session()
 		load_game_button.disabled = false
+		label.text  = "Day: " + str(int(SessionManager.session["day"])) + " Life: " + str(SessionManager.session["life"])
+		
 
 
 func _on_new_game_pressed() -> void:
