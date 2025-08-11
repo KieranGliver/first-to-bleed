@@ -4,6 +4,7 @@ const SOUNDS_NODE_PATH = "/root/Main/Sounds"
 const AUDIO_FOLDER_PATH = "res://Audio/"
 var audio_paths = []
 var audio_names = []
+var repeat_arr = []
 
 func _ready():
 	audio_paths = FileExplorer.traverse_directory(AUDIO_FOLDER_PATH)
@@ -21,13 +22,15 @@ func _ready():
 func _process(_delta):
 	close_finished()
 
-func play(audio_name:String,volume:float = 0,debug:bool = false):
+func play(audio_name:String,volume:float = 0,repeat:bool = false, debug:bool = false):
 	for i in audio_names.size():
 		if audio_names[i] == audio_name && (!exists(audio_name) || !debug):
 			var player = ResLoader.player(ResourceLoader.load(audio_paths[i]) as AudioStream,get_node(SOUNDS_NODE_PATH))
 			player.name = audio_names[i]
 			player.volume_db = volume
 			player.play()
+			if repeat:
+				repeat_arr.append(player.name)
 			return true
 	if debug:
 		print("Failed at finding audio stream " + audio_name)
@@ -54,7 +57,10 @@ func close_finished():
 	var children = get_node(SOUNDS_NODE_PATH).get_children()
 	for i in children:
 		if !i.playing:
-			i.queue_free()
+			if repeat_arr.has(i.name):
+				i.play(0)
+			else:
+				i.queue_free()
 
 func exists(child_name:String):
 	var children = get_node(SOUNDS_NODE_PATH).get_children()

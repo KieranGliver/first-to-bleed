@@ -127,6 +127,9 @@ func bounce_from_tile(hit_tile: Vector2i, from_tile: Vector2i, velocity: Vector2
 			external_magnitude = external_magnitude * 0.90
 	
 	gm.add_bounce(1, team)
+	
+	if (team == 0):
+		SoundManager.play("snare", -30)
 
 
 func calculate_external_velocity() -> Vector2:

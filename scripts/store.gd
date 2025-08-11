@@ -18,12 +18,14 @@ var bucks: int = 10:
 
 
 func _ready() -> void:
+	SoundManager.play("top_garage", -30, true)
 	bucks = bucks
 	reroll()
 	reroll_delete()
 
 
 func _on_next_day_button_pressed() -> void:
+	SoundManager.stop_all()
 	SessionManager.save_session()
 	SessionManager.upload_deck()
 	main.switch_scene('gm')
@@ -65,7 +67,7 @@ func reroll_delete():
 			deck_copy[key] -= 1
 			var amount = deck_copy[key]
 			if amount <= 0:
-				deck_copy.erase(key)
+				deck_keys.erase(key)
 			remove_buttons[i].update(card)
 		else:
 			remove_buttons[i].disabled = true
@@ -75,8 +77,11 @@ func _on_shop_button_pressed(index: int) -> void:
 	if bucks >= 3:
 		SessionManager.add_card(stock[index].building_name)
 		bucks -= 3
+		SoundManager.play("cha_ching", -25)
 		shop_buttons[index].disabled = true
 		deck_viewer.update(SessionManager.session["deck"])
+	else:
+		SoundManager.play("buzzer", -20)
 
 
 func _on_deck_button_pressed() -> void:
@@ -95,6 +100,9 @@ func _on_buy_reroll_button_pressed() -> void:
 	if bucks >= 2:
 		SessionManager.session["reroll"] += 1
 		bucks -= 2
+		SoundManager.play("cha_ching", -25)
+	else:
+		SoundManager.play("buzzer", -20)
 
 
 func _on_discard_button_pressed(index: int) -> void:
@@ -109,6 +117,9 @@ func _on_discard_button_pressed(index: int) -> void:
 			deck.erase(card.building_name)
 		bucks -= 3
 		deck_viewer.update(SessionManager.session["deck"])
+		SoundManager.play("cha_ching", -25)
+	else:
+		SoundManager.play("buzzer", -20)
 
 
 func _on_reroll_delete_pressed() -> void:

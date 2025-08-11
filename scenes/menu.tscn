@@ -39,12 +39,8 @@ disabled = true
 text = "Load Game"
 
 [node name="Label" type="Label" parent="CanvasLayer/MenuUI/ButtonContainer"]
+visible = false
 layout_mode = 2
-
-[node name="Encyclopedia" type="Button" parent="CanvasLayer/MenuUI/ButtonContainer"]
-layout_mode = 2
-disabled = true
-text = "encyclopedia"
 
 [node name="Quit" type="Button" parent="CanvasLayer/MenuUI/ButtonContainer"]
 layout_mode = 2
@@ -58,8 +54,10 @@ ok_button_text = "Accept"
 dialog_text = "Start a new game? This will overwrite your current save."
 dialog_close_on_escape = false
 
+[connection signal="mouse_entered" from="CanvasLayer/MenuUI/ButtonContainer/New Game" to="." method="_on_ui_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/MenuUI/ButtonContainer/New Game" to="." method="_on_new_game_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/MenuUI/ButtonContainer/Load" to="." method="_on_ui_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/MenuUI/ButtonContainer/Load" to="." method="_on_load_pressed"]
-[connection signal="pressed" from="CanvasLayer/MenuUI/ButtonContainer/Encyclopedia" to="." method="_on_encyclopedia_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/MenuUI/ButtonContainer/Quit" to="." method="_on_ui_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/MenuUI/ButtonContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="confirmed" from="CanvasLayer/MenuUI/NewGameConfirm" to="." method="_on_new_game_confirm_confirmed"]

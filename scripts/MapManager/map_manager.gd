@@ -48,6 +48,7 @@ func claim(coords: Vector2i, team: int = -1) -> void:
 
 
 func spawn_building(coords: Vector2i, card_data: CardData, team: int = 0) -> Building:
+	
 	if building_map.keys().has(coords):
 		building_map.erase(coords)
 	var tile_position: Vector2 = Vector2(coords) * TILE_SIZE

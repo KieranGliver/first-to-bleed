@@ -39,6 +39,7 @@ var bounce_timeline: Array[Dictionary] = [{}, {}, {}, {}]
 var card_timeline: Array[Dictionary] = [{}, {}, {}, {}]
 
 func _ready():
+	SoundManager.play("bot_underground", -30, true)
 	timer.running = false
 	load_decks()
 	setup()
@@ -257,6 +258,7 @@ func try_place_card(card: CardData, global_pos: Vector2, team: int = 0):
 		map_manager.spawn_building(coords, card, team)
 		if team == 0:
 			deck.discard(card_index)
+			SoundManager.play("building", -25)
 		else:
 			ai_decks[team].erase(card)
 		result = true
@@ -335,6 +337,7 @@ func _on_map_manager_claim_tile(from: int, to: int) -> void:
 
 
 func exit():
+	SoundManager.stop_all()
 	SessionManager.session['day'] += 1
 	SessionManager.save_session()
 	main.switch_scene('store')
