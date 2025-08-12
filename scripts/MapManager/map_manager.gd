@@ -27,8 +27,10 @@ signal building_placed(building: Building)
 func init_map(pattern: int):
 	initializer.generate_map(pattern)
 
+
 func map_to_local(map_coords: Vector2i) -> Vector2:
 	return Vector2(map_coords.x * TILE_SIZE + TILE_SIZE / 2, map_coords.y * TILE_SIZE + TILE_SIZE / 2)
+
 
 func local_to_map(local_pos: Vector2) -> Vector2i:
 	var grid_x := int(floor(local_pos.x / TILE_SIZE))
@@ -276,8 +278,8 @@ func init_team(team: int, coords: Vector2i) -> void:
 			set_cliff([pos], false)
 			
 			
-			if yield_map.has(pos):
-				var y = yield_map[pos]
+			if yield_map.has(Vector2(pos)):
+				var y = yield_map[Vector2(pos)]
 				destroy_yield(y)
 			
 			
