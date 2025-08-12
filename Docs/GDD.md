@@ -482,5 +482,3 @@ small buttons at bottom for easy user access
 - Mute button: Controls sound
 - Credits: Displays my glory
 - Settings: Opens setting menu
-
-
