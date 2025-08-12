@@ -28,11 +28,6 @@ func _on_load_pressed() -> void:
 	main.switch_scene('gm')
 
 
-func _on_quit_pressed() -> void:
-	_on_button_press()
-	get_tree().quit()
-
-
 func start_new_game():
 	SessionManager.session = {
 		"day": 0,

@@ -7,6 +7,8 @@ var cards: Dictionary = {}
 func _ready() -> void:
 	var paths = FileExplorer.traverse_directory(folder_path, false)
 	for path in paths:
+		if path.get_extension().to_lower() == "remap":
+			path = path.trim_suffix(".remap")
 		if path.get_extension().to_lower() == "tres":
 			var res_name = path.get_file().get_basename().to_lower()
 			var res = ResourceLoader.load(path)

@@ -8,8 +8,11 @@ var names: Array[String] = []
 var scenes: Dictionary = {}
 
 func _ready() -> void:
+	print(folder_path)
 	var paths = FileExplorer.traverse_directory(folder_path)
 	for path in paths:
+		if path.get_extension().to_lower() == "remap":
+			path = path.trim_suffix(".remap")
 		if path.get_extension().to_lower() == "tscn":
 			var scene_name = path.get_file().get_basename().to_lower()
 			var packed_scene = ResourceLoader.load(path)

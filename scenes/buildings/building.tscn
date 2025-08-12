@@ -19,7 +19,7 @@ script = ExtResource("3_gp7k3")
 
 [node name="ProjectileSpawner" type="Node2D" parent="."]
 script = ExtResource("4_g8imh")
-folder_path = "res://Scenes/projectiles"
+folder_path = "res://Scenes/Projectiles/"
 
 [node name="OvergrowthTimer" type="Node" parent="."]
 script = ExtResource("3_gp7k3")

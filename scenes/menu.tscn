@@ -42,10 +42,6 @@ text = "Load Game"
 visible = false
 layout_mode = 2
 
-[node name="Quit" type="Button" parent="CanvasLayer/MenuUI/ButtonContainer"]
-layout_mode = 2
-text = "Quit"
-
 [node name="NewGameConfirm" type="ConfirmationDialog" parent="CanvasLayer/MenuUI"]
 title = "Save Game Found!"
 initial_position = 1
@@ -58,6 +54,4 @@ dialog_close_on_escape = false
 [connection signal="pressed" from="CanvasLayer/MenuUI/ButtonContainer/New Game" to="." method="_on_new_game_pressed"]
 [connection signal="mouse_entered" from="CanvasLayer/MenuUI/ButtonContainer/Load" to="." method="_on_ui_mouse_entered"]
 [connection signal="pressed" from="CanvasLayer/MenuUI/ButtonContainer/Load" to="." method="_on_load_pressed"]
-[connection signal="mouse_entered" from="CanvasLayer/MenuUI/ButtonContainer/Quit" to="." method="_on_ui_mouse_entered"]
-[connection signal="pressed" from="CanvasLayer/MenuUI/ButtonContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="confirmed" from="CanvasLayer/MenuUI/NewGameConfirm" to="." method="_on_new_game_confirm_confirmed"]

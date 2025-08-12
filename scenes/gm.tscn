@@ -547,16 +547,16 @@ tile_set = SubResource("TileSet_1w6v2")
 
 [node name="YieldLayer" type="Node2D" parent="MapManager/Map"]
 script = ExtResource("6_24t7q")
-folder_path = "res://Scenes/yields"
+folder_path = "res://Scenes/Yields/"
 
 [node name="BuildingLayer" type="Node2D" parent="MapManager/Map"]
 position = Vector2(32, 32)
 script = ExtResource("6_24t7q")
-folder_path = "res://Scenes/buildings/"
+folder_path = "res://Scenes/Buildings/"
 
 [node name="PlebLayer" type="Node2D" parent="MapManager/Map"]
 script = ExtResource("6_24t7q")
-folder_path = "res://Scenes/plebs/"
+folder_path = "res://Scenes/Plebs/"
 
 [node name="BuildCursor" type="Sprite2D" parent="MapManager"]
 visible = false

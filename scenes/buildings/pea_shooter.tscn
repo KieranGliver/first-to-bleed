@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cr4pkult0amma"]
+
+[ext_resource type="PackedScene" uid="uid://c70cekbjxeabg" path="res://Scenes/Buildings/building.tscn" id="1_dwvwn"]
+[ext_resource type="Script" uid="uid://icws5jyplgk3" path="res://Scripts/Buildings/pea_shooter.gd" id="2_ra5lh"]
+
+[node name="PeaShooter" instance=ExtResource("1_dwvwn")]
+script = ExtResource("2_ra5lh")
+
+[node name="Sprite2D" parent="." index="0"]
+frame = 8
