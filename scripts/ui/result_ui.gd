@@ -10,3 +10,4 @@ class_name ResultUI
 	$PanelContainer/VBoxContainer/MarginContainer/TabContainer/Report/VBoxContainer/HBoxContainer/TeamStats4
 ]
 @onready var timeline: Timeline = $PanelContainer/VBoxContainer/MarginContainer/TabContainer/Timeline
+@onready var run_stats: Label = $PanelContainer/VBoxContainer/MarginContainer/TabContainer/Report/VBoxContainer/Label

@@ -810,6 +810,16 @@ theme_override_font_sizes/font_size = 32
 text = "Team 1 Wins"
 horizontal_alignment = 1
 
+[node name="Label2" type="Label" parent="CanvasLayer/ResultUI/PanelContainer/VBoxContainer/MarginContainer/TabContainer/Report/VBoxContainer"]
+layout_mode = 2
+text = "Gain 5 crowns to win"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/ResultUI/PanelContainer/VBoxContainer/MarginContainer/TabContainer/Report/VBoxContainer"]
+layout_mode = 2
+text = "Life: 3.0 Crowns: 5.0"
+horizontal_alignment = 1
+
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ResultUI/PanelContainer/VBoxContainer/MarginContainer/TabContainer/Report/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3

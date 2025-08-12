@@ -54,6 +54,17 @@ func load_session():
 			session["deck"] = new_deck
 
 
+func delete_session():
+	if FileAccess.file_exists(LOCATION):
+		var err = DirAccess.remove_absolute(LOCATION)
+		if err != OK:
+			push_error("Failed to delete session file: %s" % err)
+		else:
+			print("Session file deleted.")
+	else:
+		push_warning("No session file found to delete.")
+
+
 func upload_deck():
 	APIManager.post_http("/upload", session)
 

@@ -340,7 +340,10 @@ func exit():
 	SoundManager.stop_all()
 	SessionManager.session['day'] += 1
 	SessionManager.save_session()
-	main.switch_scene('store')
+	if SessionManager.session["life"] <= 0 or SessionManager.session["crown"] >= 5:
+		main.switch_scene("run_results")
+	else:
+		main.switch_scene('store')
 
 
 func get_team_tile_ranking() -> Array:
@@ -355,6 +358,7 @@ func get_team_tile_ranking() -> Array:
 
 func _on_timer_timeout() -> void:
 	battle_ui.visible = false
+	
 	var i = 0
 	var teams = get_team_tile_ranking()
 	for team in teams:
@@ -365,12 +369,22 @@ func _on_timer_timeout() -> void:
 		result_ui.team_stats[i].bounce = bounce[team]
 		result_ui.team_stats[i].card = cards[team]
 		i += 1 
+	var rank = teams.find(0)
+	match rank:
+		0:
+			SessionManager.session["crown"] += 1
+		1:
+			SessionManager.session["crown"] += 0.5
+		2:
+			SessionManager.session["life"] -= 0.5
+		3:
+			SessionManager.session["life"] -= 1
 	result_ui.timeline.update_line_graph(tile_timeline)
+	result_ui.run_stats.text = 'Life: ' + str(SessionManager.session["life"]) + ' Crowns: ' + str(SessionManager.session["crown"])
 	result_ui.result_title.text = "Team " + str(teams[0] + 1) + " wins!"
 	result_ui.visible = true
 	timestamp()
 	running = false
-	SoundManager.stop("penis_music")
 
 
 func _on_pause_button_pressed() -> void:

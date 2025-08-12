@@ -29,6 +29,7 @@ SoundManager="*res://scripts/Autoload/sound_manager.gd"
 
 window/size/viewport_width=1088
 window/size/viewport_height=612
+window/stretch/mode="canvas_items"
 
 [input]
 
